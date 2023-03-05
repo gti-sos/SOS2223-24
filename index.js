@@ -4,7 +4,7 @@ var cool = require("cool-ascii-faces");
 var app = express();
 var port = process.env.PORT || 12345;
 
-app.get("/", (request,response) =>{
+app.get("/cool", (request,response) =>{
     response.send(cool());
     console.log("New request");
 });
