@@ -14,8 +14,8 @@ app.get("/samples/ARC", (req,res) =>{
   res.send(`<h1 style="text-align:center;">${result}</h1>`)
 });
 
-app.get("/samples/OUABOU", (req,res) =>{
-  let result=media_OUABOU("Sevilla")
+app.get("/samples/OUA", (req,res) =>{
+  let result=media_OUA("Sevilla")
   res.send(`<h1 style="text-align:center;">${result}</h1>`)
 });
 
@@ -64,7 +64,7 @@ datos = [{province:"Almeria",summary:"Empresas Públicas y Asimiladas",type_of_p
         		];
 
 
-function media_OUABOU(provincia) {
+function media_oua(provincia) {
     var filtrado = datos.filter(v => v.province==provincia);
     var suma=0;
     for (let i=0;i<filtrado.length;i++){
