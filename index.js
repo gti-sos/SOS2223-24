@@ -144,7 +144,7 @@ app.delete(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
 
 //Get OUAEL
 app.get(BASE_API_URL + "/provisions-for-the-year-2014/", (req, res) => {
-  res.json(miArray);
+  res.json(datos);
   console.log("New GET to /provisions-for-the-year-2014")
 });
 //load Initial Data OUAEL
