@@ -140,4 +140,92 @@ app.delete(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
 
 
 
+//F05 OUAEL
 
+//Get OUAEL
+app.get(BASE_API_URL + "/provisions-for-the-year-2014/", (req, res) => {
+  res.json(miArray);
+  console.log("New GET to /provisions-for-the-year-2014")
+});
+//load Initial Data OUAEL
+var datos= [];
+
+app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, res) => {
+  if (datos.length==0){
+    datos.push({province:"Almeria",summary:"Empresas Públicas y Asimiladas",type_of_provision:"Anuncios",disposal_number:81,number_of_the_Bulletin:254,date_of_the_bulletin :"30/12/2014",date_of_disposition:"18/12/2014",section_number:5,section:"Anuncios",date_of_publication:"30/12/2014 0:07",subsection:"5.2 Otros anuncios oficiales"},	
+    {province:"Almeria",summary:"Empresas Públicas y Asimiladas",type_of_provision:"Anuncios",disposal_number:80,number_of_the_Bulletin:254,date_of_the_bulletin :"30/12/2014",date_of_disposition:"18/12/2014",section_number:5,section:"Anuncios",date_of_publication:"30/12/2014 0:07",subsection:"5.2 Otros anuncios oficiales"},
+    {province:"Almeria",summary:"Empresas Públicas y Asimiladas",type_of_provision:"Anuncios",disposal_number:78,number_of_the_Bulletin:254,date_of_the_bulletin :"30/12/2014",date_of_disposition:"18/12/2014",section_number:5,section:"Anuncios",date_of_publication:"30/12/2014 0:07",subsection:"5.2 Otros anuncios oficiales"},
+    {province:"Almeria",summary:"Empresas Públicas y Asimiladas",type_of_provision:"Anuncios",disposal_number:77,number_of_the_Bulletin:254,date_of_the_bulletin :"30/12/2014",date_of_disposition:"18/12/2014",section_number:5,section:"Anuncios",date_of_publication:"30/12/2014 0:07",subsection:"5.2 Otros anuncios oficiales"},
+    {province:"Málaga" ,summary:"Consejería de Agricultura, Pesca y Desarrollo Rural",type_of_provision:"Anuncios",disposal_number:88,	number_of_the_Bulletin:141,	date_of_the_bulletin:"22/07/2014",	date_of_disposition:"16/07/2014",section_number:5,section:"Anuncios",date_of_publication:"21/07/2014 23:07"	,subsection:"5.2 Otros anuncios oficiales"},	
+    {province:"Málaga" ,summary:"Consejería de Agricultura, Pesca y Desarrollo Rural",type_of_provision:"Anuncios",disposal_number:87,	number_of_the_Bulletin:141,	date_of_the_bulletin:"22/07/2014",	date_of_disposition:"16/07/2014",section_number:5,section:"Anuncios",date_of_publication:"21/07/2014 23:07"	,subsection:"5.2 Otros anuncios oficiales"},	
+    {province:"Granada",summary:"Consejería de Agricultura, Pesca y Desarrollo Rural",type_of_provision:"Anuncios",disposal_number:86,	number_of_the_Bulletin:141,	date_of_the_bulletin:"22/07/2014",	date_of_disposition:"16/07/2014",section_number:5,section:"Anuncios",date_of_publication:"21/07/2014 23:07"	,subsection:"5.2 Otros anuncios oficiales"},		
+    {province:"Granada",summary:"Consejería de Agricultura, Pesca y Desarrollo Rural",type_of_provision:"Anuncios",disposal_number:85,	number_of_the_Bulletin:141,	date_of_the_bulletin:"22/07/2014",	date_of_disposition:"26/06/2014",section_number:5,section:"Anuncios",date_of_publication:"21/07/2014 23:07"	,subsection:"5.2 Otros anuncios oficiales"},	
+    {province:"Sevilla",summary:"Consejería de Agricultura, Pesca y Desarrollo Rural",type_of_provision:"Anuncios",disposal_number:84,	number_of_the_Bulletin:141,	date_of_the_bulletin:"22/07/2014",	date_of_disposition:"19/06/2014",section_number:5,section:"Anuncios",date_of_publication:"21/07/2014 23:07"	,subsection:"5.2 Otros anuncios oficiales"},	
+    {province:"Sevilla",summary:"Consejería de Fomento y Vivienda",type_of_provision:"Anuncios",disposal_number:83,number_of_the_Bulletin:141,	date_of_the_bulletin:"22/07/2014",	date_of_disposition:"10/07/2014",section_number:5,section:"Anuncios",date_of_publication:"21/07/2014 23:07"	,subsection:"5.2 Otros anuncios oficiales"}
+    );
+    res.json(datos)
+    console.log("Se han creado 10 datos")
+
+} else {
+  res.send('Ya existen datos');
+    console.log('Ya existen datos')
+}
+});
+
+
+//Metodo Post en URL base OUAEL
+app.post(BASE_API_URL + "/provisions-for-the-year-2014", (req,res) => {
+  const keys = Object.keys(req.body);
+  if(keys.length<18){
+    res.status(400).send("No se han introducido datos suficientes");
+  } else{
+    const exists = datos.some(pr => pr.disposal_number === req.body.disposal_number && pr.date_of_publication === req.body.date_of_publication)
+    if (exists) {
+      // Enviar una respuesta con un código de estado 409 Conflict si el objeto ya existe
+      res.status(409).send('Conflicto: Este objeto ya existe');
+    } else {
+      // Agregar los nuevos datos a la variable
+      datos.push(req.body);
+      // Enviar una respuesta con un código de estado 201 Created
+      res.status(201).send('Los datos se han creado correctamente');
+    }
+  }
+  });
+
+  // Metodo PUT en URL base Ouael
+app.put(BASE_API_URL + "/provisions-for-the-year-2014", (req, res) => {
+  res.status(405).send('En esta ruta no esta permitido el método PUT');
+});
+
+// Método DELETE en URL base Ouael
+app.delete(BASE_API_URL + "/provisions-for-the-year-2014", (req, res) => {
+  array = [];
+  res.status(200).send('Se han borrado los datos');
+});
+
+//Metodo Post en loadInitialData Bloqueado Ouael
+app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, res) => {
+  res.status(405).send('En esta ruta no esta permitido el método POST');
+});
+
+//Metodo get en loadInitialData Ouael
+app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, res) => {
+  res.json(datos);
+  res.status(200);
+});
+
+//Metodo Put en loadInitialData Ouael
+app.put(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, res) => {
+if (!req.body) {
+  res.status(400).send('No se proporcionaron datos');
+} else {
+  datos = req.body;
+  res.status(200).send('Los datos se han actualizado correctamente');
+}
+});
+
+//Metodo delete en loadInitialData Ouael
+app.delete(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, res) => {
+  datos = [];
+  res.status(200).send('Los datos se han borrado correctamente');
+});
