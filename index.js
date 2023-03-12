@@ -6,9 +6,9 @@ var app = express();
 var port = process.env.PORT || 12345;
 app.use(bodyParser.json());
 
-var useOUA = require("./samples/OUA");
-var useARC = require("./samples/ARC");
-var useVSE = require("./samples/VSE");
+var useOUA = require("./Samples/OUA");
+var useARC = require("./Samples/ARC");
+var useVSE = require("./Samples/VSE");
 
 
 const BASE_API_URL = "/api/v1";
