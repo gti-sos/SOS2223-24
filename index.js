@@ -177,7 +177,7 @@ app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, re
 //Metodo Post en URL base OUAEL
 app.post(BASE_API_URL + "/provisions-for-the-year-2014", (req,res) => {
   const keys = Object.keys(req.body);
-  if(keys.length<11){
+  if(keys.length<10){
     res.status(400).send("No se han introducido datos suficientes");
   } else{
     const exists = useOUA.datos_oua.some(pr => pr.disposal_number === req.body.disposal_number && pr.date_of_publication === req.body.date_of_publication)
@@ -235,7 +235,7 @@ app.delete(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req,
 
 //Get Victor
 app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
-  res.json(array);
+  res.json(useVSE.array_VSE);
   console.log("New GET to /agroprices-weekly")
 });
 
@@ -272,7 +272,7 @@ app.post(BASE_API_URL + "/agroprices-weekly", (req,res) => {
   if(keys.length<8){
     res.status(400).send("No se han introducido datos suficientes");
   } else{
-    const exists = array2.some(agro => agro.product === req.body.product && agro.market === req.body.market)
+    const exists = useVSE.array_VSE.some(agro => agro.product === req.body.product && agro.market === req.body.market)
     if (exists) {
       // Enviar una respuesta con un código de estado 409 Conflict si el objeto ya existe
       res.status(409).send('Conflicto: Este objeto ya existe');
