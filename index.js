@@ -17,13 +17,14 @@ app.get("/cool", (request,response) =>{
     response.send(cool());
     console.log("New request");
 });
+
 /*
 app.get("/samples/ARC", (req,res) =>{
   let result=media_ARC("Almería")
   res.send(`<h1 style="text-align:center;">${result}</h1>`)
 });
 */
-app.get("/samples/ARC", useARC);
+app.get("/samples/ARC", useARC.media_ARC);
 
 /*
 app.get("/samples/OUA", (req,res) =>{
@@ -32,7 +33,7 @@ app.get("/samples/OUA", (req,res) =>{
 });
 */
 
-app.get("/samples/OUA", useOUA);
+app.get("/Samples/OUA", useOUA.media_oua);
 
 /*
 app.get("/samples/VSE", (req,res) =>{
@@ -40,7 +41,7 @@ app.get("/samples/VSE", (req,res) =>{
   res.send(`<h1 style="text-align:center;">${result}</h1>`)
 });
 */
-app.get("/samples/VSE", useVSE);
+app.get("/Samples/VSE", useVSE.media_VSE);
 
 app.listen(port, ()=>{
   console.log(`server ready in port ${port}`);
@@ -144,12 +145,11 @@ app.delete(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
 
 //Get OUAEL
 app.get(BASE_API_URL + "/provisions-for-the-year-2014/", (req, res) => {
-  res.json(datos);
+  res.json(useOUA.datos_oua);
   console.log("New GET to /provisions-for-the-year-2014")
 });
 //load Initial Data OUAEL
 var datos= [];
-
 app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, res) => {
   if (datos.length==0){
     datos.push({province:"Almeria",summary:"Empresas Públicas y Asimiladas",type_of_provision:"Anuncios",disposal_number:81,number_of_the_Bulletin:254,date_of_the_bulletin :"30/12/2014",date_of_disposition:"18/12/2014",section_number:5,section:"Anuncios",date_of_publication:"30/12/2014 0:07",subsection:"5.2 Otros anuncios oficiales"},	

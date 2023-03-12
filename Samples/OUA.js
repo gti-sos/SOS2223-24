@@ -25,3 +25,5 @@ function media(provincia) {
 console.log(media("Sevilla"));
 
 
+module.exports.datos_oua = datos;
+module.exports.media_oua =  media;
