@@ -22,7 +22,8 @@
 
 
 
-
+module.exports.miArray_ARC = miArray;
+module.exports.media_ARC =  media;
 
 
 

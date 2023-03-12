@@ -110,3 +110,7 @@ function media(provincia) {
   return suma/filtrado.length;
 }
   console.log(media("CO-Córdoba"));
+
+
+  module.exports.array_VSE = array;
+  module.exports.media_VSE =  media;
