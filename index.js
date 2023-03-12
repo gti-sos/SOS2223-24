@@ -24,7 +24,7 @@ app.get("/samples/ARC", (req,res) =>{
   res.send(`<h1 style="text-align:center;">${result}</h1>`)
 });
 */
-app.get("/samples/ARC", useARC.media_ARC);
+app.get("/Samples/ARC", useARC.media_ARC);
 
 /*
 app.get("/samples/OUA", (req,res) =>{
@@ -49,7 +49,7 @@ app.listen(port, ()=>{
 
 //Get Adolfo
 app.get(BASE_API_URL + "/agrodata-almeria/", (req, res) => {
-  res.json(miArray);
+  res.json(useARC.miArray_ARC);
   console.log("New GET to /agrodata-almeria")
 });
 
@@ -86,7 +86,7 @@ app.post(BASE_API_URL + "/agrodata-almeria", (req,res) => {
   if(keys.length<18){
     res.status(400).send("No se han introducido datos suficientes");
   } else{
-    const exists = miArray.some(agro => agro.state_id === req.body.state_id && agro.date === req.body.date)
+    const exists = useARC.miArray_ARC.some(agro => agro.state_id === req.body.state_id && agro.date === req.body.date)
     if (exists) {
       // Enviar una respuesta con un código de estado 409 Conflict si el objeto ya existe
       res.status(409).send('Conflicto: Este objeto ya existe');
