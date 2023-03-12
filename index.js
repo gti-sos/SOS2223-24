@@ -74,7 +74,8 @@ app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
     console.log("Se han creado 10 datos")
 
 } else {
-  res.send('Ya existen datos');
+  res.json(miarray_10)
+  //res.send('Ya existen datos');
     console.log('Ya existen datos')
 }
 });
@@ -92,7 +93,7 @@ app.post(BASE_API_URL + "/agrodata-almeria", (req,res) => {
       res.status(409).send('Conflicto: Este objeto ya existe');
     } else {
       // Agregar los nuevos datos a la variable
-      miArray.push(req.body);
+      useARC.miArray_ARC.push(req.body);
       // Enviar una respuesta con un código de estado 201 Created
       res.status(201).send('Los datos se han creado correctamente');
     }
@@ -106,12 +107,12 @@ app.put(BASE_API_URL + "/agrodata-almeria", (req, res) => {
 
 // Método DELETE en URL base Adolfo
 app.delete(BASE_API_URL + "/agrodata-almeria", (req, res) => {
-  miArray = [];
+  useARC.miArray_ARC = [];
   res.status(200).send('Se han borrado los datos');
 });
 
 //Metodo Post en loadInitialData Bloqueado Adolfo
-app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
+app.post(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
   res.status(405).send('En esta ruta no esta permitido el metodo POST');
 });
 
