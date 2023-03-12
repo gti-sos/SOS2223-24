@@ -74,8 +74,8 @@ app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
     console.log("Se han creado 10 datos")
 
 } else {
-  res.json(miarray_10)
-  //res.send('Ya existen datos');
+  //res.json(miarray_10)
+  res.send('Ya existen datos');
     console.log('Ya existen datos')
 }
 });
