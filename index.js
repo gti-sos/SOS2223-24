@@ -268,7 +268,7 @@ app.get(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
 
 app.post(BASE_API_URL + "/agroprices-weekly", (req,res) => {
   const keys = Object.keys(req.body);
-  if(keys.length<18){
+  if(keys.length<8){
     res.status(400).send("No se han introducido datos suficientes");
   } else{
     const exists = array2.some(agro => agro.product === req.body.product && agro.market === req.body.market)
