@@ -45,9 +45,6 @@ app.get("/Samples/VSE", useVSE.media_VSE);
 
 app.listen(port, ()=>{
   console.log(`server ready in port ${port}`);
-<<<<<<< HEAD
-});
-=======
 });
 
 //Get Adolfo
@@ -102,9 +99,6 @@ app.post(BASE_API_URL + "/agrodata-almeria", (req,res) => {
   }
   });
 
-<<<<<<< HEAD
->>>>>>> 075dff86ba73aebec70c599304985687770958f8
-=======
   // Metodo PUT en URL base Adolfo
 app.put(BASE_API_URL + "/agrodata-almeria", (req, res) => {
   res.status(405).send('En esta ruta no esta permitido el metodo PUT');
@@ -235,4 +229,3 @@ app.delete(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req,
   datos = [];
   res.status(200).send('Los datos se han borrado correctamente');
 });
->>>>>>> bb498c5f06b4216afddd4480057295d4e65d808c
