@@ -144,9 +144,9 @@ app.delete(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
 //F05 OUAEL
 
 //Get OUAEL
-app.get(BASE_API_URL + "/provisions-for-the-year-2014/", (req, res) => {
-  res.json(useOUA.datos_oua);
-  console.log("New GET to /provisions-for-the-year-2014")
+app.get(BASE_API_URL + "/provisions-for-the-year-2014", (req, res) => {
+  res.send(JSON.stringify(useOUA.datos_oua, null, 2));
+  console.log("New GET to /provisions-for-the-year-2014");
 });
 //load Initial Data OUAEL
 var datos= [];
@@ -163,7 +163,7 @@ app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, re
     {province:"Sevilla",summary:"Consejería de Agricultura, Pesca y Desarrollo Rural",type_of_provision:"Anuncios",disposal_number:84,	number_of_the_Bulletin:141,	date_of_the_bulletin:"22/07/2014",	date_of_disposition:"19/06/2014",section_number:5,section:"Anuncios",date_of_publication:"21/07/2014 23:07"	,subsection:"5.2 Otros anuncios oficiales"},	
     {province:"Sevilla",summary:"Consejería de Fomento y Vivienda",type_of_provision:"Anuncios",disposal_number:83,number_of_the_Bulletin:141,	date_of_the_bulletin:"22/07/2014",	date_of_disposition:"10/07/2014",section_number:5,section:"Anuncios",date_of_publication:"21/07/2014 23:07"	,subsection:"5.2 Otros anuncios oficiales"}
     );
-    res.json(datos)
+    res.send(JSON.stringify(useOUA.datos_oua, null, 2));
     console.log("Se han creado 10 datos")
 
 } else {
@@ -176,16 +176,16 @@ app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, re
 //Metodo Post en URL base OUAEL
 app.post(BASE_API_URL + "/provisions-for-the-year-2014", (req,res) => {
   const keys = Object.keys(req.body);
-  if(keys.length<18){
+  if(keys.length<11){
     res.status(400).send("No se han introducido datos suficientes");
   } else{
-    const exists = datos.some(pr => pr.disposal_number === req.body.disposal_number && pr.date_of_publication === req.body.date_of_publication)
+    const exists = useOUA.datos_oua.some(pr => pr.disposal_number === req.body.disposal_number && pr.date_of_publication === req.body.date_of_publication)
     if (exists) {
       // Enviar una respuesta con un código de estado 409 Conflict si el objeto ya existe
       res.status(409).send('Conflicto: Este objeto ya existe');
     } else {
       // Agregar los nuevos datos a la variable
-      datos.push(req.body);
+      useOUA.datos_oua.push(req.body);
       // Enviar una respuesta con un código de estado 201 Created
       res.status(201).send('Los datos se han creado correctamente');
     }
@@ -193,7 +193,7 @@ app.post(BASE_API_URL + "/provisions-for-the-year-2014", (req,res) => {
   });
 
   // Metodo PUT en URL base Ouael
-app.put(BASE_API_URL + "/provisions-for-the-year-2014", (req, res) => {
+app.put(BASE_API_URL + "/provisions-for-the-year-2014/", (req, res) => {
   res.status(405).send('En esta ruta no esta permitido el método PUT');
 });
 
@@ -204,13 +204,13 @@ app.delete(BASE_API_URL + "/provisions-for-the-year-2014", (req, res) => {
 });
 
 //Metodo Post en loadInitialData Bloqueado Ouael
-app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, res) => {
+app.post(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, res) => {
   res.status(405).send('En esta ruta no esta permitido el método POST');
 });
 
 //Metodo get en loadInitialData Ouael
 app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, res) => {
-  res.json(datos);
+  res.json(useOUA.datos_oua);
   res.status(200);
 });
 
