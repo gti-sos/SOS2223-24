@@ -201,7 +201,7 @@ app.put(BASE_API_URL + "/provisions-for-the-year-2014/", (req, res) => {
 // GET PROVINCE
 app.get(BASE_API_URL + "/provisions-for-the-year-2014/:province", (request, response) => {
   const province = request.params.province;
-  const provinceStats = useOUA.datos_oua.filter((dato) => dato.territory === province);
+  const provinceStats = useOUA.datos_oua.filter((dato) => dato.province === province);
   //response.json(territoryStats);
   console.log(`New GET to /provisions-for-the-year-2014/${province}`);
 
