@@ -239,6 +239,19 @@ app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
   console.log("New GET to /agroprices-weekly")
 });
 
+//Get Victor recurso especifico
+//GET recurso especifico
+app.get(BASE_API_URL+"/agroprices-weekly/:market",(req,res)=>{
+  const marketurl = req.params.market; // Obtener el parámetro del mercado de la URL
+  const resourceMarket = useVSE.array_VSE.find(resourceMarket => resourceMarket.market === marketurl); // Buscar el recurso por territorio
+
+  if (resourceMarket) {
+      res.json(resourceMarket); // Devolver el recurso con una respuesta HTTP 200
+  } else {
+      res.status(404).json({error: "Recurso no encontrado"}); // Devolver un error HTTP 404 si no se encuentra el recurso
+  }
+});
+
 
 //Array vacio + get Victor
 var array_10= [];
@@ -263,6 +276,13 @@ app.get(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
   res.send('Ya existen datos');
     console.log('Ya existen datos')
 }
+});
+
+//Metodo Post de recurso(fallido) Victor
+//POST FALLIDO
+app.post(BASE_API_URL+"/agroprices-weekly/:product",(req,res)=>{
+  res.sendStatus(405, "Method not allowed");
+  console.log("New post /agroprices-weekly/:product");
 });
 
 //Metodo Post en URL base Victor
