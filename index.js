@@ -177,7 +177,8 @@ app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, re
 //Metodo Post en URL base OUAEL
 app.post(BASE_API_URL + "/provisions-for-the-year-2014", (req,res) => {
   const keys1 = Object.keys(req.body);
-  if(keys1.length==11){
+  console.log("claves " + keys1.length);
+  if(keys1.length!=11){
     res.status(400).send("No se han introducido datos suficientes");
   } else{
     const exists = useOUA.datos_oua.some(pr => pr.disposal_number === req.body.disposal_number && pr.date_of_publication === req.body.date_of_publication)
