@@ -222,7 +222,7 @@ app.get(BASE_API_URL + "/provisions-for-the-year-2014/:province", (request, resp
 
 
 /** Put con un ID (province) */
-app.put("/api/v1/provisions-for-the-year-2014/:province", (req,res) => {
+app.put("/api/v1/provisions-for-the-year-2014/:disposal_number", (req,res) => {
   let exist = useOUA.datos_oua.find(x=>x.disposal_number == req.params.disposal_number)
   if(exist==undefined){
       res.sendStatus(400);
