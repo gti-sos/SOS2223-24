@@ -53,11 +53,7 @@ app.get(BASE_API_URL + "/agrodata-almeria/", (req, res) => {
   console.log("New GET to /agrodata-almeria")
 });
 
-
-
-
-//Array vacio + get Adolfo
-//var miarray_10= [];
+//Metodo Get loadInitialData
 
 app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
   if (useARC.miArray_ARC.length==0){
@@ -76,11 +72,12 @@ app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
     console.log("Se han creado 10 datos")
 
 } else {
-  //res.json(miarray_10)
   res.send('Ya existen datos');
     console.log('Ya existen datos')
 }
 });
+
+//Metodo GET recurso especifico
 
 app.get(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
   const state_s = req.params.state_s;
@@ -124,6 +121,8 @@ app.delete(BASE_API_URL + "/agrodata-almeria", (req, res) => {
   res.status(200).send('Se han borrado los datos');
 });
 
+//Metodo delete recurso especifico
+
 app.delete(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
   const state_s =req.params.state_s;
   const index=useARC.miArray_ARC.findIndex(item => item.state_s === state_s);
@@ -136,7 +135,7 @@ app.delete(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
   }
 });
 
-//Metodo Post en loadInitialData Bloqueado Adolfo
+//Metodo Post en recurso especifico
 app.post(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
   res.status(405).send('En esta ruta no esta permitido el metodo POST');
 });
@@ -148,7 +147,7 @@ app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
   res.status(200);
 });
 
-//Metodo Put en loadInitialData Adolfo
+//Metodo Put en recurso especifico
 app.put(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
 const state_s = req.params.state_s;
 const updateStat = req.body;
@@ -170,7 +169,7 @@ if (index !== -1) {
 }
 });
 
-//Metodo delete en loadInitialData Adolfo
+//Metodo delete Addolfo
 app.delete(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
   useARC.miArray_ARC = [];
   res.status(200).send('Los datos se han borrado correctamente');
