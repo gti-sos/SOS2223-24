@@ -55,11 +55,11 @@ app.get(BASE_API_URL + "/agrodata-almeria/", (req, res) => {
 
 
 //Array vacio + get Adolfo
-var miarray_10= [];
+//var miarray_10= [];
 
 app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
-  if (miarray_10.length==0){
-    miarray_10.push({state_id:4,state_s:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"31/01/2000",day	:31,temp_max:13.5,hormin_temp_max	:1736,temp_min	:10.67,hormin_temp_min	:2135,temp_average	:11.26,hum_max	:91.9,hum_min	:73.8,hum_average	:83.5,wind_speed:596,wind_direction:317.3,radiation:2,precipitation:0},
+  if (useARC.miArray_ARC.length==0){
+    useARC.miArray_ARC.push({state_id:4,state_s:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"31/01/2000",day	:31,temp_max:13.5,hormin_temp_max	:1736,temp_min	:10.67,hormin_temp_min	:2135,temp_average	:11.26,hum_max	:91.9,hum_min	:73.8,hum_average	:83.5,wind_speed:596,wind_direction:317.3,radiation:2,precipitation:0},
     {state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"01/02/2000",day	:32,temp_max	:19.16,hormin_temp_max	:1411,temp_min	:7.94,hormin_temp_min	:147,temp_average	:13.28,hum_max	:98.5,hum_min	:47.41,hum_average	:80.5,wind_speed:967,wind_direction:273,radiation:11.76,precipitation:0},
     {state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"02/02/2000",day	:33,temp_max	:20.1,hormin_temp_max	:1305,temp_min	:9.42,hormin_temp_min	:651,temp_average	:14.29,hum_max	:98.6,hum_min	:50.03,hum_average	:80.8,wind_speed:1.179,wind_direction:61.06,radiation:13.18,precipitation:0},
     {state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"03/02/2000",day	:34,temp_max	:19.42,hormin_temp_max	:1332,temp_min	:10.49,hormin_temp_min	:530,temp_average	:14.68,hum_max	:91.7,hum_min	:53,hum_average	    :68.89,wind_speed:1.058,wind_direction:337.2,radiation:13.33,precipitation:0},
@@ -70,7 +70,7 @@ app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
     {state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"08/02/2000",day	:39,temp_max	:19.23,hormin_temp_max	:1405,temp_min	:10.16,hormin_temp_min	:435,temp_average	:14.42,hum_max	:91,hum_min	    :43.25,hum_average	:66.2,wind_speed:1.152,wind_direction:287,radiation:12.47,precipitation:0},
     {state_id	:3,state_s	:"Sevilla",station_id	:2,station_s	:"La Mojonera",date	:"09/02/2000",day	:40,temp_max	:19.83,hormin_temp_max	:1355,temp_min	:10.29,hormin_temp_min	:609,temp_average	:14.68,hum_max	:94.9,hum_min	:36.78,hum_average	:66.35,wind_speed:1.676,wind_direction:60.25,radiation:13.9,precipitation:0}
     );
-    res.json(miarray_10)
+    res.json(useARC.miArray_ARC)
     console.log("Se han creado 10 datos")
 
 } else {
@@ -119,7 +119,7 @@ app.post(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
 //Metodo get en loadInitialData Adolfo
 
 app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
-  res.json(miarray_10);
+  res.json(useARC.miArray_ARC);
   res.status(200);
 });
 
@@ -128,14 +128,14 @@ app.put(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
 if (!req.body) {
   res.status(400).send('No se proporcionaron datos');
 } else {
-  miarray_10 = req.body;
+  useARC.miArray_ARC = req.body;
   res.status(200).send('Los datos se han actualizado correctamente');
 }
 });
 
 //Metodo delete en loadInitialData Adolfo
 app.delete(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
-  miarray_10 = [];
+  useARC.miArray_ARC = [];
   res.status(200).send('Los datos se han borrado correctamente');
 });
 
@@ -176,8 +176,8 @@ app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, re
 
 //Metodo Post en URL base OUAEL
 app.post(BASE_API_URL + "/provisions-for-the-year-2014", (req,res) => {
-  const keys = Object.keys(req.body);
-  if(keys.length<11){
+  const keys1 = Object.keys(req.body);
+  if(keys1.length<11){
     res.status(400).send("No se han introducido datos suficientes");
   } else{
     const exists = useOUA.datos_oua.some(pr => pr.disposal_number === req.body.disposal_number && pr.date_of_publication === req.body.date_of_publication)
@@ -278,7 +278,7 @@ app.post(BASE_API_URL + "/agroprices-weekly", (req,res) => {
       res.status(409).send('Conflicto: Este objeto ya existe');
     } else {
       // Agregar los nuevos datos a la variable
-      array.push(req.body);
+      useVSE.array_VSE.push(req.body);
       // Enviar una respuesta con un código de estado 201 Created
       res.status(201).send('Los datos se han creado correctamente');
     }
@@ -292,7 +292,7 @@ app.put(BASE_API_URL + "/agroprices-weekly", (req, res) => {
 
 // Método DELETE en URL base Victor
 app.delete(BASE_API_URL + "/agroprices-weekly", (req, res) => {
-  array = [];
+  useVSE.array_VSE = [];
   res.status(200).send('Se han borrado los datos');
 });
 
