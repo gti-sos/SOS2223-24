@@ -301,6 +301,19 @@ app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
   console.log("New GET to /agroprices-weekly")
 });
 
+//Get Victor recurso especifico
+//GET recurso especifico
+app.get(BASE_API_URL+"/agroprices-weekly/:market",(req,res)=>{
+  const marketurl = req.params.market; // Obtener el parámetro del mercado de la URL
+  const resourceMarket = useVSE.array_VSE.find(resourceMarket => resourceMarket.market === marketurl); // Buscar el recurso por territorio
+
+  if (resourceMarket) {
+      res.json(resourceMarket); // Devolver el recurso con una respuesta HTTP 200
+  } else {
+      res.status(404).json({error: "Recurso no encontrado"}); // Devolver un error HTTP 404 si no se encuentra el recurso
+  }
+});
+
 
 //Array vacio + get Victor
 var array_10= [];
@@ -325,6 +338,13 @@ app.get(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
   res.send('Ya existen datos');
     console.log('Ya existen datos')
 }
+});
+
+//Metodo Post de recurso(fallido) Victor
+//POST FALLIDO
+app.post(BASE_API_URL+"/agroprices-weekly/:product",(req,res)=>{
+  res.sendStatus(405, "Method not allowed");
+  console.log("New post /agroprices-weekly/:product");
 });
 
 //Metodo Post en URL base Victor
@@ -358,6 +378,19 @@ app.delete(BASE_API_URL + "/agroprices-weekly", (req, res) => {
   res.status(200).send('Se han borrado los datos');
 });
 
+//Metodo delete recurso especifico Victor
+//DELETE  DE UN RECURSO
+app.delete(BASE_API_URL + "/agroprices-weekly/:market", (request, response) => {
+  const market = request.params.market;
+  const index = useVSE.array_VSE.findIndex(item => item.market === market); // Encontrar el índice del elemento a eliminar
+  if (index !== -1) { // Comprobar si se encontró el elemento
+    useVSE.splice(index, 1); // Eliminar el elemento en el índice encontrado
+    response.status(204).send("Se ha eliminado correctamente"); // Enviar una respuesta vacía con el código 204 (No Content) para indicar éxito sin contenido
+  } else {
+    response.status(404).send({ error: "No se encontró el elemento con el territorio especificado" }); // Enviar una respuesta con el código 404 (Not Found) si el elemento no se encontró
+  }
+});
+
 //Metodo Post en loadInitialData Bloqueado Victor
 app.get(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
   res.status(405).send('En esta ruta no esta permitido el metodo POST');
@@ -378,6 +411,29 @@ if (!req.body) {
   array_10 = req.body;
   res.status(200).send('Los datos se han actualizado correctamente');
 }
+});
+
+//Metodo put para actualizar recurso Victor
+// PUT actualizar recurso existente
+app.put(BASE_API_URL + "/agroprices-weekly/:market", (request, response) => {
+  const market = request.params.market; // Obtener el territorio de la URL
+  const updatedStat = request.body; // Obtener los nuevos datos del cuerpo de la solicitud
+  if (!updatedStat.hasOwnProperty("market")) { // Comprobar si el cuerpo de la solicitud contiene el campo "market"
+      response.status(400).send({ error: "El objeto JSON no tiene los campos esperados" });
+      return;
+  }
+  if (market !== updatedStat.market) { // Comprobar si el "territory" de la URL es igual al "territory" del cuerpo de la solicitud
+      response.status(400).send({ error: "El ID del recurso no coincide con el ID de la URL" });
+      return;
+  }
+  const index = useVSE.array_VSE.findIndex(stat => stat.market === market); // Encontrar el índice del recurso a actualizar
+  if (index !== -1) {
+      useVSE.array_VSE[index] = updatedStat; // Actualizar el recurso en la posición encontrada
+      response.sendStatus(204); // Enviar una respuesta vacía con código de estado 204 (Actualización exitosa)
+      console.log("Recurso actualizado: " + market);
+  } else {
+      response.status(404).send({ error: "Recurso no encontrado" }); // Si no se encuentra el recurso, devolver un código de estado 404
+  }
 });
 
 //Metodo delete en loadInitialData Victor
