@@ -54,6 +54,8 @@ app.get(BASE_API_URL + "/agrodata-almeria/", (req, res) => {
 });
 
 
+
+
 //Array vacio + get Adolfo
 //var miarray_10= [];
 
@@ -78,6 +80,17 @@ app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
   res.send('Ya existen datos');
     console.log('Ya existen datos')
 }
+});
+
+app.get(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
+  const state_s = req.params.state_s;
+  const resourse = useARC.miArray_ARC.find(resourse => resourse.state_s === state_s)
+  if (resourse){
+    res.json(resourse);
+  }else {
+    res.status(404).json({error:"Recurso no encontrado" })
+  }
+
 });
 
 //Metodo Post en URL base Adolfo
@@ -111,8 +124,20 @@ app.delete(BASE_API_URL + "/agrodata-almeria", (req, res) => {
   res.status(200).send('Se han borrado los datos');
 });
 
+app.delete(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
+  const state_s =req.params.state_s;
+  const index=useARC.miArray_ARC.findIndex(item => item.state_s === state_s);
+  console.log("New Delete");
+  if (index!==-1){
+    useARC.miArray_ARC.splice(index, 1);
+    res.status(204).send("Se ha eliminado correctamente");
+  }else{
+    res.status(404).send({error : "No se encontro el elemento"});
+  }
+});
+
 //Metodo Post en loadInitialData Bloqueado Adolfo
-app.post(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
+app.post(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
   res.status(405).send('En esta ruta no esta permitido el metodo POST');
 });
 
@@ -124,12 +149,24 @@ app.get(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
 });
 
 //Metodo Put en loadInitialData Adolfo
-app.put(BASE_API_URL + "/agrodata-almeria/loadInitialData", (req, res) => {
-if (!req.body) {
-  res.status(400).send('No se proporcionaron datos');
-} else {
-  useARC.miArray_ARC = req.body;
-  res.status(200).send('Los datos se han actualizado correctamente');
+app.put(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
+const state_s = req.params.state_s;
+const updateStat = req.body;
+if(!updateStat.hasOwnProperty("state_s")){
+  res.status(400).send({error : "El Objeto Json no tiene los campos esperados"});
+  return;
+}if(state_s !== updateStat.state_s){
+  res.status(400).send({error : "El ID del recurso no coincide"});
+  return;
+}
+const index = useARC.miArray_ARC.findIndex(stat => stat.state_s == state_s);
+if (index !== -1) {
+  useARC.miArray_ARC[index]= updateStat;
+  res.sendStatus(204);
+  console.log("Recurso actualizado correctamente" + state_s);
+  
+}else{
+  res.status(404).send({error: "Recurso no encontado"});
 }
 });
 
