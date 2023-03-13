@@ -178,7 +178,7 @@ app.get(BASE_API_URL + "/provisions-for-the-year-2014/loadInitialData", (req, re
 app.post(BASE_API_URL + "/provisions-for-the-year-2014", (req,res) => {
   const keys1 = Object.keys(req.body);
   console.log("claves " + keys1.length);
-  if(keys1.length!=11){
+  if(keys1.length!==11){
     res.status(400).send("No se han introducido datos suficientes");
   } else{
     const exists = useOUA.datos_oua.some(pr => pr.disposal_number === req.body.disposal_number && pr.date_of_publication === req.body.date_of_publication)
@@ -223,11 +223,11 @@ app.get(BASE_API_URL + "/provisions-for-the-year-2014/:province", (request, resp
 
 /** Put con un ID (province) */
 app.put("/api/v1/provisions-for-the-year-2014/:province", (req,res) => {
-  let exist = useOUA.datos_oua.find(x=>x.province == req.params.province)
+  let exist = useOUA.datos_oua.find(x=>x.disposal_number == req.params.disposal_number)
   if(exist==undefined){
       res.sendStatus(400);
   }
-  if(req.params.province != req.body.province){
+  if(req.params.disposal_number != req.body.disposal_number){
       res.sendStatus(400);
   }
 									
