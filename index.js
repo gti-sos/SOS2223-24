@@ -198,6 +198,67 @@ app.put(BASE_API_URL + "/provisions-for-the-year-2014/", (req, res) => {
   res.status(405).send('En esta ruta no esta permitido el método PUT');
 });
 
+// GET PROVINCE
+app.get(BASE_API_URL + "/provisions-for-the-year-2014/:province", (request, response) => {
+  const province = request.params.province;
+  const provinceStats = useOUA.datos_oua.filter((dato) => dato.territory === province);
+  //response.json(territoryStats);
+  console.log(`New GET to /provisions-for-the-year-2014/${province}`);
+
+  if (provinceStats.length === 0) {
+      console.log(`provisions for province ${province} not found`);
+      response.sendStatus(404);
+  } else {
+      response.json(provinceStats);
+      console.log(`New GET to /provisions-for-the-year-2014/${province}`);
+  }
+});
+
+  /** Post con un Province bloqueado  */
+  app.post("/api/v1/provisions-for-the-year-2014/:province", (req,res) => {
+    res.sendStatus(409);
+});
+
+
+/** Put con un ID (province) */
+app.put("/api/v1/provisions-for-the-year-2014/:province", (req,res) => {
+  let exist = useOUA.datos_oua.find(x=>x.province == req.params.province)
+  if(exist==undefined){
+      res.sendStatus(400);
+  }
+  if(req.params.province != req.body.province){
+      res.sendStatus(400);
+  }
+									
+  exist.province=req.body.province;
+  exist.summary=req.body.summary;
+  exist.type_of_provision=req.body.type_of_provision;
+  exist.disposal_number=req.body.disposal_number;
+  exist.number_of_the_Bulletin=req.body.number_of_the_Bulletin;
+  exist.date_of_the_bulletin=req.body.date_of_the_bulletin;
+  exist.date_of_disposition=req.body.date_of_disposition;
+  exist.section_number=req.body.section_number;
+  exist.section=req.body.section;
+  exist.date_of_publication=req.body.date_of_publication;
+  exist.subsection=req.body.subsection;
+
+  res.sendStatus(200);
+});
+
+ /** Delete con province */
+ app.delete("/api/v1/provisions-for-the-year-2014/:province", (req,res) => { 
+
+  //check if exist
+  let exist = useOUA.datos_oua.find(x=>x.province == req.params.province)
+  if(exist == undefined){
+      res.sendStatus(404);
+  }else{
+      useOUA.datos_oua = useOUA.datos_oua.filter(x=> x.province != req.params.province);
+      res.sendStatus(200);
+  }
+});
+
+
 // Método DELETE en URL base Ouael
 app.delete(BASE_API_URL + "/provisions-for-the-year-2014", (req, res) => {
   array = [];
