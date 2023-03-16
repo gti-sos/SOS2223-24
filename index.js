@@ -339,7 +339,7 @@ app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
 
 //Get Victor recurso especifico
 //GET recurso especifico
-app.get(BASE_API_URL+"/agroprices-weekly/:market",(req,res)=>{
+app.get(BASE_API_URL+"/agroprices-weekly/mercados/:market",(req,res)=>{
   const marketurl = req.params.market; // Obtener el parámetro del mercado de la URL
   const resourceMarket = useVSE.array_VSE.find(resourceMarket => resourceMarket.market === marketurl); // Buscar el recurso por territorio
 
@@ -378,9 +378,9 @@ app.get(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
 
 //Metodo Post de recurso(fallido) Victor
 //POST FALLIDO
-app.post(BASE_API_URL+"/agroprices-weekly/:product",(req,res)=>{
+app.post(BASE_API_URL+"/agroprices-weekly/mercados/:market",(req,res)=>{
   res.sendStatus(405, "Method not allowed");
-  console.log("New post /agroprices-weekly/:product");
+  console.log("New post /agroprices-weekly/mercados/:market");
 });
 
 //Metodo Post en URL base Victor
@@ -416,7 +416,7 @@ app.delete(BASE_API_URL + "/agroprices-weekly", (req, res) => {
 
 //Metodo delete recurso especifico Victor
 //DELETE  DE UN RECURSO
-app.delete(BASE_API_URL + "/agroprices-weekly/:market", (request, response) => {
+app.delete(BASE_API_URL + "/agroprices-weekly/mercados/:market", (request, response) => {
   const market = request.params.market;
   const index = useVSE.array_VSE.findIndex(item => item.market === market); // Encontrar el índice del elemento a eliminar
   if (index !== -1) { // Comprobar si se encontró el elemento
@@ -451,7 +451,7 @@ if (!req.body) {
 
 //Metodo put para actualizar recurso Victor
 // PUT actualizar recurso existente
-app.put(BASE_API_URL + "/agroprices-weekly/:market", (request, response) => {
+app.put(BASE_API_URL + "/agroprices-weekly/mercados/:market", (request, response) => {
   const market = request.params.market; // Obtener el territorio de la URL
   const updatedStat = request.body; // Obtener los nuevos datos del cuerpo de la solicitud
   if (!updatedStat.hasOwnProperty("market")) { // Comprobar si el cuerpo de la solicitud contiene el campo "market"
