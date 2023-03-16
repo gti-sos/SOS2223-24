@@ -367,7 +367,7 @@ app.get(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
     {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",week1: 172.80,week2: 172.80},
     {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "MA-Málaga",commpos: "A.I.",week1: 172.20,week2: 176.30}
     );
-    res.json(array_10)
+    res.json(useVSE.array_VSE)
     console.log("Se han creado 10 datos")
 
 } else {
