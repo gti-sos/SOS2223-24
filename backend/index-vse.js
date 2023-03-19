@@ -1,6 +1,6 @@
 module.exports = (app) => {
 
-    var useVSE = require("./Samples/VSE");
+    var useVSE = require("../Samples/VSE");
     const BASE_API_URL = "/api/v1";
     //Get Victor
 app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
