@@ -15,34 +15,6 @@ var useARC = require("./Samples/ARC");
 
 const BASE_API_URL = "/api/v1";
 
-app.get("/cool", (request,response) =>{
-    response.send(cool());
-    console.log("New request");
-});
-
-/*
-app.get("/samples/ARC", (req,res) =>{
-  let result=media_ARC("Almería")
-  res.send(`<h1 style="text-align:center;">${result}</h1>`)
-});
-*/
-
-/*
-app.get("/samples/OUA", (req,res) =>{
-  let result=media_OUA("Sevilla")
-  res.send(`<h1 style="text-align:center;">${result}</h1>`)
-});
-*/
-
-//app.get("/Samples/OUA", useOUA.media_oua);
-
-/*
-app.get("/samples/VSE", (req,res) =>{
-  let result=media_VSE("CO-Córdoba")
-  res.send(`<h1 style="text-align:center;">${result}</h1>`)
-});
-*/
-
 app.listen(port, ()=>{
   console.log(`server ready in port ${port}`);
 });
