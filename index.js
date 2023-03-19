@@ -9,7 +9,6 @@ app.use("/", express.static("./public"));
 
 app.use(bodyParser.json());
 
-var useOUA = require("./Samples/OUA");
 var useARC = require("./Samples/ARC");
 
 
