@@ -1,8 +1,8 @@
 module.exports = (app)=>{
 
+    var useOua = require("../Samples/OUA");
     const Datastore = require('nedb');
     const db = new Datastore({ filename: 'provisions.db', autoload: true });
-
     const rutaoua = "/api/v1/provisions-for-the-year-2014";
 
 
