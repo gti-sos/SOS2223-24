@@ -26,7 +26,6 @@ app.get("/samples/ARC", (req,res) =>{
   res.send(`<h1 style="text-align:center;">${result}</h1>`)
 });
 */
-app.get("/Samples/ARC", useARC.media_ARC);
 
 /*
 app.get("/samples/OUA", (req,res) =>{
@@ -35,15 +34,12 @@ app.get("/samples/OUA", (req,res) =>{
 });
 */
 
-app.get("/Samples/OUA", useOUA.media_oua);
-
 /*
 app.get("/samples/VSE", (req,res) =>{
   let result=media_VSE("CO-Córdoba")
   res.send(`<h1 style="text-align:center;">${result}</h1>`)
 });
 */
-app.get("/Samples/VSE", useVSE.media_VSE);
 
 app.listen(port, ()=>{
   console.log(`server ready in port ${port}`);
