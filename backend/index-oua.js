@@ -214,6 +214,15 @@ module.exports = (app)=>{
     });
 
 
+    //PUT pronvincia No permitido
+    app.put(rutaoua+'/:province', (req, res) => {
+        response.status(405).send("PUT no está permitido en esta ruta.");
+    });
+
+    //PUT pronvincia/año No permitido
+    app.put(rutaoua+'/:province/:year', (req, res) => {
+        response.status(405).send("PUT no está permitido en esta ruta.");
+    });
 
     //PUT rutaoua No permitido
     app.put(rutaoua, (req, res) => {
