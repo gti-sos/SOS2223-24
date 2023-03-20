@@ -107,9 +107,16 @@ module.exports = (app) => {
       if (req.query.week1_price_over) {
           query.week1 = { $gte: Number(req.query.week1_price_over) };
       }
-      if (req.query.week2_price_over) {
-          query.week2 = { $lte: Number(req.query.week2_price_over) };
+      if (req.query.week1_price_below) {
+          query.week1 = { $lte: Number(req.query.week1_price_over) };
       }
+
+      if (req.query.week2_price_over) {
+        query.week2 = { $gte: Number(req.query.week2_price_over) };
+    }
+    if (req.query.week2_price_below) {
+        query.week2 = { $lte: Number(req.query.week2_price_over) };
+    }
   });
 
       // POST
