@@ -2,8 +2,6 @@ var Datastore = require('nedb');
 var db = new Datastore();
 
 module.exports = (app) => {
-
-
     const BASE_API_URL = "/api/v1";
     const rutavse = "/api/v1/agroprices-weekly";
     const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26059751/2s93K1oezi";
@@ -146,7 +144,10 @@ module.exports = (app) => {
       // POST
       app.post(rutavse, (req, res) => {
         console.log(req.body);
-        if (!req.body) {
+        if (!req.body || !newReq.hasOwnProperty('product') || !newReq.hasOwnProperty('type') || 
+        !newReq.hasOwnProperty('class') || !newReq.hasOwnProperty('unit') || 
+        !newReq.hasOwnProperty('market') || !newReq.hasOwnProperty('commpos') ||
+        !newReq.hasOwnProperty('week1') || !newReq.hasOwnProperty('week2')) {
             res.status(400).send("Hay que insertar datos.");
         } else {
             const newData = req.body;
