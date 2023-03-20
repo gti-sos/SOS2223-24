@@ -3,16 +3,16 @@ var db = new Datastore();
 const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26061569/2s93JzMggQ";
 const BASE_API_URL = "/api/v1";
 
-var datosFichero = [{state_id:4,state_s:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"31/01/2000",day	:31,temp_max:13.5,hormin_temp_max	:1736,temp_min	:10.67,hormin_temp_min	:2135,temp_average	:11.26,hum_max	:91.9,hum_min	:73.8,hum_average	:83.5,wind_speed:596,wind_direction:317.3,radiation:2,precipitation:0},
-{state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"01/02/2000",day	:32,temp_max	:19.16,hormin_temp_max	:1411,temp_min	:7.94,hormin_temp_min	:147,temp_average	:13.28,hum_max	:98.5,hum_min	:47.41,hum_average	:80.5,wind_speed:967,wind_direction:273,radiation:11.76,precipitation:0},
-{state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"02/02/2000",day	:33,temp_max	:20.1,hormin_temp_max	:1305,temp_min	:9.42,hormin_temp_min	:651,temp_average	:14.29,hum_max	:98.6,hum_min	:50.03,hum_average	:80.8,wind_speed:1.179,wind_direction:61.06,radiation:13.18,precipitation:0},
-{state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"03/02/2000",day	:34,temp_max	:19.42,hormin_temp_max	:1332,temp_min	:10.49,hormin_temp_min	:530,temp_average	:14.68,hum_max	:91.7,hum_min	:53,hum_average	    :68.89,wind_speed:1.058,wind_direction:337.2,radiation:13.33,precipitation:0},
-{state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"04/02/2000",day	:35,temp_max	:17.88,hormin_temp_max	:1336,temp_min	:11.04,hormin_temp_min	:430,temp_average	:14.43,hum_max	:92.2,hum_min	:18.54,hum_average	:58.5,wind_speed:2.325,wind_direction:50.62,radiation:14.11,precipitation:0},
-{state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"05/02/2000",day	:36,temp_max	:19.32,hormin_temp_max	:959,temp_min	:9.56,hormin_temp_min	:2338,temp_average	:14.8,hum_max	:81.6,hum_min	:11.57,hum_average	:37.77,wind_speed:2.89,wind_direction:56.1,radiation:14.4,precipitation:0},
-{state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"06/02/2000",day	:37,temp_max	:16.61,hormin_temp_max	:1254,temp_min	:7.75,hormin_temp_min	:451,temp_average	:12.22,hum_max	:94.9,hum_min	:43.88,hum_average	:65.21,wind_speed:1.571,wind_direction:302.5,radiation:13.91,precipitation:0},
-{state_id	:2,state_s	:"Huelva",station_id	:3,station_s	:"La Mojonera",date	:"07/02/2000",day	:38,temp_max	:20.84,hormin_temp_max	:1351,temp_min	:8.88,hormin_temp_min	:646,temp_average	:13.96,hum_max	:95.9,hum_min	:25.49,hum_average	:72.2,wind_speed:1.294,wind_direction:37.55,radiation:13.85,precipitation:0},
-{state_id	:4,state_s	:"Almería",station_id	:1,station_s	:"La Mojonera",date	:"08/02/2000",day	:39,temp_max	:19.23,hormin_temp_max	:1405,temp_min	:10.16,hormin_temp_min	:435,temp_average	:14.42,hum_max	:91,hum_min	    :43.25,hum_average	:66.2,wind_speed:1.152,wind_direction:287,radiation:12.47,precipitation:0},
-{state_id	:3,state_s	:"Sevilla",station_id	:2,station_s	:"La Mojonera",date	:"09/02/2000",day	:40,temp_max	:19.83,hormin_temp_max	:1355,temp_min	:10.29,hormin_temp_min	:609,temp_average	:14.68,hum_max	:94.9,hum_min	:36.78,hum_average	:66.35,wind_speed:1.676,wind_direction:60.25,radiation:13.9,precipitation:0}
+var datosFichero = [{state_s:"Almería",station_s	:"La Mojonera",year	:2000,day:31,temp_max:13.5,temp_min	:10.67,temp_average	:11.26},
+{state_s	:"Almería",station_s	:"La Mojonera",year	:2000,day	:32,temp_max	:19.16,temp_min	:7.94,temp_average	:13.28},
+{state_s	:"Almería",station_s	:"La Mojonera",year	:2000,day	:33,temp_max	:20.1,temp_min	:9.42,temp_average	:14.29},
+{state_s	:"Almería",station_s	:"La Mojonera",year	:2000,day	:34,temp_max	:19.42,temp_min	:10.49,temp_average	:14.68},
+{state_s	:"Almería",station_s	:"La Mojonera",year	:2000,day	:35,temp_max	:17.88,temp_min	:11.04,temp_average	:14.43},
+{state_s	:"Almería",station_s	:"La Mojonera",year	:2000,day	:36,temp_max	:19.32,temp_min	:9.56,temp_average	:14.8},
+{state_s	:"Almería",station_s	:"La Mojonera",year	:2000,day	:37,temp_max	:16.61,temp_min	:7.75,temp_average	:12.22},
+{state_s	:"Huelva",station_s	:"La Mojonera",year	:2000,day	:38,temp_max	:20.84,temp_min	:8.88,temp_average	:13.96},
+{state_s	:"Almería",station_s	:"La Mojonera",year	:2000,day	:39,temp_max	:19.23,temp_min	:10.16,temp_average	:14.42},
+{state_s	:"Sevilla",station_s	:"La Mojonera",year	:2000,day	:40,temp_max	:19.83,temp_min	:10.29,temp_average	:14.68}
 ];
 
 module.exports = (app) => {
@@ -52,7 +52,940 @@ module.exports = (app) => {
 
 
 
-//GET
+//CODIGO
+
+app.get(BASE_API_URL+"/agrodata-almeria", (req, res) => {
+  const from = req.query.from;
+  const to = req.query.to;
+  db.find({}, (err, agrodata)=>{
+      if (from && to && !err) {
+          const provinciasAño = agrodata.filter(x => {return x.year >= from && x.year <= to}); 
+          if (from >= to) {
+              res.status(400).json("El rango de años especificado es inválido");
+          
+          }else{
+              res.status(200);
+              res.json(provinciasAño.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              console.log(`/GET en /agrodata?from=${from}&to=${to}`); 
+          }
+      }else if(!err){
+          const year = req.query.year;
+          const day = req.query.day;
+          const state_s = req.query.state_s;
+          const station_s = req.query.station_s;
+          const temp_max = req.query.temp_max;
+          const temp_min = req.query.temp_min;
+          const temp_average = req.query.temp_average;
+          const limit = req.query.limit;
+          const offset = req.query.offset;
+          
+          if(limit && offset){ 
+              const filtradas = pagination(req,agrodata);
+              console.log("Nuevo GET en /agrodata con paginación");  
+              res.status(200);
+              res.json(filtradas.map((c)=>{
+              delete c._id;
+              return c;
+              }));
+
+            }else if(state_s && station_s && year && day && temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.station_s ==station_s && r.year == year && r.day == parseInt(day) && r.temp_max >= temp_max
+                  && r.temp_min >= temp_min && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia,estacion, año,dia, temperaturas maxima, minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }  
+            
+            }else if(state_s && station_s && year && temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.station_s ==station_s && r.year == year && r.temp_max >= temp_max
+                  && r.temp_min >= temp_min && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia,estacion, año, temperaturas maxima, minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(state_s && station_s && day && temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.station_s ==station_s && r.day == day && r.temp_max >= temp_max
+                  && r.temp_min >= temp_min && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia,estacion, dia, temperaturas maxima, minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+            }else if(state_s && day && temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.day == day && r.temp_max >= temp_max
+                  && r.temp_min >= temp_min && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia, dia, temperaturas maxima, minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(day && temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.day == day && r.temp_max >= temp_max
+                  && r.temp_min >= temp_min && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con dia, temperaturas maxima, minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && year && temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.year == year && r.temp_max >= temp_max
+                  && r.temp_min >= temp_min && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia, año, temperaturas maxima, minima y media");  
+              res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+            }else if(station_s && year && temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.year == year && r.temp_max >= temp_max
+                  && r.temp_min >= temp_min && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con estacion, año, temperaturas maxima, minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && year && temp_max && temp_min){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.year == year && r.temp_max >= temp_max
+                  && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con provincia, año, temperatura maxima y minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(station_s && year && temp_max && temp_min){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.year == year && r.temp_max >= temp_max
+                  && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con estacion, año, temperatura maxima y minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && year && temp_max && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.year == year && r.temp_max >= temp_max
+                  && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia, año, temperatura maxima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          
+            }else if(station_s && year && temp_max && temp_average){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.year == year && r.temp_max >= temp_max
+                  && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con estacion, año, temperatura maxima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+          }else if(state_s && year && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.year == year && r.temp_min >= temp_min
+                  && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia, año, temperatura minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+            }else if(station_s && year && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.year == year && r.temp_min >= temp_min
+                  && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con estacion, año, temperatura minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }   
+
+          }else if(state_s && temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.temp_max >= temp_max && 
+                  r.temp_min >= temp_min && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia, temperatura maxima, minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+            }else if(station_s && temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.temp_max >= temp_max && 
+                  r.temp_min >= temp_min && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con estacion, temperatura maxima, minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+          }else if(year && temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.year == year && r.temp_max >= temp_max && r.temp_min >= temp_min
+                  && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con año, temperatura maxima, minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && year && temp_max){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.year == year && r.temp_max >= temp_max);
+              console.log("Nuevo GET en /agrodata con provincia, año y temperatura maxima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+            }else if(station_s && year && temp_max){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.year == year && r.temp_max >= temp_max);
+              console.log("Nuevo GET en /agrodata con estacion, año y temperatura maxima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+          }else if(state_s && year && temp_min){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.year == year && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con provincia, año y temperatura minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+            }else if(station_s && year && temp_min){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.year == year && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con estacion, año y temperatura minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && year && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.year == year && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia, año y temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+            }else if(station_s && year && temp_average){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.year == year && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con estacion, año y temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+          }else if(state_s && temp_max && temp_min){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.temp_max >= temp_max && 
+                  r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con provincia, temperatura maxima y minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(station_s && temp_max && temp_min){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.temp_max >= temp_max && 
+                  r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con estacion, temperatura maxima y minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && temp_max && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.temp_max >= temp_max && 
+                  r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia, temperatura maxima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(station_s && temp_max && temp_average){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.temp_max >= temp_max && 
+                  r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con estacion, temperatura maxima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.temp_min >= temp_min &&
+                  r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia, temperatura minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(station_s && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.temp_min >= temp_min &&
+                  r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con estacion, temperatura minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(year && temp_max && temp_min){
+              const filtradas = agrodata.filter(r => r.year == year && r.temp_max >= temp_max &&
+                  r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con año, temperatura maxima y minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(year && temp_max && temp_average){
+              const filtradas = agrodata.filter(r => r.year == year && r.temp_max >= temp_max &&
+                  r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con año, temperatura maxima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(year && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.year == year && r.temp_min >= temp_min &&
+                  r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con año, temperatura minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(temp_max && temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.temp_max >= temp_max && r.temp_min >= temp_min
+                  && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con temperatura maxima, minima y media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && year){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.year == year);
+              console.log("Nuevo GET en /agrodata con provincia y año");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(station_s && year){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.year == year);
+              console.log("Nuevo GET en /agrodata con estacion y año");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && temp_max){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.temp_max >= temp_max);
+              console.log("Nuevo GET en /agrodata con provincia y temperatura maxima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && temp_min){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con provincia y temperatura minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(state_s && temp_average){
+              const filtradas = agrodata.filter(r => r.state_s == state_s && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con provincia y temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+            }else if(station_s && temp_max){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.temp_max >= temp_max);
+              console.log("Nuevo GET en /agrodata con estacion y temperatura maxima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(station_s && temp_min){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con estacion y temperatura minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(station_s && temp_average){
+              const filtradas = agrodata.filter(r => r.station_s == station_s && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con estacion y temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(year && temp_max){
+              const filtradas = agrodata.filter(r => r.year == year && r.temp_max >= temp_max);
+              console.log("Nuevo GET en /agrodata con año y temperatura maxima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(year && temp_min){
+              const filtradas = agrodata.filter(r => r.year == year && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con año y temperatura minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(year && temp_average){
+              const filtradas = agrodata.filter(r => r.year == year && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con año y temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+
+            }else if(day && temp_max){
+              const filtradas = agrodata.filter(r => r.day == day && r.temp_max >= temp_max);
+              console.log("Nuevo GET en /agrodata con dia y temperatura maxima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(day && temp_min){
+              const filtradas = agrodata.filter(r => r.day == day && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con dia y temperatura minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(day && temp_average){
+              const filtradas = agrodata.filter(r => r.day == day && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con dia y temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+            }else if(day && state_s){
+              const filtradas = agrodata.filter(r => r.day == day && r.state_s == state_s);
+              console.log("Nuevo GET en /agrodata con dia y provincia");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(day && station_s){
+              const filtradas = agrodata.filter(r => r.day == day && r.station_s == station_s);
+              console.log("Nuevo GET en /agrodata con dia y estacion");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(day && station_s && state_s){
+              const filtradas = agrodata.filter(r => r.day == day && r.station_s == station_s && r.state_s == state_s);
+              console.log("Nuevo GET en /agrodata con dia,estacion y provincia");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(day && station_s && temp_average){
+              const filtradas = agrodata.filter(r => r.day == day && r.station_s == station_s && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con dia,estacion y temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(day && state_s && temp_average){
+              const filtradas = agrodata.filter(r => r.day == day && r.state_s == state_s && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con dia,provincia y temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(day && state_s && temp_max){
+              const filtradas = agrodata.filter(r => r.day == day && r.state_s == state_s && r.temp_max >= temp_max);
+              console.log("Nuevo GET en /agrodata con dia,provincia y temperatura maxima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(day && station_s && temp_max){
+              const filtradas = agrodata.filter(r => r.day == day && r.station_s == station_s && r.temp_max >= temp_max);
+              console.log("Nuevo GET en /agrodata con dia,provincia y temperatura maxima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(day && state_s && temp_min){
+              const filtradas = agrodata.filter(r => r.day == day && r.state_s == state_s && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con dia,provincia y temperatura minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(day && station_s && temp_min){
+              const filtradas = agrodata.filter(r => r.day == day && r.station_s == station_s && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con dia,provincia y temperatura minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+
+          }else if(temp_max && temp_min){
+              const filtradas = agrodata.filter(r => r.temp_max >= temp_max && r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con temperatura maxima y temperatura minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(temp_max && temp_average){
+              const filtradas = agrodata.filter(r => r.temp_max >= temp_max && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con temperatura maxima y temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(temp_min && temp_average){
+              const filtradas = agrodata.filter(r => r.temp_min >= temp_min && r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con temperatura minima y temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if (year) {
+              const filtradas = agrodata.filter(r => r.year === parseInt(year));
+              console.log("Nuevo GET en /agrodata con año");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+              
+          } else if(state_s){
+              const filtradas = agrodata.filter(r => r.state_s === state_s);
+              console.log("Nuevo GET en /agrodata con provincia");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            } else if(station_s){
+              const filtradas = agrodata.filter(r => r.station_s === station_s);
+              console.log("Nuevo GET en /agrodata con provincia");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(temp_max){
+              const filtradas = agrodata.filter(r => r.temp_max >= temp_max);
+              console.log("Nuevo GET en /agrodata con temperatura maxima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(temp_min){
+              const filtradas = agrodata.filter(r => r.temp_min >= temp_min);
+              console.log("Nuevo GET en /agrodata con temperatura minima");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else if(temp_average){
+              const filtradas = agrodata.filter(r => r.temp_average >= temp_average);
+              console.log("Nuevo GET en /agrodata con temperatura media");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+            }else if(day){
+              const filtradas = agrodata.filter(r => r.day >= day);
+              console.log("Nuevo GET en /agrodata con dia");  
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }else {
+              console.log("Nuevo GET en /agrodata"); 
+              if(filtradas.length==0){
+                res.status(404).send("Not Found")
+              } else{
+                res.status(200);
+              res.json(filtradas.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+              }
+          }  
+      }else{
+          console.log("Error al dar los datos");
+          res.sendStatus(500);
+      }
+  });
+  console.log("GET con los datos");
+});
+
+// Paginacion
+function pagination(req, lista){
+  var res = [];
+  const limit = req.query.limit;
+  const offset = req.query.offset;
+  
+  if(limit < 1 || offset < 0 || offset > lista.length){
+      res.push("Hay un error en los parametros offset y limit");
+      return res;
+  }else{
+  res = lista.slice(offset,parseInt(limit)+parseInt(offset));
+  return res;
+  }     
+};
+
+
+app.get(BASE_API_URL+"/agrodata/:state_s", (request, response) => {
+  const state_s = request.params.state_s;
+  const from = request.query.from;
+  const to = request.query.to;
+  db.find({}, (err, agrodata)=>{
+      if (from && to && !err) {
+          if (from > to) {
+              response.status(400).json("El rango de años especificado es inválido");
+          } else {
+              const datosFiltrados = agrodata.filter(x => x.state_s === state_s && x.year >= from && x.year <= to);
+              response.status(200).json(datosFiltrados.map((c) =>{
+                  delete c._id;
+                  return c;
+              }));
+              console.log(`/GET en /agrodata/${state_s}?from=${from}&to=${to}`);
+          }
+      }else if(!err){
+          const datosFiltrados = agrodata.filter(x => x.state_s == state_s);
+          
+          if(datosFiltrados.length == 0){
+              res.status(404).json('La ruta solicitada no existe');
+          }else{
+          response.status(200).json(datosFiltrados.map((c)=>{
+              delete c._id;
+              return c;
+          }));
+          console.log(`New GET /agrodata/${state_s}`); 
+          }
+          console.log(`Nuevo GET en /agrodata/${state_s}`); 
+      }else{
+          response.sendStatus(500);
+          console.log("No se ha podido hacer la busqueda");
+      }
+  });    
+});
+
+/// CODIGO
+
 
 app.get(BASE_API_URL + "/agrodata-almeria", (req, res) => {
     console.log("New GET req /agrodata-almeria");
@@ -71,71 +1004,94 @@ app.get(BASE_API_URL + "/agrodata-almeria", (req, res) => {
 });
 
 
-//Get Filtrado
-
-app.get(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
-    const state_s = req.params.state_s;
-    db.findOne({state_s: state_s}, (err, resource) => {
-        if (err) {
-            console.log(`Error getting resource ${state_s}: ${err}`);
-            res.sendStatus(500);
-        } else if (resource) {
-            delete resource._id;
-            res.json(resource);
-            console.log(`New GET req /agrodata-almeria/${state_s}`);
-        } else {
-            res.status(404).json({error: "Recurso no encontrado"});
-        }
-    });
+app.get(BASE_API_URL+"/agrodata-almeria/:state_s/:year", (req,res) => {
+  const state_s = req.params.state_s;
+  const year = parseInt(req.params.year);
+  db.find({}, (err, agrodata)=>{
+      if(!err){
+          var filtro = agrodata.filter(x => x.state_s == state_s && x.year == year);
+          if (filtro.length == 0) {            
+              res.status(404).json('La ruta solicitada no existe');
+          } else {
+              res.status(200).json(filtro.map((c)=>{
+                  delete c._id;
+                  return c;
+              }));
+          }
+      }else{
+          console.log("No se ha podido obtener los datos");
+          res.sendStatus(500);
+      }   
+  });
+  console.log("Datos de /agrodata-almeria/:state_s/:year");
 });
+
+app.get(BASE_API_URL+"/agrodata-almeria/:state_s", (request, response) => {
+  const state_s = request.params.state_s;
+  const from = request.query.from;
+  const to = request.query.to;
+  db.find({}, (err, agrodata)=>{
+      if (from && to && !err) {
+          if (from > to) {
+              response.status(400).json("El rango de años especificado es inválido");
+          } else {
+              const datosFiltrados = agrodata.filter(x => x.state_s === state_s && x.year >= from && x.year <= to);
+              response.status(200).json(datosFiltrados.map((c) =>{
+                  delete c._id;
+                  return c;
+              }));
+              console.log(`/GET en /agrodata-almeria1/${state_s}?from=${from}&to=${to}`);
+          }
+      }else if(!err){
+          const datosFiltrados = agrodata.filter(x => x.state_s == state_s);
+          
+          if(datosFiltrados.length == 0){
+              res.status(404).json('La ruta solicitada no existe');
+          }else{
+          response.status(200).json(datosFiltrados.map((c)=>{
+              delete c._id;
+              return c;
+          }));
+          console.log(`New GET /agrodata-almeria/${state_s}`); 
+          }
+          console.log(`Nuevo GET en /agrodata-almeria/${state_s}`); 
+      }else{
+          response.sendStatus(500);
+          console.log("No se ha podido hacer la busqueda");
+      }
+  });    
+});
+
   
 app.post(BASE_API_URL + "/agrodata-almeria", (req, res) => {
     const newRecord = req.body;
     
     if (
-      !newRecord.hasOwnProperty("state_id") ||
-      !newRecord.hasOwnProperty("station_id") ||
-      !newRecord.hasOwnProperty("date") ||
+      !newRecord.hasOwnProperty("state_s") ||
+      !newRecord.hasOwnProperty("station_s") ||
+      !newRecord.hasOwnProperty("year") ||
       !newRecord.hasOwnProperty("day") ||
       !newRecord.hasOwnProperty("temp_max") ||
-      !newRecord.hasOwnProperty("hormin_temp_max") ||
       !newRecord.hasOwnProperty("temp_min") ||
-      !newRecord.hasOwnProperty("hormin_temp_min") ||
-      !newRecord.hasOwnProperty("temp_average") ||
-      !newRecord.hasOwnProperty("hum_max") ||
-      !newRecord.hasOwnProperty("hum_min") ||
-      !newRecord.hasOwnProperty("hum_average") ||
-      !newRecord.hasOwnProperty("wind_speed") ||
-      !newRecord.hasOwnProperty("wind_direction") ||
-      !newRecord.hasOwnProperty("radiation") ||
-      !newRecord.hasOwnProperty("precipitation")
+      !newRecord.hasOwnProperty("temp_average")
     ) {
       res.status(400).send({ error: "El objeto JSON no tiene los campos esperados" });
       return;
-    }
+    };
     
     db.findOne(
       {
-        state_id: newRecord.state_id,
-        station_id: newRecord.station_id,
-        date: newRecord.date,
+        state_s: newRecord.state_s,
+        station_s: newRecord.station_s,
+        year: newRecord.year,
         day: newRecord.day,
         temp_max: newRecord.temp_max,
-        hormin_temp_max: newRecord.hormin_temp_max,
         temp_min: newRecord.temp_min,
-        hormin_temp_min: newRecord.hormin_temp_min,
         temp_average: newRecord.temp_average,
-        hum_max: newRecord.hum_max,
-        hum_min: newRecord.hum_min,
-        hum_average: newRecord.hum_average,
-        wind_speed: newRecord.wind_speed,
-        wind_direction: newRecord.wind_direction,
-        radiation: newRecord.radiation,
-        precipitation: newRecord.precipitation,
       },
       (err, resource) => {
         if (err) {
-          console.log(`Error getting resource ${newRecord.state_id}: ${err}`);
+          console.log(`Error getting resource ${newRecord.state_s}: ${err}`);
           res.sendStatus(500);
         } else if (resource) {
           res.status(409).send({ error: "Ya existe un elemento con los mismos datos" });
@@ -191,7 +1147,7 @@ app.put(BASE_API_URL + "/agrodata-almeria/:state_s", (req, res) => {
     const updatedData = req.body; // Obtener los nuevos datos del cuerpo de la solicitud
 
     // Comprobar si el cuerpo de la solicitud contiene todos los campos requeridos
-    if (!updatedData.hasOwnProperty("state_id") || !updatedData.hasOwnProperty("station_id") || !updatedData.hasOwnProperty("station_s") || !updatedData.hasOwnProperty("date") || !updatedData.hasOwnProperty("day") || !updatedData.hasOwnProperty("temp_max") || !updatedData.hasOwnProperty("hormin_temp_max") || !updatedData.hasOwnProperty("temp_min") || !updatedData.hasOwnProperty("hormin_temp_min") || !updatedData.hasOwnProperty("temp_average") || !updatedData.hasOwnProperty("hum_max") || !updatedData.hasOwnProperty("hum_min") || !updatedData.hasOwnProperty("hum_average") || !updatedData.hasOwnProperty("wind_speed") || !updatedData.hasOwnProperty("wind_direction") || !updatedData.hasOwnProperty("radiation") || !updatedData.hasOwnProperty("precipitation")) {
+    if (!updatedData.hasOwnProperty("station_s") || !updatedData.hasOwnProperty("year") || !updatedData.hasOwnProperty("day") || !updatedData.hasOwnProperty("temp_max")|| !updatedData.hasOwnProperty("temp_min")|| !updatedData.hasOwnProperty("temp_average")) {
         res.status(400).send({ error: "El objeto JSON no tiene los campos esperados" });
         return;
     }
