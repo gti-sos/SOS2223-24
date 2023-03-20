@@ -1,6 +1,5 @@
 module.exports = (app)=>{
 
-    var useOua = require("../Samples/OUA");
     const Datastore = require('nedb');
     const db = new Datastore({ filename: 'provisions.db', autoload: true });
     const rutaoua = "/api/v1/provisions-for-the-year-2014";
@@ -57,51 +56,102 @@ module.exports = (app)=>{
         });
     });
 
-    //GET and GET ?from&to and GET ?year
+    //GET BASE, Paginating, Search, from&to
     app.get(rutaoua, (req, res) => {
+        //paginating
+        let offset = 0;
+        let limit = 0;
+
+        if (req.query.offset) {
+            offset = Number(req.query.offset);
+        }
+        if (req.query.limit) {
+            limit = Number(req.query.limit);
+        }
+
+        //Búsquedas
+        let query = {};
+
+        if (req.query.province) {
+            query.province = req.query.province;
+        }
+        if (req.query.year) {
+            query.year = Number(req.query.year);
+        }
+        if (req.query.summary) {
+            query.summary = req.query.summary;
+        }
+        if (req.query.type_of_provision) {
+            query.type_of_provision = req.query.type_of_provision;
+        }
+        if (req.query.disposal_number) {
+            query.disposal_number = Number(req.query.disposal_number);
+        }
+        if (req.query.number_of_the_Bulletin) {
+            query.number_of_the_Bulletin = Number(req.query.number_of_the_Bulletin);
+        }
+        if (req.query.date_of_disposition) {
+            query.date_of_disposition = req.query.date_of_disposition;
+        }
+        if (req.query.section_number) {
+            query.section_number = Number(req.query.section_number);
+        }
+        if (req.query.section) {
+            query.section = req.query.section;
+        }
+
+        //Búsquedas numéricas
+
+        //disposal_number
+        if (req.query.disposal_number_over) {
+            query.disposal_number = { $gte: Number(req.query.disposal_number_over) };
+        }
+        if (req.query.disposal_number_below) {
+            query.disposal_number = { $lte: Number(req.query.disposal_number_below) };
+        }
+
+        //year
+        if (req.query.year_over) {
+            query.year = { $gte: Number(req.query.year_over) };
+        }
+        if (req.query.year_below) {
+            query.year = { $lte: Number(req.query.year_below) };
+        }
+
+        //number_of_the_Bulletin
+        if (req.query.number_of_the_Bulletin_over) {
+            query.number_of_the_Bulletin = { $gte: Number(req.query.number_of_the_Bulletin_over) };
+        }
+        if (req.query.number_of_the_Bulletin_below) {
+            query.number_of_the_Bulletin = { $lte: Number(req.query.number_of_the_Bulletin_below) };
+        }
+
+        //GET and GET ?from&to and GET ?year
         const from = Number(req.query.from);
         const to = Number(req.query.to);
         const year = Number(req.query.year);
-        
+
         if (from && to) {
-        if (from >= to) {
-            res.status(400).send("El rango es incorrecto");
-        } else {
-            db.find({ year: { $gte: from, $lte: to } }, (err, yearSelect) => {
+            if (from >= to) {
+                res.status(400).send("El rango es incorrecto");
+            } else {
+                query.year = { $gte: from, $lte: to };
+            }
+        } else if (year) {
+            query.year = year;
+        }
+
+        db.find(query).sort({ disposal_number: req.body.disposal_number }).skip(offset).limit(limit).exec(function (err, docs) {
             if (err) {
                 res.status(500).send(err);
-            } else if (yearSelect.length !== 0) {
-                res.status(200).json(yearSelect);
-                console.log(`New GET to /provisions-for-the-year-2014/?from=${from}&to=${to}`);
+            } else if (docs.length === 0) {
+                res.status(404).send(`No existe ningún recurso.`);
             } else {
-                res.status(404).send(`No existe ningún recurso en el periodo ${from}-${to}.`)
-            }
-            });
-        }
-        } else if (year) {
-        db.find({ year: year }, (err, yearSelect) => {
-            if (err) {
-            res.status(500).send(err);
-            } else if (yearSelect.length === 0) {
-            res.status(404).send(`No exite ningun dato para el año ${year}`);
-            } else {
-            res.status(200).json(yearSelect);
-            console.log(`New GET to /provisions-for-the-year-2014?year=${year}`);
+                res.status(200).send(docs);
             }
         });
-        } else {
-        db.find({}, (err, datos) => {
-            if (err) {
-            res.status(500).send(err);
-            } else if (datos.length !== 0) {
-            res.status(200).json(datos);
-            console.log("New GET to /provisions-for-the-year-2014/");
-            } else {
-            res.status(404).json({ message: `No existe ningún recurso:` });
-            }
-        });
-        }
-    });  
+    });
+
 
     //GET periodo concreto + provincia
     app.get(rutaoua + '/:province', (req, res) => {

@@ -1,14 +1,11 @@
 var express = require("express");
-var cool = require("cool-ascii-faces");
 const bodyParser = require("body-parser");
-var app = express();
 var port = process.env.PORT || 12345;
 
+var app = express();
 app.use("/", express.static("./public"));
-
 app.use(bodyParser.json());
 
-var useARC = require("./Samples/ARC");
 
 
 const BASE_API_URL = "/api/v1";
