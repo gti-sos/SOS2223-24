@@ -7,11 +7,12 @@ module.exports = (app) => {
     db.insert(useVSE.array_VSE);
     const BASE_API_URL = "/api/v1";
     const rutavse = "/api/v1/agroprices-weekly";
-    //Get Victor
-    app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
-    res.json(useVSE.array_VSE);
-    console.log("New GET to /agroprices-weekly")
-  });
+    const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26059751/2s93K1oezi";
+
+    //POSTMAN docs
+    app.get(rutavse+"/docs",(req,res)=>{
+      res.redirect(API_DOC_PORTAL);
+    });
   
   
   //loadInitialData
