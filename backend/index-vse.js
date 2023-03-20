@@ -3,8 +3,7 @@ var db = new Datastore();
 
 module.exports = (app) => {
 
-    var useVSE = require("../Samples/VSE");
-    db.insert(useVSE.array_VSE);
+
     const BASE_API_URL = "/api/v1";
     const rutavse = "/api/v1/agroprices-weekly";
     const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26059751/2s93K1oezi";
