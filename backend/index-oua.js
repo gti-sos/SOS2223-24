@@ -193,7 +193,12 @@ module.exports = (app)=>{
     // POST rutaoua
     app.post(rutaoua, (req, res) => {
         console.log(req.body);
-        if (!req.body) {
+        let newReq = req.body;
+        if (!req.body || !newReq.hasOwnProperty('province') || !newReq.hasOwnProperty('year') || 
+        !newReq.hasOwnProperty('summary') || !newReq.hasOwnProperty('type_of_provision') || 
+        !newReq.hasOwnProperty('disposal_number') || !newReq.hasOwnProperty('number_of_the_Bulletin') ||
+        !newReq.hasOwnProperty('date_of_disposition') || !newReq.hasOwnProperty('section_number') ||
+        !newReq.hasOwnProperty('section')) {
             res.status(400).send("Hay que insertar datos.");
         } else {
             const newData = req.body;
