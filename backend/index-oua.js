@@ -4,6 +4,13 @@ module.exports = (app)=>{
     const Datastore = require('nedb');
     const db = new Datastore({ filename: 'provisions.db', autoload: true });
     const rutaoua = "/api/v1/provisions-for-the-year-2014";
+    const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26056359/2s93JzN1dS";
+
+    //POSTMAN docs
+    app.get(rutaoua+"/docs",(req,res)=>{
+        res.redirect(API_DOC_PORTAL);
+      });
+
 
 
     app.get(rutaoua + "/loadInitialData", (req, res) => {

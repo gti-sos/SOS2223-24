@@ -1,7 +1,6 @@
 var express = require("express");
 var cool = require("cool-ascii-faces");
 const bodyParser = require("body-parser");
-
 var app = express();
 var port = process.env.PORT || 12345;
 
