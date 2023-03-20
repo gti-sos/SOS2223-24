@@ -13,19 +13,6 @@ module.exports = (app) => {
     console.log("New GET to /agroprices-weekly")
   });
   
-  //Get Victor recurso especifico
-  //GET recurso especifico por mercado
-  app.get(BASE_API_URL+"/agroprices-weekly/mercados/:market",(req,res)=>{
-    const marketurl = req.params.market; // Obtener el parámetro del mercado de la URL
-    const resourceMarket = useVSE.array_VSE.find(resourceMarket => resourceMarket.market === marketurl); // Buscar el recurso por territorio
-  
-    if (resourceMarket) {
-        res.json(resourceMarket); // Devolver el recurso con una respuesta HTTP 200
-    } else {
-        res.status(404).json({error: "Recurso no encontrado"}); // Devolver un error HTTP 404 si no se encuentra el recurso
-    }
-  });
-  
   
   //loadInitialData
   app.get(rutavse + "/loadInitialData", (req, res) => {
