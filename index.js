@@ -21,10 +21,6 @@ app.listen(port, ()=>{
 var backend_oua = require("./backend/index-oua");
 backend_oua(app);
 
-var backend_arc = require("./backend/index-arc");
-backend_arc(app);
-
-
 var backend_vse = require("./backend/index-vse");
 backend_vse(app);
 
