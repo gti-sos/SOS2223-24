@@ -154,29 +154,29 @@ module.exports = (app) => {
   
 
       //PUT actualizar precio de un producto en un mercado en la semana 1
-      app.put(rutavse + '/:market' + '/:product' + '/:week1', (req, res) => {
+      app.put(rutavse + '/:market' + '/:product', (req, res) => {
         const market = req.params.market;
         const product = req.params.product;
-        const week1 = Number(req.params.week1);
 
-        db.findOne({ market: market, product: product, week1: week1 }, (err, existe) => {
+        db.findOne({ market: market, product: product}, (err, existe) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            if (!existe || market !== req.body.market || product !== req.body.product || week1 !== Number(req.body.week1)) {
+            if (!existe || market !== req.body.market || product !== req.body.product) {
                 return res.status(400).send("Disposición incorrecta.");
             } else {
                 existe.type = req.body.type || existe.type;
                 existe.class = req.body.class || existe.class;
                 existe.unit = req.body.unit || existe.unit;
                 existe.commpos = req.body.commpos || existe.commpos;
+                existe.week1 = Number(req.body.week1) || existe.week1;
                 existe.week2 = Number(req.body.week2) || existe.week2;
                 db.update({ _id: existe._id }, existe, {}, (err, numReplaced) => {
                     if (err) {
                         return res.status(500).send(err);
                     }
                     res.status(200).send("Disposición actualizada correctamente");
-                    console.log("New PUT to /agroprices-weekly/" + market + "/" + product + "/" + week1);
+                    console.log("New PUT to /agroprices-weekly/" + market + "/" + product);
                 });
             }
         });
