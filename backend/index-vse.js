@@ -1,52 +1,151 @@
+var Datastore = require('nedb');
+var db = new Datastore();
+
 module.exports = (app) => {
 
     var useVSE = require("../Samples/VSE");
+    db.insert(useVSE.array_VSE);
     const BASE_API_URL = "/api/v1";
-    //Get Victor
-app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
-    res.json(useVSE.array_VSE);
-    console.log("New GET to /agroprices-weekly")
+    const rutavse = "/api/v1/agroprices-weekly";
+    const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26059751/2s93K1oezi";
+
+    //POSTMAN docs
+    app.get(rutavse+"/docs",(req,res)=>{
+      res.redirect(API_DOC_PORTAL);
+    });
+  
+  
+  //loadInitialData
+  app.get(rutavse + "/loadInitialData", (req, res) => {
+    db.find({}, function (err, docs) {
+      if (docs.length === 0) {
+        db.insert([
+          {product: "REFINADO",type: "Aceites de girasol",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",week1: 77.53,week2: 76.55},
+          {product: "DE ORUJO CRUDO",type: "ACEITES DE OLIVA",class: "5 g BAS. 10",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",week1: 73.62,week2: 79.50},
+          {product: "DE ORUJO REFINADO",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",week1: 118.69,week2: 121.25},
+          {product: "VÍRGENES-VIRGEN EXTRA",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "GR-Alhama",commpos: "A.I.",week1: 202.00,week2: 203.00},
+          {product: "BLANCA O COMÚN",type: "AVENA",class: "S.E.",unit: "t",market: "SE-Sevilla",commpos: "S.Alm.",week1: 183.00,week2: 184.00},
+          {product: "CABALLAR",type: "CEBADA",class: "S.E.",unit: "t",market: "GR-Montes Occidentales",commpos: "S.Alm.",week1: 180.00,week2: 180.00},
+          {product: "CERVECERA",type: "CEBADA",class: "S.E.",unit: "t",market: "GR-Alhama",commpos: "S.Alm.",week1: 180.00,week2: 180.00},
+          {product: "FINO O MESERO",type: "LIMÓN",class: "I",unit: "100 kg",market: "MA-Málaga",commpos: "C.M.",week1: 85.00,week2: 85.00},
+          {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "HU-Huelva",commpos: "Árbol",week1: 30.00,week2: 30.00},
+          {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "MA-Málaga",commpos: "Árbol",week1: 16.00,week2: 16.00}
+        ], function (err, newDocs) {
+          res.send(JSON.stringify(newDocs, null, 2));
+          console.log("Se han creado 10 datos");
+        });
+      } else {
+        res.send("Ya existen datos");
+        console.log("Ya existen datos");
+      }
+    });
+    console.log("New GET to /agroprices-weekly/loadInitialData");
   });
-  
-  //Get Victor recurso especifico
-  //GET recurso especifico
-  app.get(BASE_API_URL+"/agroprices-weekly/mercados/:market",(req,res)=>{
-    const marketurl = req.params.market; // Obtener el parámetro del mercado de la URL
-    const resourceMarket = useVSE.array_VSE.find(resourceMarket => resourceMarket.market === marketurl); // Buscar el recurso por territorio
-  
-    if (resourceMarket) {
-        res.json(resourceMarket); // Devolver el recurso con una respuesta HTTP 200
-    } else {
-        res.status(404).json({error: "Recurso no encontrado"}); // Devolver un error HTTP 404 si no se encuentra el recurso
-    }
+
+  //GET producto + tipo + mercado
+  app.get(rutavse + '/:product' + '/:type' + '/:market', (req, res) => {
+    const product = req.params.product;
+    const type = req.params.type;
+    const market = req.params.market;
+    
+    db.find({ product: product, type: type, market: market }, (err, docs) => {
+        if (err) {
+        res.status(500).json({ message: 'Error interno del servidor' });
+        } else if (docs.length > 0) {
+        res.json(docs).status(200);
+        console.log(`Nuevo GET a ${rutavse}/${product}/${type}/${market}`);
+        } else {
+        res.status(404).json({ message: `No existe ningún recurso para el producto: ${product} del tipo: ${type} en el mercado de : ${market}.` });
+        }
+    });
+});
+
+    //GET BASE, Paginating, Search, from&to
+    app.get(rutavse, (req, res) => {
+      //paginating
+      let offset = 0;
+      let limit = 0;
+
+      if (req.query.offset) {
+          offset = Number(req.query.offset);
+      }
+      if (req.query.limit) {
+          limit = Number(req.query.limit);
+      }
+
+      //Búsquedas
+      let query = {};
+
+      if (req.query.market) {
+          query.market = req.query.market;
+      }
+      if (req.query.product) {
+          query.product = req.query.product;
+      }
+      if (req.query.type) {
+          query.type = req.query.type;
+      }
+      if (req.query.class) {
+          query.class = req.query.class;
+      }
+      if (req.query.unit) {
+          query.unit = req.query.unit;
+      }
+      if (req.query.commpos) {
+          query.commpos = req.query.commpos;
+      }
+      if (req.query.week1) {
+          query.week1 = Number(req.query.week1);
+      }
+      if (req.query.week2) {
+          query.week2 = Number(req.query.week2);
+      }
+
+      //Búsquedas numéricas
+
+      //precio semanal
+      if (req.query.week1_price_over) {
+          query.week1 = { $gte: Number(req.query.week1_price_over) };
+      }
+      if (req.query.week2_price_over) {
+          query.week2 = { $lte: Number(req.query.week2_price_over) };
+      }
   });
-  
-  
-  //Array vacio + get Victor
-  var array_10= [];
-  
-  app.get(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
-    if (array_10.length==0){
-      array_10.push({product: "REFINADO",type: "Aceites de girasol",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",week1: 77.53,week2: 76.55},
-      {product: "REFINADO",type: "Aceites de girasol",class: "S.E.",unit: "100 kg",market: "SE-Sevilla",commpos: "A.I.",week1: 80.00,week2: 79.00},
-      {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "GR-Montes Orientales",commpos: "A.I.",week1: 180.00,week2: 180.00},
-      {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "GR-Alhama",commpos: "A.I.",week1: 140.00,week2: 140.00},
-      {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "GR-Montes Orientales",commpos: "A.I.",week1: 179.00,week2: 180.00},
-      {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "CA-Cádiz",commpos: "A.I.",week1: 174.00,week2: 174.00},
-      {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "HU-Huelva",commpos: "A.I.",week1: 210.00,week2: 210.00},
-      {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "GR-Granada",commpos: "A.I.",week1: 159.00,week2: 168.00},
-      {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",week1: 172.80,week2: 172.80},
-      {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "MA-Málaga",commpos: "A.I.",week1: 172.20,week2: 176.30}
-      );
-      res.json(useVSE.array_VSE)
-      console.log("Se han creado 10 datos")
-  
-  } else {
-    res.send('Ya existen datos');
-      console.log('Ya existen datos')
-  }
-  });
-  
+
+      // POST
+      app.post(rutavse, (req, res) => {
+        console.log(req.body);
+        if (!req.body) {
+            res.status(400).send("Hay que insertar datos.");
+        } else {
+            const newData = req.body;
+            db.find({
+                product: newData.product,
+                type: newData.type,
+                class: newData.class,
+                unit: newData.unit,
+                market: newData.market,
+                commpos: newData.commpos,
+                week1: newData.week1,
+                week2: newData.week2,
+            }, (err, docs) => {
+                if (docs.length > 0) {
+                    res.status(409).send("El recurso ya existe.");
+                } else {
+                    db.insert(newData, (err, doc) => {
+                        if (err) {
+                            res.status(500).send("Error interno del servidor.");
+                        } else {
+                            console.log(`newData = ${JSON.stringify(doc, null, 2)}`);
+                            console.log("New POST to /agroprocices-weekly");
+                            res.status(201).send("El recurso se ha creado correctamente.");
+                        }
+                    });
+                }
+            });
+        }
+    });
+
   //Metodo Post de recurso(fallido) Victor
   //POST FALLIDO
   app.post(BASE_API_URL+"/agroprices-weekly/mercados/:market",(req,res)=>{
@@ -54,98 +153,75 @@ app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
     console.log("New post /agroprices-weekly/mercados/:market");
   });
   
-  //Metodo Post en URL base Victor
-  
-  app.post(BASE_API_URL + "/agroprices-weekly", (req,res) => {
-    const keys = Object.keys(req.body);
-    if(keys.length<8){
-      res.status(400).send("No se han introducido datos suficientes");
-    } else{
-      const exists = useVSE.array_VSE.some(agro => agro.product === req.body.product && agro.market === req.body.market)
-      if (exists) {
-        // Enviar una respuesta con un código de estado 409 Conflict si el objeto ya existe
-        res.status(409).send('Conflicto: Este objeto ya existe');
-      } else {
-        // Agregar los nuevos datos a la variable
-        useVSE.array_VSE.push(req.body);
-        // Enviar una respuesta con un código de estado 201 Created
-        res.status(201).send('Los datos se han creado correctamente');
-      }
-    }
+
+      //PUT actualizar precio de un producto en un mercado en la semana 1
+      app.put(rutavse + '/:market' + '/:product', (req, res) => {
+        const market = req.params.market;
+        const product = req.params.product;
+
+        db.findOne({ market: market, product: product}, (err, existe) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            if (!existe || market !== req.body.market || product !== req.body.product) {
+                return res.status(400).send("Disposición incorrecta.");
+            } else {
+                existe.type = req.body.type || existe.type;
+                existe.class = req.body.class || existe.class;
+                existe.unit = req.body.unit || existe.unit;
+                existe.commpos = req.body.commpos || existe.commpos;
+                existe.week1 = Number(req.body.week1) || existe.week1;
+                existe.week2 = Number(req.body.week2) || existe.week2;
+                db.update({ _id: existe._id }, existe, {}, (err, numReplaced) => {
+                    if (err) {
+                        return res.status(500).send(err);
+                    }
+                    res.status(200).send("Disposición actualizada correctamente");
+                    console.log("New PUT to /agroprices-weekly/" + market + "/" + product);
+                });
+            }
+        });
     });
-  
-    // Metodo PUT en URL base Victor
+
+
+  // Metodo PUT en URL base Victor(no se permite)
   app.put(BASE_API_URL + "/agroprices-weekly", (req, res) => {
     res.status(405).send('En esta ruta no esta permitido el metodo PUT');
   });
   
-  // Método DELETE en URL base Victor
-  app.delete(BASE_API_URL + "/agroprices-weekly", (req, res) => {
-    useVSE.array_VSE = [];
-    res.status(200).send('Se han borrado los datos');
-  });
-  
-  //Metodo delete recurso especifico Victor
-  //DELETE  DE UN RECURSO
-  app.delete(BASE_API_URL + "/agroprices-weekly/mercados/:market", (request, response) => {
-    const market = request.params.market;
-    const index = useVSE.array_VSE.findIndex(item => item.market === market); // Encontrar el índice del elemento a eliminar
-    if (index !== -1) { // Comprobar si se encontró el elemento
-      useVSE.splice(index, 1); // Eliminar el elemento en el índice encontrado
-      response.status(204).send("Se ha eliminado correctamente"); // Enviar una respuesta vacía con el código 204 (No Content) para indicar éxito sin contenido
-    } else {
-      response.status(404).send({ error: "No se encontró el elemento con el territorio especificado" }); // Enviar una respuesta con el código 404 (Not Found) si el elemento no se encontró
-    }
-  });
   
   //Metodo Post en loadInitialData Bloqueado Victor
   app.get(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
     res.status(405).send('En esta ruta no esta permitido el metodo POST');
   });
-  
-  //Metodo get en loadInitialData Victor
-  
-  app.get(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
-    res.json(array_10);
-    res.status(200);
+
+  //DELETE Todos los datos
+  app.delete(rutavse, (req, res) => {
+    db.remove({}, { multi: true }, (err, numRemoved) => {
+        if (err) {
+            res.status(500).send("Ha ocurrido un error al eliminar los datos.");
+        } else {
+            res.status(200).send("Los datos se han borrado correctamente.");
+        }
+    });
+});
+
+
+  //DELETE de un recurso.
+  app.delete(rutavse + "/:market/:product/:type", (req, res) => {
+      const market = req.params.market;
+      const product = req.params.product;
+      const type = req.params.type;
+      
+      db.remove({ market: market, product: product, type: type }, {}, (err, numRemoved) => {
+      if (err) {
+          res.status(500).send("Error interno del servidor.");
+      } else if (numRemoved === 0) {
+          res.status(404).send("El recurso no existe.");
+      } else {
+          res.status(200).send("El recurso se ha borrado correctamente.");
+      }
+      });
   });
   
-  //Metodo Put en loadInitialData Victor
-  app.put(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
-  if (!req.body) {
-    res.status(400).send('No se proporcionaron datos');
-  } else {
-    array_10 = req.body;
-    res.status(200).send('Los datos se han actualizado correctamente');
-  }
-  });
-  
-  //Metodo put para actualizar recurso Victor
-  // PUT actualizar recurso existente
-  app.put(BASE_API_URL + "/agroprices-weekly/mercados/:market", (request, response) => {
-    const market = request.params.market; // Obtener el territorio de la URL
-    const updatedStat = request.body; // Obtener los nuevos datos del cuerpo de la solicitud
-    if (!updatedStat.hasOwnProperty("market")) { // Comprobar si el cuerpo de la solicitud contiene el campo "market"
-        response.status(400).send({ error: "El objeto JSON no tiene los campos esperados" });
-        return;
-    }
-    if (market !== updatedStat.market) { // Comprobar si el "territory" de la URL es igual al "territory" del cuerpo de la solicitud
-        response.status(400).send({ error: "El ID del recurso no coincide con el ID de la URL" });
-        return;
-    }
-    const index = useVSE.array_VSE.findIndex(stat => stat.market === market); // Encontrar el índice del recurso a actualizar
-    if (index !== -1) {
-        useVSE.array_VSE[index] = updatedStat; // Actualizar el recurso en la posición encontrada
-        response.sendStatus(204); // Enviar una respuesta vacía con código de estado 204 (Actualización exitosa)
-        console.log("Recurso actualizado: " + market);
-    } else {
-        response.status(404).send({ error: "Recurso no encontrado" }); // Si no se encuentra el recurso, devolver un código de estado 404
-    }
-  });
-  
-  //Metodo delete en loadInitialData Victor
-  app.delete(BASE_API_URL + "/agroprices-weekly/loadInitialData", (req, res) => {
-    array_10 = [];
-    res.status(200).send('Los datos se han borrado correctamente');
-  });
 }

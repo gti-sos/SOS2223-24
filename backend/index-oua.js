@@ -1,7 +1,7 @@
 module.exports = (app)=>{
 
     const Datastore = require('nedb');
-    const db = new Datastore({ filename: 'provisions.db', autoload: true });
+    const db = new Datastore();
     const rutaoua = "/api/v1/provisions-for-the-year-2014";
     const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26056359/2s93JzN1dS";
 
