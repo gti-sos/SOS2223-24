@@ -1,9 +1,13 @@
+var Datastore = require('nedb');
+var db = new Datastore();
+
 module.exports = (app) => {
 
     var useVSE = require("../Samples/VSE");
+    db.insert(useVSE.array_VSE);
     const BASE_API_URL = "/api/v1";
     //Get Victor
-app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
+    app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
     res.json(useVSE.array_VSE);
     console.log("New GET to /agroprices-weekly")
   });
@@ -39,6 +43,7 @@ app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
       {product: "VÍRGENES-LAMPANTE (2 g)",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "MA-Málaga",commpos: "A.I.",week1: 172.20,week2: 176.30}
       );
       res.json(useVSE.array_VSE)
+      db.insert(array_10);
       console.log("Se han creado 10 datos")
   
   } else {
@@ -46,7 +51,7 @@ app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
       console.log('Ya existen datos')
   }
   });
-  
+
   //Metodo Post de recurso(fallido) Victor
   //POST FALLIDO
   app.post(BASE_API_URL+"/agroprices-weekly/mercados/:market",(req,res)=>{
@@ -61,27 +66,25 @@ app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
     if(keys.length<8){
       res.status(400).send("No se han introducido datos suficientes");
     } else{
-      const exists = useVSE.array_VSE.some(agro => agro.product === req.body.product && agro.market === req.body.market)
+    //   const exists = useVSE.array_VSE.some(agro => agro.product === req.body.product && agro.market === req.body.market) -> usar el db.find
       if (exists) {
-        // Enviar una respuesta con un código de estado 409 Conflict si el objeto ya existe
         res.status(409).send('Conflicto: Este objeto ya existe');
       } else {
-        // Agregar los nuevos datos a la variable
-        useVSE.array_VSE.push(req.body);
+        db.insert(req.body);
         // Enviar una respuesta con un código de estado 201 Created
         res.status(201).send('Los datos se han creado correctamente');
       }
     }
     });
   
-    // Metodo PUT en URL base Victor
+    // Metodo PUT en URL base Victor(no se permite)
   app.put(BASE_API_URL + "/agroprices-weekly", (req, res) => {
     res.status(405).send('En esta ruta no esta permitido el metodo PUT');
   });
   
   // Método DELETE en URL base Victor
   app.delete(BASE_API_URL + "/agroprices-weekly", (req, res) => {
-    useVSE.array_VSE = [];
+    //usar db.delete
     res.status(200).send('Se han borrado los datos');
   });
   
@@ -89,12 +92,10 @@ app.get(BASE_API_URL + "/agroprices-weekly/", (req, res) => {
   //DELETE  DE UN RECURSO
   app.delete(BASE_API_URL + "/agroprices-weekly/mercados/:market", (request, response) => {
     const market = request.params.market;
-    const index = useVSE.array_VSE.findIndex(item => item.market === market); // Encontrar el índice del elemento a eliminar
-    if (index !== -1) { // Comprobar si se encontró el elemento
-      useVSE.splice(index, 1); // Eliminar el elemento en el índice encontrado
+    if (market) { // Comprobar si se encontró el elemento
       response.status(204).send("Se ha eliminado correctamente"); // Enviar una respuesta vacía con el código 204 (No Content) para indicar éxito sin contenido
     } else {
-      response.status(404).send({ error: "No se encontró el elemento con el territorio especificado" }); // Enviar una respuesta con el código 404 (Not Found) si el elemento no se encontró
+      response.status(404).send({ error: "No se encontró el elemento con el mercado especificado" }); // Enviar una respuesta con el código 404 (Not Found) si el elemento no se encontró
     }
   });
   
