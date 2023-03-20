@@ -2,7 +2,6 @@ var Datastore = require('nedb');
 var db = new Datastore();
 
 module.exports = (app) => {
-
     const BASE_API_URL = "/api/v1";
     const rutavse = "/api/v1/agroprices-weekly";
     const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26059751/2s93K1oezi";
