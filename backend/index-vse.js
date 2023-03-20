@@ -145,7 +145,10 @@ module.exports = (app) => {
       // POST
       app.post(rutavse, (req, res) => {
         console.log(req.body);
-        if (!req.body) {
+        if (!req.body || !newReq.hasOwnProperty('product') || !newReq.hasOwnProperty('type') || 
+        !newReq.hasOwnProperty('class') || !newReq.hasOwnProperty('unit') || 
+        !newReq.hasOwnProperty('market') || !newReq.hasOwnProperty('commpos') ||
+        !newReq.hasOwnProperty('week1') || !newReq.hasOwnProperty('week2')) {
             res.status(400).send("Hay que insertar datos.");
         } else {
             const newData = req.body;
