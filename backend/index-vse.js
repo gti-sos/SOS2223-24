@@ -116,6 +116,31 @@ module.exports = (app) => {
     if (req.query.week2_price_below) {
         query.week2 = { $lte: Number(req.query.week2_price_over) };
     }
+
+    //GET and GET ?from&to and GET ?week1
+    const from = Number(req.query.from);
+    const to = Number(req.query.to);
+    const week1 = Number(req.query.week1);
+
+    if (from && to) {
+        if (from >= to) {
+            res.status(400).send("El rango es incorrecto");
+        } else {
+            query.week1 = { $gte: from, $lte: to };
+        }
+        } else if (week1) {
+            query.week1 = week1;
+        }
+        db.find(query).sort({ market: req.body.market }).skip(offset).limit(limit).exec(function (err, docs) {
+            if (err) {
+                res.status(500).send(err);
+            } else if (docs.length === 0) {
+                res.status(404).send(`No existe ningún recurso.`);
+            } else {
+                res.status(200).send(docs);
+            }
+        });
+
   });
 
       // POST
