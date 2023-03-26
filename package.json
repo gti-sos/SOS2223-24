@@ -6,8 +6,10 @@
   "scripts": {
     "start": "node index",
     "test-vse": "npx newman run ./tests/backend-VSE.json",
-    "test-oua": "npx newman run ./tests/backend-oua.json -e ./tests/env/localhost-oua.json",
-    "test": "npm run test-oua && npm run test-vse && npm run test-arc"
+    "test-oua":"npx newman run ./tests/backend-oua.json -e ./tests/env/localhost-oua.json",
+    "test-arc-localhost": "npx newman run ./tests/backend-ARC.json -e ./tests/env/localhost-arc.json",
+    "test-arc": "npx newman run ./tests/backend-ARC.json -e ./tests/env/gcloud-arc.json",
+    "test":"npm run test-oua && npm run test-vse && npm run test-arc "
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,9 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "cool-ascii-faces": "^1.3.4",
+    "csvdata": "^2.0.0",
     "express": "^4.18.2",
-    "nedb": "^1.8.0"
+    "nedb": "^1.8.0",
+    "newman": "^5.3.2"
   }
 }
