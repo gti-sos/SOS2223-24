@@ -2,6 +2,7 @@ module.exports = (app)=>{
 
     const Datastore = require('nedb');
     const db = new Datastore();
+    const provisionsDB = "../db/provisions";
     const rutaoua = "/api/v1/provisions-for-the-year-2014";
     const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26056359/2s93JzN1dS";
 
@@ -127,18 +128,18 @@ module.exports = (app)=>{
                         section: "Otras disposiciones"
                       }
             ], function (err, newDocs) {
-              res.send(JSON.stringify(newDocs, null, 2));
+              res.status(201).json('Se han creado 10 datos');
               console.log("Se han creado 10 datos");
             });
           } else {
-            res.send("Ya existen datos");
+            res.status(200).json('Ya existen datos' );
             console.log("Ya existen datos");
           }
         });
         console.log("New GET to /provisions-for-the-year-2014/loadInitialData");
       });
 
-    //GET provincia + año + número de disposición
+    /*//GET provincia + año + número de disposición
     app.get(rutaoua + '/:province' + '/:year' + '/:disposal_number', (req, res) => {
         const year = Number(req.params.year);
         const province = req.params.province;
@@ -154,7 +155,25 @@ module.exports = (app)=>{
             res.status(404).json({ message: `No existe ningún recurso para la provincia: ${province} en el año: ${year} con el número de disposición: ${disposal_number}.` });
             }
         });
+    });*/
+
+    app.get(rutaoua + '/:province' + '/:year' + '/:disposal_number', (req, res) => {
+        const year = Number(req.params.year);
+        const province = req.params.province;
+        const disposal_number = Number(req.params.disposal_number);
+    
+        db.findOne({ province: province, year: year, disposal_number: disposal_number }, (err, doc) => {
+            if (err) {
+                res.status(500).json({ message: 'Error interno del servidor' });
+            } else if (doc) {
+                res.json(doc).status(200);
+                console.log(`Nuevo GET a ${rutaoua}/${province}/${year}/${disposal_number}`);
+            } else {
+                res.status(404).json({ message: `No existe ningún recurso para la provincia: ${province} en el año: ${year} con el número de disposición: ${disposal_number}.` });
+            }
+        });
     });
+    
 
     //GET BASE, Paginating, Search, from&to
     app.get(rutaoua, (req, res) => {
@@ -233,7 +252,7 @@ module.exports = (app)=>{
 
         if (from && to) {
             if (from >= to) {
-                res.status(400).send("El rango es incorrecto");
+                res.status(400).json("El rango es incorrecto");
             } else {
                 query.year = { $gte: from, $lte: to };
             }
@@ -243,11 +262,11 @@ module.exports = (app)=>{
 
         db.find(query).sort({ disposal_number: req.body.disposal_number }).skip(offset).limit(limit).exec(function (err, docs) {
             if (err) {
-                res.status(500).send(err);
+                res.status(500).json(err);
             } else if (docs.length === 0) {
-                res.status(404).send(`No existe ningún recurso.`);
+                res.status(404).json(`No existe ningún recurso.`);
             } else {
-                res.status(200).send(docs);
+                res.status(200).json(docs);
             }
         });
     });
@@ -270,7 +289,7 @@ module.exports = (app)=>{
                 console.log(`New GET to /provisions-for-the-year-2014/${province}?from=${from}&to=${to}`);
             }
             else {
-                res.status(404).send("No existe ningún recurso")
+                res.status(404).json("No existe ningún recurso")
             }
             }
         } else {
@@ -281,7 +300,7 @@ module.exports = (app)=>{
                 console.log("New GET to /provisions-for-the-year-2014/" + province);
             }
             else {
-                res.status(404).send("No existe ningún recurso")
+                res.status(404).json({ message: 'No existe ningún recurso' });
             }
             });
         }
@@ -299,7 +318,7 @@ module.exports = (app)=>{
         !newReq.hasOwnProperty('disposal_number') || !newReq.hasOwnProperty('number_of_the_Bulletin') ||
         !newReq.hasOwnProperty('date_of_disposition') || !newReq.hasOwnProperty('section_number') ||
         !newReq.hasOwnProperty('section')) {
-            res.status(400).send("Hay que insertar datos.");
+            res.status(400).json({ message: 'Verifique que ha insertado todos los campos' });
         } else {
             const newData = req.body;
             db.find({
@@ -314,15 +333,17 @@ module.exports = (app)=>{
                 section: newData.section
             }, (err, docs) => {
                 if (docs.length > 0) {
-                    res.status(409).send("El recurso ya existe.");
+                    res.status(404).json({ message: 'El recurso ya existe.' });
                 } else {
                     db.insert(newData, (err, doc) => {
                         if (err) {
-                            res.status(500).send("Error interno del servidor.");
+
+                            res.status(500).json(`Error interno del servidor: ${err}`);
                         } else {
                             console.log(`newData = ${JSON.stringify(doc, null, 2)}`);
                             console.log("New POST to /provisions-for-the-year-2014");
-                            res.status(201).send("El recurso se ha creado correctamente.");
+                            res.status(201).json("El recurso se ha creado correctamente.");
+
                         }
                     });
                 }
@@ -334,9 +355,9 @@ module.exports = (app)=>{
     app.post(rutaoua + "/loadInitialData", (req, res) => {
         db.find({ year: 2014 }, (err, docs) => {
             if (err) {
-                res.status(500).send("Error al obtener datos desde la base de datos.");
+                res.status(500).json(`Error al obtener datos desde la base de datos: ${err}`);
             } else {
-                res.status(405).send("POST no está permitido en esta ruta.");
+                res.status(405).json( "POST no está permitido en esta ruta."   );
             }
         });
     });
@@ -351,10 +372,10 @@ module.exports = (app)=>{
 
         db.findOne({ province: province, year: year, disposal_number: disposal_number }, (err, existe) => {
             if (err) {
-                return res.status(500).send(err);
+                return res.status(500).json(err);
             }
             if (!existe || province !== req.body.province || year !== Number(req.body.year) || disposal_number !== Number(req.body.disposal_number)) {
-                return res.status(400).send("Disposición incorrecta.");
+                return res.status(400).json({message:"Disposición incorrecta."});
             } else {
                 //{province,year,summary,type_of_provision,disposal_number,
                 //number_of_the_Bulletin,date_of_disposition,section_number,section:
@@ -366,9 +387,9 @@ module.exports = (app)=>{
                 existe.section = req.body.section || existe.section;
                 db.update({ _id: existe._id }, existe, {}, (err, numReplaced) => {
                     if (err) {
-                        return res.status(500).send(err);
+                        return res.status(500).json(err);
                     }
-                    res.status(200).send("Disposición actualizada correctamente");
+                    res.status(200).json({message: "Disposición actualizada correctamente"});
                     console.log("New PUT to /provisions-for-the-year-2014/" + province + "/" + year + "/" + disposal_number);
                 });
             }
@@ -378,17 +399,17 @@ module.exports = (app)=>{
 
     //PUT pronvincia No permitido
     app.put(rutaoua+'/:province', (req, res) => {
-        response.status(405).send("PUT no está permitido en esta ruta.");
+        response.status(405).json({message: "PUT no está permitido en esta ruta."});
     });
 
     //PUT pronvincia/año No permitido
     app.put(rutaoua+'/:province/:year', (req, res) => {
-        response.status(405).send("PUT no está permitido en esta ruta.");
+        response.status(405).json({message: "PUT no está permitido en esta ruta."});
     });
 
     //PUT rutaoua No permitido
     app.put(rutaoua, (req, res) => {
-        res.status(405).send("PUT no está permitido en esta ruta.");
+        res.status(405).json({message: "PUT no está permitido en esta ruta."});
     });
 
 
@@ -398,9 +419,9 @@ module.exports = (app)=>{
     app.delete(rutaoua, (req, res) => {
         db.remove({}, { multi: true }, (err, numRemoved) => {
             if (err) {
-                res.status(500).send("Ha ocurrido un error al eliminar los datos.");
+                res.status(500).json({message: "Ha ocurrido un error al eliminar los datos."});
             } else {
-                res.status(200).send("Los datos se han borrado correctamente.");
+                res.status(200).json({message: "Los datos se han borrado correctamente."});
             }
         });
     });
@@ -414,34 +435,12 @@ module.exports = (app)=>{
         
         db.remove({ province: province, year: year, disposal_number: disposal_number }, {}, (err, numRemoved) => {
         if (err) {
-            res.status(500).send("Error interno del servidor.");
+            res.status(500).json({message: "Error interno del servidor."});
         } else if (numRemoved === 0) {
-            res.status(404).send("El recurso no existe.");
+            res.status(404).json({message: "El recurso no existe."});
         } else {
-            res.status(200).send("El recurso se ha borrado correctamente.");
+            res.status(200).json({message: "El recurso se ha borrado correctamente."});
         }
         });
     });
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
 }
-
