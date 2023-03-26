@@ -28,11 +28,11 @@ module.exports = (app) => {
           {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "HU-Huelva",commpos: "Árbol",week1: 30.00,week2: 30.00},
           {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "MA-Málaga",commpos: "Árbol",week1: 16.00,week2: 16.00}
         ], function (err, newDocs) {
-          res.send(JSON.stringify(newDocs, null, 2));
-          console.log("Se han creado 10 datos");
+            res.status(201).json('Se han creado 10 datos');
+            console.log("Se han creado 10 datos");
         });
       } else {
-        res.send("Ya existen datos");
+        res.status(200).json('Ya existen datos' );
         console.log("Ya existen datos");
       }
     });
@@ -122,7 +122,7 @@ module.exports = (app) => {
 
     if (from && to) {
         if (from >= to) {
-            res.status(400).send("El rango es incorrecto");
+            res.status(400).json("El rango es incorrecto");
         } else {
             query.week1 = { $gte: from, $lte: to };
         }
@@ -131,11 +131,11 @@ module.exports = (app) => {
         }
         db.find(query).sort({ market: req.body.market }).skip(offset).limit(limit).exec(function (err, docs) {
             if (err) {
-                res.status(500).send(err);
+                res.status(500).json(err);
             } else if (docs.length === 0) {
-                res.status(404).send(`No existe ningún recurso.`);
+                res.status(404).json(`No existe ningún recurso.`);
             } else {
-                res.status(200).send(docs);
+                res.status(200).json(docs);
             }
         });
 
@@ -148,7 +148,7 @@ module.exports = (app) => {
         !newReq.hasOwnProperty('class') || !newReq.hasOwnProperty('unit') || 
         !newReq.hasOwnProperty('market') || !newReq.hasOwnProperty('commpos') ||
         !newReq.hasOwnProperty('week1') || !newReq.hasOwnProperty('week2')) {
-            res.status(400).send("Hay que insertar datos.");
+            res.status(400).json({ message: 'Verifique que ha insertado todos los campos' });
         } else {
             const newData = req.body;
             db.find({
@@ -162,15 +162,15 @@ module.exports = (app) => {
                 week2: newData.week2,
             }, (err, docs) => {
                 if (docs.length > 0) {
-                    res.status(409).send("El recurso ya existe.");
+                    res.status(409).json({ message: 'El recurso ya existe.' });
                 } else {
                     db.insert(newData, (err, doc) => {
                         if (err) {
-                            res.status(500).send("Error interno del servidor.");
+                            res.status(500).json(`Error interno del servidor: ${err}`);
                         } else {
                             console.log(`newData = ${JSON.stringify(doc, null, 2)}`);
                             console.log("New POST to /agroprocices-weekly");
-                            res.status(201).send("El recurso se ha creado correctamente.");
+                            res.status(201).json("El recurso se ha creado correctamente.");
                         }
                     });
                 }
@@ -181,7 +181,7 @@ module.exports = (app) => {
   //Metodo Post de recurso(fallido) Victor
   //POST FALLIDO
   app.post(BASE_API_URL+"/agroprices-weekly/mercados/:market",(req,res)=>{
-    res.sendStatus(405, "Method not allowed");
+    res.status(405).json( "POST no está permitido en esta ruta."   );
     console.log("New post /agroprices-weekly/mercados/:market");
   });
   
@@ -218,7 +218,7 @@ module.exports = (app) => {
 
   // Metodo PUT en URL base Victor(no se permite)
   app.put(BASE_API_URL + "/agroprices-weekly", (req, res) => {
-    res.status(405).send('En esta ruta no esta permitido el metodo PUT');
+    res.status(405).json({message: "PUT no está permitido en esta ruta."});
   });
   
   
@@ -231,9 +231,9 @@ module.exports = (app) => {
   app.delete(rutavse, (req, res) => {
     db.remove({}, { multi: true }, (err, numRemoved) => {
         if (err) {
-            res.status(500).send("Ha ocurrido un error al eliminar los datos.");
+            res.status(500).json({message: "Ha ocurrido un error al eliminar los datos."});
         } else {
-            res.status(200).send("Los datos se han borrado correctamente.");
+            res.status(200).json({message: "Los datos se han borrado correctamente."});
         }
     });
 });
@@ -247,11 +247,11 @@ module.exports = (app) => {
       
       db.remove({ market: market, product: product, type: type }, {}, (err, numRemoved) => {
       if (err) {
-          res.status(500).send("Error interno del servidor.");
+        res.status(500).json({message: "Error interno del servidor."});
       } else if (numRemoved === 0) {
-          res.status(404).send("El recurso no existe.");
+        res.status(404).json({message: "El recurso no existe."});
       } else {
-          res.status(200).send("El recurso se ha borrado correctamente.");
+        res.status(200).json({message: "El recurso se ha borrado correctamente."});
       }
       });
   });

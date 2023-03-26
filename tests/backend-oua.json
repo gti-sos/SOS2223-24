@@ -1,0 +1,793 @@
+{
+	"info": {
+		"_postman_id": "5c5b2750-dc7b-4d94-9363-aae02749387c",
+		"name": "GCLOUD SOS-223-24",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26056359"
+	},
+	"item": [
+		{
+			"name": "loadinitialdata",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/loadinitialdata",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"loadinitialdata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "provisions-for-the-year-2014",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Hay 10 datos en la api.\", function () {\r",
+							"\tvar jsonData = pm.response.json();\r",
+							"\tpm.expect(jsonData).to.have.lengthOf(10);\r",
+							"\t});\r",
+							"pm.test(\"Response must be valid and have a body\", function(){\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test data type of the response\", () => {\r",
+							"\tpm.expect(jsonData).to.be.an(\"array\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET provincia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Contains the same province in the request\", () => {\r",
+							"    jsonData.forEach(provision => {\r",
+							"        pm.expect(provision.province).to.equal('Sevilla');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Test data type of the response\", () => {\r",
+							"\tpm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/Sevilla",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"Sevilla"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET recurso unico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Contains the same ressource requested\", () => {\r",
+							"    var jsonData = pm.response.json(); \r",
+							"    pm.expect(jsonData).to.have.property('province', 'Sevilla');\r",
+							"    pm.expect(jsonData).to.have.property('year', 2014);\r",
+							"    pm.expect(jsonData).to.have.property('disposal_number', 92);\r",
+							"});\r",
+							"\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.test(\"Test data type of the response\", () => {\r",
+							"\tpm.expect(jsonData).to.be.an(\"Object\");\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/Sevilla/2014/92",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"Sevilla",
+						"2014",
+						"92"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post dato",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = JSON.parse(pm.request.body.raw);\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Número de claves igual a 9\", function () {\r",
+							"  var numClaves = Object.keys(jsonData).length;\r",
+							"  pm.expect(numClaves).to.eql(9);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validez de las Claves en el cuerpo\", function () {\r",
+							"    var clavesEsperadas = [\"province\", \"year\", \"organization\", \"disposal_type\", \"disposal_number\", \"number_of_the_Bulletin\", \"date_of_disposition\", \"section_number\", \"section\"];\r",
+							"    var claves = Object.keys(jsonData);\r",
+							"    pm.expect(claves).to.eql(clavesEsperadas);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"province\": \"Huelva\",\r\n    \"year\": 2012,\r\n    \"organization\": \"Consejería de Fomento y Vivienda\",\r\n    \"disposal_type\": \"Anuncios\",\r\n    \"disposal_number\": 1,\r\n    \"number_of_the_Bulletin\": 141,\r\n    \"date_of_disposition\": \"27-12-2012\",\r\n    \"section_number\": 5,\r\n    \"section\": \"Prueba\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET provincia/from&to",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Contains the same province and year range in the request\", () => {\r",
+							"    jsonData.forEach(provision => {\r",
+							"        pm.expect(provision.province).to.equal('Huelva');\r",
+							"        pm.expect(provision.year).to.be.within(2012, 2013);        \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Test data type of the response\", () => {\r",
+							"\tpm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/Huelva?from=2012&to=2013",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"Huelva"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "2012"
+						},
+						{
+							"key": "to",
+							"value": "2013"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET from&to",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains the same province and year range in the request\", () => {\r",
+							"    jsonData.forEach(provision => {\r",
+							"        pm.expect(provision.year).to.be.within(2012, 2013);        \r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Test data type of the response\", () => {\r",
+							"\tpm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014?from=2012&to=2013",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "2012"
+						},
+						{
+							"key": "to",
+							"value": "2013"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ?year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Contains the same province in the request\", () => {\r",
+							"    jsonData.forEach(provision => {\r",
+							"        pm.expect(provision.year).to.equal(2012);\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Test data type of the response\", () => {\r",
+							"\tpm.expect(jsonData).to.be.an(\"array\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014?year=2012",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014"
+					],
+					"query": [
+						{
+							"key": "year",
+							"value": "2012"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Paginating",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"La longitud del array es igial a limit\", function () {\r",
+							"    pm.expect(jsonData).to.have.lengthOf(5);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test data type of the response\", () => {\r",
+							"\tpm.expect(jsonData).to.be.an(\"array\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014?limit=5&offset=0",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contains the same properties requested\", () => {\r",
+							"    jsonData.forEach(provision => {\r",
+							"        pm.expect(provision.province).to.equal('Sevilla');\r",
+							"        pm.expect(provision.year).to.equal(2014);\r",
+							"        pm.expect(provision.disposal_number).to.equal(92);\r",
+							"\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test data type of the response\", () => {\r",
+							"\tpm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014?province=Sevilla&year=2014&disposal_number=92",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014"
+					],
+					"query": [
+						{
+							"key": "province",
+							"value": "Sevilla"
+						},
+						{
+							"key": "year",
+							"value": "2014"
+						},
+						{
+							"key": "disposal_number",
+							"value": "92"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST no permitido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/loadinitialdata",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"loadinitialdata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post no permitido /provincia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/Sevilla",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"Sevilla"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post no permitido /recurso_único",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/Sevilla/2014/92",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"Sevilla",
+						"2014",
+						"92"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put /province/year/diapo_number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"province\": \"Sevilla\",\r\n    \"year\": 2014,\r\n    \"organization\": \"Consejería de Fomento y Vivienda\",\r\n    \"disposal_type\": \"Anuncios\",\r\n    \"disposal_number\": 92,\r\n    \"number_of_the_Bulletin\": 141,\r\n    \"date_of_disposition\": \"27-12-2014\",\r\n    \"section_number\": 5,\r\n    \"section\": \"Prueba\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/Sevilla/2014/92",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"Sevilla",
+						"2014",
+						"92"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT no permitido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT no permitido /provincia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/Sevilla",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"Sevilla"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT no permitido /provincia/year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/Sevilla/2014",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"Sevilla",
+						"2014"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014/Sevilla/2014/92",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014",
+						"Sevilla",
+						"2014",
+						"92"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE ALL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{ghost}}/provisions-for-the-year-2014",
+					"host": [
+						"{{ghost}}"
+					],
+					"path": [
+						"provisions-for-the-year-2014"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "ghost",
+			"value": "https://sos2223-24.appspot.com//api/v1"
+		}
+	]
+}

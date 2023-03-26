@@ -139,24 +139,7 @@ module.exports = (app)=>{
         console.log("New GET to /provisions-for-the-year-2014/loadInitialData");
       });
 
-    /*//GET provincia + año + número de disposición
-    app.get(rutaoua + '/:province' + '/:year' + '/:disposal_number', (req, res) => {
-        const year = Number(req.params.year);
-        const province = req.params.province;
-        const disposal_number = Number(req.params.disposal_number);
-        
-        db.find({ province: province, year: year, disposal_number: disposal_number }, (err, docs) => {
-            if (err) {
-            res.status(500).json({ message: 'Error interno del servidor' });
-            } else if (docs.length > 0) {
-            res.json(docs).status(200);
-            console.log(`Nuevo GET a ${rutaoua}/${province}/${year}/${disposal_number}`);
-            } else {
-            res.status(404).json({ message: `No existe ningún recurso para la provincia: ${province} en el año: ${year} con el número de disposición: ${disposal_number}.` });
-            }
-        });
-    });*/
-
+    //GET provincia + año + número de disposición
     app.get(rutaoua + '/:province' + '/:year' + '/:disposal_number', (req, res) => {
         const year = Number(req.params.year);
         const province = req.params.province;
@@ -197,11 +180,11 @@ module.exports = (app)=>{
         if (req.query.year) {
             query.year = Number(req.query.year);
         }
-        if (req.query.summary) {
-            query.summary = req.query.summary;
+        if (req.query.organization) {
+            query.organization = req.query.organization;
         }
-        if (req.query.type_of_provision) {
-            query.type_of_provision = req.query.type_of_provision;
+        if (req.query.disposal_type) {
+            query.disposal_type = req.query.disposal_type;
         }
         if (req.query.disposal_number) {
             query.disposal_number = Number(req.query.disposal_number);
@@ -314,7 +297,7 @@ module.exports = (app)=>{
         console.log(req.body);
         let newReq = req.body;
         if (!req.body || !newReq.hasOwnProperty('province') || !newReq.hasOwnProperty('year') || 
-        !newReq.hasOwnProperty('summary') || !newReq.hasOwnProperty('type_of_provision') || 
+        !newReq.hasOwnProperty('organization') || !newReq.hasOwnProperty('disposal_type') || 
         !newReq.hasOwnProperty('disposal_number') || !newReq.hasOwnProperty('number_of_the_Bulletin') ||
         !newReq.hasOwnProperty('date_of_disposition') || !newReq.hasOwnProperty('section_number') ||
         !newReq.hasOwnProperty('section')) {
@@ -324,8 +307,8 @@ module.exports = (app)=>{
             db.find({
                 province: newData.province,
                 year: newData.year,
-                summary: newData.summary,
-                type_of_provision: newData.type_of_provision,
+                organization: newData.organization,
+                disposal_type: newData.disposal_type,
                 disposal_number: newData.disposal_number,
                 number_of_the_Bulletin: newData.number_of_the_Bulletin,
                 date_of_disposition: newData.date_of_disposition,
@@ -353,7 +336,7 @@ module.exports = (app)=>{
 
     //Ruta específica POST NO permitida
     app.post(rutaoua + "/loadInitialData", (req, res) => {
-        db.find({ year: 2014 }, (err, docs) => {
+        db.find({}, (err, docs) => {
             if (err) {
                 res.status(500).json(`Error al obtener datos desde la base de datos: ${err}`);
             } else {
@@ -362,7 +345,27 @@ module.exports = (app)=>{
         });
     });
 
+        //Ruta /provincia POST NO permitida
+        app.post(rutaoua + "/:province", (req, res) => {
+            db.find({}, (err, docs) => {
+                if (err) {
+                    res.status(500).json(`Error al obtener datos desde la base de datos: ${err}`);
+                } else {
+                    res.status(405).json( "POST no está permitido en esta ruta."   );
+                }
+            });
+        });
 
+        //POST no permitido en recurso único
+        app.post(rutaoua + '/:province' + '/:year' + '/:disposal_number', (req, res) => {
+            db.find({}, (err, docs) => {
+                if (err) {
+                    res.status(500).json(`Error al obtener datos desde la base de datos: ${err}`);
+                } else {
+                    res.status(405).json( "POST no está permitido en esta ruta."   );
+                }
+            });
+        });
 /*------------------------------------------------PUT----------------------------------------------------------- */
     //PUT actualizar disposicion
     app.put(rutaoua + '/:province' + '/:year' + '/:disposal_number', (req, res) => {
@@ -377,10 +380,8 @@ module.exports = (app)=>{
             if (!existe || province !== req.body.province || year !== Number(req.body.year) || disposal_number !== Number(req.body.disposal_number)) {
                 return res.status(400).json({message:"Disposición incorrecta."});
             } else {
-                //{province,year,summary,type_of_provision,disposal_number,
-                //number_of_the_Bulletin,date_of_disposition,section_number,section:
-                existe.summary = req.body.summary || existe.summary;
-                existe.type_of_provision = req.body.type_of_provision || existe.type_of_provision;
+                existe.organization = req.body.organization || existe.organization;
+                existe.disposal_type = req.body.disposal_type || existe.disposal_type;
                 existe.number_of_the_Bulletin = req.body.number_of_the_Bulletin || existe.number_of_the_Bulletin;
                 existe.date_of_disposition = req.body.date_of_disposition || existe.date_of_disposition;
                 existe.section_number = Number(req.body.section_number) || existe.section_number;
@@ -399,12 +400,12 @@ module.exports = (app)=>{
 
     //PUT pronvincia No permitido
     app.put(rutaoua+'/:province', (req, res) => {
-        response.status(405).json({message: "PUT no está permitido en esta ruta."});
+        res.status(405).json({message: "PUT no está permitido en esta ruta."});
     });
 
     //PUT pronvincia/año No permitido
     app.put(rutaoua+'/:province/:year', (req, res) => {
-        response.status(405).json({message: "PUT no está permitido en esta ruta."});
+        res.status(405).json({message: "PUT no está permitido en esta ruta."});
     });
 
     //PUT rutaoua No permitido
