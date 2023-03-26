@@ -145,14 +145,16 @@ module.exports = (app)=>{
         const province = req.params.province;
         const disposal_number = Number(req.params.disposal_number);
     
-        db.findOne({ province: province, year: year, disposal_number: disposal_number }, (err, doc) => {
+        db.findOne({ province: province, year: year, disposal_number: disposal_number }, (err, docs) => {
             if (err) {
-                res.status(500).json({ message: 'Error interno del servidor' });
-            } else if (doc) {
-                res.json(doc).status(200);
+                res.status(500).json( 'Error interno del servidor' );
+            } else if (docs) {
+                delete(docs._id);
+                res.status(200).json(docs);
+                
                 console.log(`Nuevo GET a ${rutaoua}/${province}/${year}/${disposal_number}`);
             } else {
-                res.status(404).json({ message: `No existe ningún recurso para la provincia: ${province} en el año: ${year} con el número de disposición: ${disposal_number}.` });
+                res.status(404).json(`No existe ningún recurso para la provincia: ${province} en el año: ${year} con el número de disposición: ${disposal_number}.` );
             }
         });
     });
@@ -249,7 +251,10 @@ module.exports = (app)=>{
             } else if (docs.length === 0) {
                 res.status(404).json(`No existe ningún recurso.`);
             } else {
-                res.status(200).json(docs);
+                res.status(200).json(docs.map((p) => {
+                    delete p._id;
+                    return(p);
+                }));
             }
         });
     });
@@ -268,7 +273,10 @@ module.exports = (app)=>{
             res.status(400).send("El rango es incorrecto");
             } else {
             if (docs.length !== 0) {
-                res.status(200).json(docs);
+                res.status(200).json(docs.map((p) => {
+                    delete p._id;
+                    return(p);
+                }));
                 console.log(`New GET to /provisions-for-the-year-2014/${province}?from=${from}&to=${to}`);
             }
             else {
@@ -279,11 +287,14 @@ module.exports = (app)=>{
             // Filtrar solo por provincia en la base de datos
             db.find({ province: province }, function (err, docs) {
             if (docs.length !== 0) {
-                res.json(docs);
+                res.json(docs.map((p) => {
+                    delete p._id;
+                    return(p);
+                }));
                 console.log("New GET to /provisions-for-the-year-2014/" + province);
             }
             else {
-                res.status(404).json({ message: 'No existe ningún recurso' });
+                res.status(404).json('No existe ningún recurso' );
             }
             });
         }
@@ -316,7 +327,7 @@ module.exports = (app)=>{
                 section: newData.section
             }, (err, docs) => {
                 if (docs.length > 0) {
-                    res.status(404).json({ message: 'El recurso ya existe.' });
+                    res.status(409).json({ message: 'El recurso ya existe.' });
                 } else {
                     db.insert(newData, (err, doc) => {
                         if (err) {
