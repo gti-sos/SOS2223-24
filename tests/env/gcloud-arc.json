@@ -1,0 +1,15 @@
+{
+	"id": "fd093b35-58ed-4195-921b-e4c2dee99a05",
+	"name": "Gcloud",
+	"values": [
+		{
+			"key": "URL_BASE",
+			"value": "https://sos2223-24.ew.r.appspot.com",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-03-26T18:34:04.040Z",
+	"_postman_exported_using": "Postman/10.12.8-230325-0944"
+}
