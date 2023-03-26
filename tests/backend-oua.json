@@ -205,7 +205,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"province\": \"Huelva\",\r\n        \"year\": 2012,\r\n        \"organization\": \"Consejería de La Presidencia\",\r\n        \"disposal_type\": \"Resoluciones\",\r\n        \"disposal_number\": 12,\r\n        \"number_of_the_bulletin\": 133,\r\n        \"date_of_disposition\": \"01-07-2012\",\r\n        \"section_number\": 3,\r\n        \"section\": \"Otras disposiciones\"\r\n    }",
+					"raw": "{\r\n    \"province\": \"Huelva\",\r\n    \"year\": 2012,\r\n    \"organization\": \"Consejería de Fomento y Vivienda\",\r\n    \"disposal_type\": \"Anuncios\",\r\n    \"disposal_number\": 1,\r\n    \"number_of_the_Bulletin\": 141,\r\n    \"date_of_disposition\": \"27-12-2012\",\r\n    \"section_number\": 5,\r\n    \"section\": \"Prueba\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -605,7 +605,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"province\": \"Sevilla\",\r\n    \"year\": 2014,\r\n    \"organization\": \"Consejería de Fomento y Vivienda\",\r\n    \"disposal_type\": \"Anuncios\",\r\n    \"disposal_number\": 92,\r\n    \"number_of_the_Bulletin\": 141,\r\n    \"date_of_disposition\": \"27/12/2014\",\r\n    \"section_number\": 5,\r\n    \"section\": \"Prueba\"\r\n}\r\n",
+					"raw": "{\r\n    \"province\": \"Sevilla\",\r\n    \"year\": 2014,\r\n    \"organization\": \"Consejería de Fomento y Vivienda\",\r\n    \"disposal_type\": \"Anuncios\",\r\n    \"disposal_number\": 92,\r\n    \"number_of_the_Bulletin\": 141,\r\n    \"date_of_disposition\": \"27-12-2014\",\r\n    \"section_number\": 5,\r\n    \"section\": \"Prueba\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
