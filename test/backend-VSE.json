@@ -1,0 +1,334 @@
+{
+	"info": {
+		"_postman_id": "1d9eeab0-49d5-4dd4-8f7f-2d72ddd16ede",
+		"name": "F06",
+		"description": "Métodos GET DELETE POST y PUT de la API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26059751"
+	},
+	"item": [
+		{
+			"name": "GET loadInitialData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						"loadInitialData"
+					]
+				},
+				"description": "**loadInitialData**\n\nCarga inicial de los datos en la BD, solo se permite si la BD esta vacia"
+			},
+			"response": []
+		},
+		{
+			"name": "GET URL base",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Recurso especifico 200OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/BLANCA O COMÚN/AVENA/SE-Sevilla",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						"BLANCA O COMÚN",
+						"AVENA",
+						"SE-Sevilla"
+					]
+				},
+				"description": "**GET de recurso específico**\n\nSe necesita introducir producto tipo y mercado del elemento a obtener"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Recurso especifico Error 404",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/BLANCA O COMÚN/AVENA/SE-Sevillaa",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						"BLANCA O COMÚN",
+						"AVENA",
+						"SE-Sevillaa"
+					]
+				},
+				"description": "**GET de recurso específico**\n\nSe necesita introducir producto tipo y mercado del elemento a obtener"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE URL base",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						""
+					]
+				},
+				"description": "**DELETE URL base**\n\nBorra todos los datos de la BD"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Recurso especifico",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/SE-Sevilla/BLANCA O COMÚN/AVENA",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						"SE-Sevilla",
+						"BLANCA O COMÚN",
+						"AVENA"
+					]
+				},
+				"description": "**DELETE Recurso específico**\n\nSe necesita introducir mercado producto y tipo del elemento a eliminar"
+			},
+			"response": []
+		},
+		{
+			"name": "POST URL base",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"product\": \"REFINADOa\",\r\n        \"type\": \"Aceites de girasolv\",\r\n        \"class\": \"S.E.\",\r\n        \"unit\": \"100 kg\",\r\n        \"market\": \"CO-Córdoba\",\r\n        \"commpos\": \"A.I.\",\r\n        \"week1\": 77.53,\r\n        \"week2\": 76.55\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						""
+					]
+				},
+				"description": "**POST URL base**\n\nIntroduce el elemento en la BD"
+			},
+			"response": []
+		},
+		{
+			"name": "POST URL base Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"product\": \"REFINADOa\",\r\n        \"type\": \"Aceites de girasolv\",\r\n        \"class\": \"S.E.\",\r\n        \"unit\": \"100 kg\",\r\n        \"market\": \"CO-Córdoba\",\r\n        \"commpos\": \"A.I.\",\r\n        \"week1\": 77.53,\r\n        \"week2\": 76.55\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						""
+					]
+				},
+				"description": "**POST URL base**\n\nIntroduce el elemento en la BD"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Recurso especifico(no permitido)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/mercados/CO-Córdoba",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						"mercados",
+						"CO-Córdoba"
+					]
+				},
+				"description": "**POST Recurso especifico**\n\nNo esta permitido"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT URL base(no permitido)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						""
+					]
+				},
+				"description": "**PUT URL base**\n\nNo esta permitido"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Recurso especifico",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"product\": \"BLANCA O COMÚN\",\r\n        \"type\": \"AVENA\",\r\n        \"class\": \"S.E.e\",\r\n        \"unit\": \"t\",\r\n        \"market\": \"SE-Sevilla\",\r\n        \"commpos\": \"S.Alm.\",\r\n        \"week1\": 183,\r\n        \"week2\": 184\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/SE-Sevilla/BLANCA O COMÚN/",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						"SE-Sevilla",
+						"BLANCA O COMÚN",
+						""
+					]
+				},
+				"description": "**POST Recurso especifico**\n\nSe necesita introducir mercado y el producto del elemento a actualizar"
+			},
+			"response": []
+		}
+	]
+}
