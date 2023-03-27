@@ -1,10 +1,9 @@
 var express = require("express");
-const bodyParser = require("body-parser");
 var port = process.env.PORT || 12345;
 
 var app = express();
 app.use("/", express.static("./public"));
-app.use(bodyParser.json());
+app.use(express.json());
 
 
 
