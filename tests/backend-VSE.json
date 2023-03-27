@@ -14,9 +14,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -565,7 +563,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"product\": \"BLANCA O COMÚN\",\r\n        \"type\": \"AVENA\",\r\n        \"class\": \"S.E.e\",\r\n        \"unit\": \"t\",\r\n        \"market\": \"SE-Sevilla\",\r\n        \"commpos\": \"S.Alm.\",\r\n        \"week1\": 183,\r\n        \"week2\": 184\r\n    }",
+					"raw": "    {\r\n        \"product\": \"CERVECERA\",\r\n        \"type\": \"CEBADA\",\r\n        \"class\": \"S.E.\",\r\n        \"unit\": \"t\",\r\n        \"market\": \"GR-Alhama\",\r\n        \"commpos\": \"S.Alm.\",\r\n        \"week1\": 180,\r\n        \"week2\": 180\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -573,7 +571,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/SE-Sevilla/BLANCA O COMÚN/",
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/GR-Alhama/CERVECERA/",
 					"protocol": "https",
 					"host": [
 						"sos2223-24",
@@ -584,8 +582,8 @@
 						"api",
 						"v1",
 						"agroprices-weekly",
-						"SE-Sevilla",
-						"BLANCA O COMÚN",
+						"GR-Alhama",
+						"CERVECERA",
 						""
 					]
 				},
