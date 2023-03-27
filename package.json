@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "test-vse": "npx newman run ./tests/backend-VSE.json",
+    "test-vse": "npx newman run ./tests/backend-agroprices-weekly.json",
     "test-oua": "npx newman run ./tests/backend-oua.json -e ./tests/env/localhost-oua.json",
     "test-arc": "npx newman run ./tests/backend-ARC.json -e ./tests/env/localhost-arc.json",
     "test-arc-gcloud": "npx newman run ./tests/backend-ARC.json -e ./tests/env/gcloud-arc.json",
