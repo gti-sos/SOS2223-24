@@ -49,7 +49,8 @@ module.exports = (app) => {
         if (err) {
         res.status(500).json({ message: 'Error interno del servidor' });
         } else if (docs.length > 0) {
-        res.json(docs).status(200);
+            delete(docs._id);
+            res.json(docs).status(200);
         console.log(`Nuevo GET a ${rutavse}/${product}/${type}/${market}`);
         } else {
         res.status(404).json({ message: `No existe ningún recurso para el producto: ${product} del tipo: ${type} en el mercado de : ${market}.` });
@@ -135,6 +136,7 @@ module.exports = (app) => {
             } else if (docs.length === 0) {
                 res.status(404).json(`No existe ningún recurso.`);
             } else {
+                delete(docs._id);
                 res.status(200).json(docs);
             }
         });
