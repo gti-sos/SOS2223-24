@@ -12,79 +12,94 @@ module.exports = (app) => {
             res.status(301).redirect("https://documenter.getpostman.com/view/26061569/2s93JzMggQ");
         });
             //GET total y querys
-        app.get(BASE_API_URL+'/agrodata-almeria', (req,res)=>{
-            var year_query = req.query.year;
-            var day_query = req.query.day;
-            var state_s_query = req.query.state_s;
-            var station_s_query = req.query.station_s;
-            var temp_min = req.query.temp_min;
-            var temp_max = req.query.temp_max;
-            var temp_average = req.query.temp_average;    
-            console.log(`New req to /agrodata-almeria.`);
-                db.find({}, {_id: 0}, (error, docs) => {
-                    if(error){
-                        console.log(`Error getting agrodata-almeria.`);
-                        res.sendStatus(500);
-                    }else if(docs.length == 0){
-                        console.log(`Agrodata not found`);
-                        res.sendStatus(404);
-                    }else{
-                        let i = -1;
-                        if(!req.query.offset){ 
-                            var offset = -1;
-                        }else{
-                            var offset = parseInt(req.query.offset);
-                        }
-                        // Filtramos según las query
-                        let datos = docs.filter((x) => {
-                            return (((year_query == undefined)||(parseInt(year_query) === x.year))&&
-                            ((day_query == undefined)||(parseInt(day_query) === x.day))&&
-                            ((state_s_query == undefined)||(state_s_query === x.state_s))&&
-                            ((station_s_query == undefined)||(station_s_query === x.station_s))&&
-                            ((temp_min == undefined)||(parseFloat(temp_min) >= x.temp_min))&&
-                            ((temp_max == undefined)||(parseFloat(temp_max) >= x.temp_max))&&
-                            ((temp_average == undefined)||(parseFloat(temp_average) >= x.temp_average)))
-                        }).filter((x) => {
-                            // Paginación
-                            i=i+1;
-                            if(req.query.limit==undefined){ 
-                                var cond = true;
-                            }else{ 
-                                var cond = (offset + parseInt(req.query.limit)) >= i;
-                            }
-                            return (i>offset)&&cond;
-                        });
-                        if(docs.length == 0){
-                            console.log(`Agrodata-almeria not found`);
+            app.get(BASE_API_URL+'/agrodata-almeria', (req,res)=>{
+                var year_query = req.query.year;
+                var day_query = req.query.day;
+                var state_s_query = req.query.state_s;
+                var station_s_query = req.query.station_s;
+                var temp_min = req.query.temp_min;
+                var temp_max = req.query.temp_max;
+                var temp_average = req.query.temp_average;    
+                console.log(`New req to /agrodata-almeria.`);
+                    db.find({}, {_id: 0}, (error, docs) => {
+                        if(error){
+                            console.log(`Error getting agrodata-almeria.`);
+                            res.sendStatus(500);
+                        }else if(docs.length == 0){
+                            console.log(`Agrodata not found`);
                             res.sendStatus(404);
                         }else{
-                            console.log(`Data of agrodata-almeria returned: ${docs.length}`);
-                            res.json(datos);
+                            let i = -1;
+                            if(!req.query.offset){ 
+                                var offset = -1;
+                            }else{
+                                var offset = parseInt(req.query.offset);
+                            }
+                            // Filtramos según las query
+                            let datos = docs.filter((x) => {
+                                return (((year_query == undefined)||(parseInt(year_query) === x.year))&&
+                                ((day_query == undefined)||(parseInt(day_query) === x.day))&&
+                                ((state_s_query == undefined)||(state_s_query === x.state_s))&&
+                                ((station_s_query == undefined)||(station_s_query === x.station_s))&&
+                                ((temp_min == undefined)||(parseFloat(temp_min) >= x.temp_min))&&
+                                ((temp_max == undefined)||(parseFloat(temp_max) >= x.temp_max))&&
+                                ((temp_average == undefined)||(parseFloat(temp_average) >= x.temp_average)))
+                            }).filter((x) => {
+                                // Paginación
+                                i=i+1;
+                                if(req.query.limit==undefined){ 
+                                    var cond = true;
+                                }else{ 
+                                    var cond = (offset + parseInt(req.query.limit)) >= i;
+                                }
+                                return (i>offset)&&cond;
+                            });
+                            if(datos.length == 0){
+                                console.log(`Agrodata-almeria not found`);
+                                res.sendStatus(404);
+                            }else if(datos.length == 1) {
+                                // Si hay solo un elemento, lo convertimos en objeto
+                                res.json({...datos[0]});
+                            } else {
+                                // Si hay más de un elemento, devolvemos un arreglo
+                                console.log(`Data of agrodata-almeria returned: ${datos.length}`);
+                                res.json(datos.map((c) => {
+                                    delete c._id;
+                                    return(c);
+                                }))
+                            }
+                        }
+                    })
+                });
+            
+            //GET a recurso específico
+            app.get(BASE_API_URL+'/agrodata-almeria/:year/:day/:station_s', (req,res)=>{
+                var year = req.params.year;
+                var day = req.params.day;
+                var station_s = req.params.station_s;
+                db.find({"year":parseInt(year),"day":parseInt(day),"station_s":station_s},(err,docs)=>{
+                    if(err){
+                        console.log(`Error getting agrodata-almeria/${year}/${day}/${station_s}: ${err}`)
+                        res.sendStatus(500);
+                    }else if(docs.length == 0){
+                        console.log(`agrodata-almeria/${year}/${day}/${station_s} not found`);
+                        res.sendStatus(404);
+                    }else{
+                        console.log(`Data of agrodata-almeria/${year}/${day}/${station_s} returned`);
+                        if (docs.length === 1) {
+                          // Si hay solo un elemento, lo convertimos en objeto
+                          res.json({...docs[0], _id: undefined})
+                        } else {
+                          // Si hay más de un elemento, devolvemos un arreglo
+                          res.json(docs.map((c) => {
+                              delete c._id;
+                              return(c);
+                          }))
                         }
                     }
-                })
+                });
             });
-            //GET a recurso específico
-        app.get(BASE_API_URL+'/agrodata-almeria/:year/:day/:station_s', (req,res)=>{
-            var year = req.params.year;
-            var day = req.params.day;
-            var station_s = req.params.station_s;
-            db.find({"year":parseInt(year),"day":parseInt(day),"station_s":station_s},(err,docs)=>{
-                if(err){
-                    console.log(`Error getting agrodata-almeria/${year}/${day}/${station_s}: ${err}`)
-                    res.sendStatus(500);
-                }else if(docs.length == 0){
-                    console.log(`agrodata-almeria/${year}/${day}/${station_s} not found`);
-                    res.sendStatus(404);
-                }else{
-                    console.log(`Data of agrodata-almeria/${year}/${day}/${station_s} returned`);
-                    res.json(docs.map((c) => {
-                        delete c._id;
-                        return(c);
-                    }))
-                }
-            });
-        });
+            
             //GET para cargar datos
         app.get(BASE_API_URL+'/agrodata-almeria/loadInitialData', (req, res) => {
             console.log(`New req to /loadInitialData.`);

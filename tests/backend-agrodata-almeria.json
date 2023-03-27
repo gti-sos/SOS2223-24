@@ -1,0 +1,1356 @@
+{
+	"info": {
+		"_postman_id": "a54596af-5146-427d-98dc-ba6e4edd02b6",
+		"name": "API Agrodata-almeria",
+		"description": "Los datos de cada elementos poseen en total 7 campos, los cuales son:\n\nstate_s --> Provincia donde se encuentra la estación meteorologica\n\nstation_s --> Localidad donde se encuentra la estación Meteorologica\n\nyear --> Año en el cual se recogio la información de la muestra\n\nday --> Día en el cual se recogio la información de la muestra\n\ntemp_max --> Temperatura máxima del dia\n\ntemp_min -- Temperatura mínima del dia\n\ntemp_average --> Temperatura media del dia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26061569"
+	},
+	"item": [
+		{
+			"name": "Pruebas_test_no_afecta_datos",
+			"item": [
+				{
+					"name": "Not Found /2000/32/La-Mojonera",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32/La-Mojonera",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32",
+								"La-Mojonera"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not Found /2000/32/Níjar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32/Níjar",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32",
+								"Níjar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not Found /2000/32/Almería",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32/Almería",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32",
+								"Almería"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Not Found /2000/32/Adra",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32/Adra",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32",
+								"Adra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /2000/32/Adra",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Adra\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /2000/32/Almería",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Almería\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /2000/32/Níjar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Níjar\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /2000/32/La-Mojonera",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"La-Mojonera\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agrodata-almeria GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta tiene mínimo 1 elemento\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agrodata-almeria/2000/32/Níjar GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32/Níjar",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32",
+								"Níjar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agrodata-almeria?limit=2&offset=1 GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria?limit=2&offset=1",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "offset",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agrodata-almeria?from=2000&to=2001 GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria?from=2000&to=2001",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2000"
+								},
+								{
+									"key": "to",
+									"value": "2001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agrodata-almeria?station_s=Adra",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria?station_s=Adra",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							],
+							"query": [
+								{
+									"key": "station_s",
+									"value": "Adra"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agrodata-almeria?temp_max=20 GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria?temp_max=20",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							],
+							"query": [
+								{
+									"key": "temp_max",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agrodata-almeria?temp_min=10 GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria?temp_min=10",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							],
+							"query": [
+								{
+									"key": "temp_min",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agrodata-almeria?temp_max=20&temp_min=10 GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria?temp_max=20&temp_min=10",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							],
+							"query": [
+								{
+									"key": "temp_max",
+									"value": "20"
+								},
+								{
+									"key": "temp_min",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agrodata-almeria?temp_max=20&temp_min=10&temp_average=13 GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria?temp_max=20&temp_min=10&temp_average=13",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							],
+							"query": [
+								{
+									"key": "temp_max",
+									"value": "20"
+								},
+								{
+									"key": "temp_min",
+									"value": "10"
+								},
+								{
+									"key": "temp_average",
+									"value": "13"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Error 409",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Adra\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Error 405",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Adra\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Error 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Adra\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Error 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Adra\",\r\n        \"year\": 2050,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.68,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2050/32/Adra",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2050",
+								"32",
+								"Adra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Error 405",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Adra\",\r\n        \"year\": 2050,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.68,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Error 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Adra\",\r\n        \"year\": 2050,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2050/32/Adra",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2050",
+								"32",
+								"Adra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /agrodata-almeria/2000/32/Adra",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Adra\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.68,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32/Adra",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32",
+								"Adra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /2000/32/Adra",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32/Adra",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32",
+								"Adra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /2000/32/Almería",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32/Almería",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32",
+								"Almería"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /2000/32/Níjar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32/Níjar",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32",
+								"Níjar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /2000/32/La-Mojonera",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria/2000/32/La-Mojonera",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria",
+								"2000",
+								"32",
+								"La-Mojonera"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /2000/32/Adra",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Adra\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /2000/32/Almería",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Almería\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /2000/32/Níjar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"Níjar\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /2000/32/La-Mojonera",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"state_s\": \"Almería\",\r\n        \"station_s\": \"La-Mojonera\",\r\n        \"year\": 2000,\r\n        \"day\": 32,\r\n        \"temp_max\": 13.5,\r\n        \"temp_min\": 10.67,\r\n        \"temp_average\": 11.26\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/agrodata-almeria GET",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta tiene mínimo 1 elemento\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_BASE}}/api/v1/agrodata-almeria",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agrodata-almeria"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
