@@ -7,8 +7,8 @@
     "start": "node index",
     "test-vse": "npx newman run ./tests/backend-VSE.json",
     "test-oua": "npx newman run ./tests/backend-oua.json -e ./tests/env/localhost-oua.json",
-    "test-arc-localhost": "npx newman run ./tests/backend-ARC.json -e ./tests/env/localhost-arc.json",
-    "test-arc": "npx newman run ./tests/backend-ARC.json -e ./tests/env/gcloud-arc.json",
+    "test-arc": "npx newman run ./tests/backend-ARC.json -e ./tests/env/localhost-arc.json",
+    "test-arc-gcloud": "npx newman run ./tests/backend-ARC.json -e ./tests/env/gcloud-arc.json",
     "test": "npm run test-oua && npm run test-vse && npm run test-arc "
   },
   "repository": {
