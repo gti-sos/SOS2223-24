@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "GET loadInitialData",
+			"name": "DELETE URL base Inicio",
 			"event": [
 				{
 					"listen": "test",
@@ -16,6 +16,43 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						""
+					]
+				},
+				"description": "**DELETE URL base**\n\nBorra todos los datos de la BD"
+			},
+			"response": []
+		},
+		{
+			"name": "GET loadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -270,6 +307,43 @@
 			"response": []
 		},
 		{
+			"name": "GET loadInitialData despues del delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly",
+						"loadInitialData"
+					]
+				},
+				"description": "**loadInitialData**\n\nCarga inicial de los datos en la BD, solo se permite si la BD esta vacia"
+			},
+			"response": []
+		},
+		{
 			"name": "DELETE Recurso especifico",
 			"event": [
 				{
@@ -315,9 +389,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -361,9 +433,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 409\", function () {\r",
-							"    pm.response.to.have.status(409);\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
