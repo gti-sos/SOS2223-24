@@ -6,10 +6,10 @@
   "scripts": {
     "start": "node index",
     "test-agroprices-weekly": "npx newman run ./tests/backend-agroprices-weekly.json",
-    "test-oua": "npx newman run ./tests/backend-oua.json -e ./tests/env/localhost-oua.json",
+    "test-provisions-for-the-year-2014": "npx newman run ./tests/backend-oua.json -e ./tests/env/localhost-oua.json",
     "test-agrodata-almeria": "npx newman run ./tests/backend-agrodata-almeria.json -e ./tests/env/localhost-arc.json",
     "test-agrodata-almeria-gcloud": "npx newman run ./tests/agrodata-almeria.json -e ./tests/env/gcloud-arc.json",
-    "test": "npm run test-oua && npm run test-agroprices-weekly && npm run test-agrodata-almeria "
+    "test": "npm run test-provisions-for-the-year-2014 && npm run test-agroprices-weekly && npm run test-agrodata-almeria "
   },
   "repository": {
     "type": "git",
