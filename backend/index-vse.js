@@ -17,16 +17,16 @@ function vse(app){
     db.find({}, function (err, docs) {
       if (docs.length === 0) {
         db.insert([
-          {product: "REFINADO",type: "Aceites de girasol",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",week1: 77.53,week2: 76.55},
-          {product: "DE ORUJO CRUDO",type: "ACEITES DE OLIVA",class: "5 g BAS. 10",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",week1: 73.62,week2: 79.50},
-          {product: "DE ORUJO REFINADO",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",week1: 118.69,week2: 121.25},
-          {product: "VÍRGENES-VIRGEN EXTRA",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "GR-Alhama",commpos: "A.I.",week1: 202.00,week2: 203.00},
-          {product: "BLANCA O COMÚN",type: "AVENA",class: "S.E.",unit: "t",market: "SE-Sevilla",commpos: "S.Alm.",week1: 183.00,week2: 184.00},
-          {product: "CABALLAR",type: "CEBADA",class: "S.E.",unit: "t",market: "GR-Montes Occidentales",commpos: "S.Alm.",week1: 180.00,week2: 180.00},
-          {product: "CERVECERA",type: "CEBADA",class: "S.E.",unit: "t",market: "GR-Alhama",commpos: "S.Alm.",week1: 180.00,week2: 180.00},
-          {product: "FINO O MESERO",type: "LIMÓN",class: "I",unit: "100 kg",market: "MA-Málaga",commpos: "C.M.",week1: 85.00,week2: 85.00},
-          {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "HU-Huelva",commpos: "Árbol",week1: 30.00,week2: 30.00},
-          {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "MA-Málaga",commpos: "Árbol",week1: 16.00,week2: 16.00}
+          {product: "REFINADO",type: "Aceites de girasol",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",price: 77.53,date: "30/12/2013 - 5/1/2014"},
+          {product: "DE ORUJO CRUDO",type: "ACEITES DE OLIVA",class: "5 g BAS. 10",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",price: 79.50,date: "6/1/2014 - 12/1/2014"},
+          {product: "DE ORUJO REFINADO",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",price: 118.69,date: "30/12/2013 - 5/1/2014"},
+          {product: "VÍRGENES-VIRGEN EXTRA",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "GR-Alhama",commpos: "A.I.",price: 203.00,date: "6/1/2014 - 12/1/2014"},
+          {product: "BLANCA O COMÚN",type: "AVENA",class: "S.E.",unit: "t",market: "SE-Sevilla",commpos: "S.Alm.",price: 183.00,date: "30/12/2013 - 5/1/2014"},
+          {product: "CABALLAR",type: "CEBADA",class: "S.E.",unit: "t",market: "GR-Montes Occidentales",commpos: "S.Alm.",price: 180.00,date: "30/12/2013 - 5/1/2014"},
+          {product: "CERVECERA",type: "CEBADA",class: "S.E.",unit: "t",market: "GR-Alhama",commpos: "S.Alm.",price: 180.00,date: "6/1/2014 - 12/1/2014"},
+          {product: "FINO O MESERO",type: "LIMÓN",class: "I",unit: "100 kg",market: "MA-Málaga",commpos: "C.M.",price: 85.00,date: "30/12/2013 - 5/1/2014"},
+          {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "HU-Huelva",commpos: "Árbol",price: 30.00,date: "6/1/2014 - 12/1/2014"},
+          {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "MA-Málaga",commpos: "Árbol",price: 16.00,date: "6/1/2014 - 12/1/2014"}
         ], function (err, newDocs) {
             res.status(201).json('Se han creado 10 datos');
             console.log("Se han creado 10 datos");
@@ -92,43 +92,36 @@ function vse(app){
       if (req.query.commpos) {
           query.commpos = req.query.commpos;
       }
-      if (req.query.week1) {
-          query.week1 = Number(req.query.week1);
+      if (req.query.price) {
+          query.price = Number(req.query.price);
       }
-      if (req.query.week2) {
-          query.week2 = Number(req.query.week2);
+      if (req.query.date) {
+          query.date = req.query.date;
       }
 
       //Búsquedas numéricas
 
       //precio semanal
-      if (req.query.week1_price_over) {
-          query.week1 = { $gte: Number(req.query.week1_price_over) };
+      if (req.query.price_price_over) {
+          query.price = { $gte: Number(req.query.price_price_over) };
       }
-      if (req.query.week1_price_below) {
-          query.week1 = { $lte: Number(req.query.week1_price_over) };
+      if (req.query.price_price_below) {
+          query.price = { $lte: Number(req.query.price_price_over) };
       }
 
-      if (req.query.week2_price_over) {
-        query.week2 = { $gte: Number(req.query.week2_price_over) };
-    }
-    if (req.query.week2_price_below) {
-        query.week2 = { $lte: Number(req.query.week2_price_over) };
-    }
-
-    //GET and GET ?from&to and GET ?week1
+    //GET and GET ?from&to and GET ?price
     const from = Number(req.query.from);
     const to = Number(req.query.to);
-    const week1 = Number(req.query.week1);
+    const price = Number(req.query.price);
 
     if (from && to) {
         if (from >= to) {
             res.status(400).json("El rango es incorrecto");
         } else {
-            query.week1 = { $gte: from, $lte: to };
+            query.price = { $gte: from, $lte: to };
         }
-        } else if (week1) {
-            query.week1 = week1;
+        } else if (price) {
+            query.price = price;
         }
         db.find(query).sort({ market: req.body.market }).skip(offset).limit(limit).exec(function (err, docs) {
             if (err) {
@@ -149,7 +142,7 @@ function vse(app){
         if (!req.body || !newReq.hasOwnProperty('product') || !newReq.hasOwnProperty('type') || 
         !newReq.hasOwnProperty('class') || !newReq.hasOwnProperty('unit') || 
         !newReq.hasOwnProperty('market') || !newReq.hasOwnProperty('commpos') ||
-        !newReq.hasOwnProperty('week1') || !newReq.hasOwnProperty('week2')) {
+        !newReq.hasOwnProperty('price') || !newReq.hasOwnProperty('date')) {
             res.status(400).json({ message: 'Verifique que ha insertado todos los campos' });
         } else {
             const newData = req.body;
@@ -160,8 +153,8 @@ function vse(app){
                 unit: newData.unit,
                 market: newData.market,
                 commpos: newData.commpos,
-                week1: newData.week1,
-                week2: newData.week2,
+                price: newData.price,
+                date: newData.date,
             }, (err, docs) => {
                 if (docs.length > 0) {
                     res.status(409).json({ message: 'El recurso ya existe.' });
@@ -204,8 +197,8 @@ function vse(app){
                 existe.class = req.body.class || existe.class;
                 existe.unit = req.body.unit || existe.unit;
                 existe.commpos = req.body.commpos || existe.commpos;
-                existe.week1 = Number(req.body.week1) || existe.week1;
-                existe.week2 = Number(req.body.week2) || existe.week2;
+                existe.price = Number(req.body.price) || existe.price;
+                existe.date = req.body.date || existe.date;
                 db.update({ _id: existe._id }, existe, {}, (err, numReplaced) => {
                     if (err) {
                         return res.status(500).send(err);
