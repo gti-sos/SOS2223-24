@@ -1,17 +1,14 @@
 import express from "express";
+import { handler } from "./frontend/build/handler.js";
 var port = process.env.PORT || 12345;
 
 var app = express();
-app.use("/", express.static("./public"));
+//app.use("/", express.static("./public"));
 app.use(express.json());
 
 
 
 const BASE_API_URL = "/api/v1";
-
-app.listen(port, ()=>{
-  console.log(`server ready in port ${port}`);
-});
 
 import { oua } from "./backend/index-oua.js";
 oua(app);
@@ -19,6 +16,13 @@ import { vse } from "./backend/index-vse.js";
 vse(app);
 import { arc } from "./backend/index-arc.js";
 arc(app);
+
+
+app.use(handler);
+
+app.listen(port, ()=>{
+  console.log(`server ready in port ${port}`);
+});
 
 //var backend_oua = require("./backend/index-oua");
 //backend_oua(app);
