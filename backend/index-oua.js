@@ -1,6 +1,8 @@
-module.exports = (app)=>{
+import Datastore from 'nedb';
 
-    const Datastore = require('nedb');
+function oua(app){
+
+    
     const db = new Datastore();
     const provisionsDB = "../db/provisions";
     const rutaoua = "/api/v1/provisions-for-the-year-2014";
@@ -457,4 +459,5 @@ module.exports = (app)=>{
     });
 }
 
+export {oua}
 // Comprobacion 

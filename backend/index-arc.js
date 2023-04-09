@@ -1,11 +1,13 @@
-var Datastore = require('nedb');
+import Datastore from 'nedb';
+import { data_arc } from '../db/data_arc.js';
+import { config } from '../db/config.js';
+import Papa from 'papaparse';
+
 var db = new Datastore();
-var csvdata = require('csvdata')
 const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26061569/2s93JzMggQ";
 const BASE_API_URL = "/api/v1";
 
-
-module.exports = (app) => {
+function arc(app){
         //Todos los GET
         app.get(BASE_API_URL+'/agrodata-almeria/docs', (req, res) => {
             console.log('Redirecting to documentation site of agrodata-almeria');
@@ -111,7 +113,7 @@ module.exports = (app) => {
                     console.log(`Data is already stored.`);
                     res.sendStatus(200);
                 }else{
-                    let datos = await csvdata.load('./db/datos_arc.csv', {delimiter: ';',encoding : 'utf8'})
+                    let datos = await Papa.parse(data_arc,config);
                     db.insert(datos);
                     console.log(`Inserted ${datos.length} data in the database.`);
                     res.sendStatus(201);
@@ -277,3 +279,6 @@ module.exports = (app) => {
             res.sendStatus(405);
         });
     }
+
+
+    export { arc }
