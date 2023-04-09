@@ -8,7 +8,7 @@ const config = {
 	transformHeader: undefined,
 	dynamicTyping: false,
 	preview: 0,
-	encoding: "utf-8",
+	encoding: "",
 	worker: false,
 	comments: false,
 	step: undefined,
