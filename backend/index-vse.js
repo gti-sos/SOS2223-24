@@ -17,16 +17,16 @@ function vse (app){
     db.find({}, function (err, docs) {
       if (docs.length === 0) {
         db.insert([
-          {product: "REFINADO",type: "Aceites de girasol",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",price: 77.53,date: "30/12/2013 - 5/1/2014"},
-          {product: "DE ORUJO CRUDO",type: "ACEITES DE OLIVA",class: "5 g BAS. 10",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",price: 79.50,date: "6/1/2014 - 12/1/2014"},
-          {product: "DE ORUJO REFINADO",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",price: 118.69,date: "30/12/2013 - 5/1/2014"},
-          {product: "VÍRGENES-VIRGEN EXTRA",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "GR-Alhama",commpos: "A.I.",price: 203.00,date: "6/1/2014 - 12/1/2014"},
-          {product: "BLANCA O COMÚN",type: "AVENA",class: "S.E.",unit: "t",market: "SE-Sevilla",commpos: "S.Alm.",price: 183.00,date: "30/12/2013 - 5/1/2014"},
-          {product: "CABALLAR",type: "CEBADA",class: "S.E.",unit: "t",market: "GR-Montes Occidentales",commpos: "S.Alm.",price: 180.00,date: "30/12/2013 - 5/1/2014"},
-          {product: "CERVECERA",type: "CEBADA",class: "S.E.",unit: "t",market: "GR-Alhama",commpos: "S.Alm.",price: 180.00,date: "6/1/2014 - 12/1/2014"},
-          {product: "FINO O MESERO",type: "LIMÓN",class: "I",unit: "100 kg",market: "MA-Málaga",commpos: "C.M.",price: 85.00,date: "30/12/2013 - 5/1/2014"},
-          {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "HU-Huelva",commpos: "Árbol",price: 30.00,date: "6/1/2014 - 12/1/2014"},
-          {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "MA-Málaga",commpos: "Árbol",price: 16.00,date: "6/1/2014 - 12/1/2014"}
+          {product: "REFINADO",type: "Aceites de girasol",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",price: 77.53,date: "30-12-2013->5-1-2014"},
+          {product: "DE ORUJO CRUDO",type: "ACEITES DE OLIVA",class: "5 g BAS. 10",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",price: 79.50,date: "6-1-2014->12-1-2014"},
+          {product: "DE ORUJO REFINADO",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "CO-Córdoba",commpos: "A.I.",price: 118.69,date: "30-12-2013->5-1-2014"},
+          {product: "VÍRGENES-VIRGEN EXTRA",type: "ACEITES DE OLIVA",class: "S.E.",unit: "100 kg",market: "GR-Alhama",commpos: "A.I.",price: 203.00,date: "6-1-2014->12-1-2014"},
+          {product: "BLANCA O COMÚN",type: "AVENA",class: "S.E.",unit: "t",market: "SE-Sevilla",commpos: "S.Alm.",price: 183.00,date: "30-12-2013->5-1-2014"},
+          {product: "CABALLAR",type: "CEBADA",class: "S.E.",unit: "t",market: "GR-Montes Occidentales",commpos: "S.Alm.",price: 180.00,date: "30-12-2013->5-1-2014"},
+          {product: "CERVECERA",type: "CEBADA",class: "S.E.",unit: "t",market: "GR-Alhama",commpos: "S.Alm.",price: 180.00,date: "6-1-2014->12-1-2014"},
+          {product: "FINO O MESERO",type: "LIMÓN",class: "I",unit: "100 kg",market: "MA-Málaga",commpos: "C.M.",price: 85.00,date: "30-12-2013->5-1-2014"},
+          {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "HU-Huelva",commpos: "Árbol",price: 30.00,date: "6-1-2014->12-1-2014"},
+          {product: "CLEMENTINA MEDIA TEMPORADA-CLEMENULES",type: "MANDARINA",class: "S.E.",unit: "100 kg",market: "MA-Málaga",commpos: "Árbol",price: 16.00,date: "6-1-2014->12-1-2014"}
         ], function (err, newDocs) {
             res.status(201).json('Se han creado 10 datos');
             console.log("Se han creado 10 datos");
@@ -39,21 +39,22 @@ function vse (app){
     console.log("New GET to /agroprices-weekly/loadInitialData");
   });
 
-  //GET producto + tipo + mercado
-  app.get(rutavse + '/:product' + '/:type' + '/:market', (req, res) => {
+  //GET producto + tipo
+  app.get(rutavse + '/:product' + '/:type' , (req, res) => {
     const product = req.params.product;
     const type = req.params.type;
-    const market = req.params.market;
     
-    db.find({ product: product, type: type, market: market }, (err, docs) => {
+    db.find({ product: product, type: type}, (err, docs) => {
         if (err) {
         res.status(500).json({ message: 'Error interno del servidor' });
         } else if (docs.length > 0) {
-            delete(docs._id);
-            res.json(docs).status(200);
-        console.log(`Nuevo GET a ${rutavse}/${product}/${type}/${market}`);
+            res.status(200).json(docs.map((p) => {
+                delete p._id;
+                return(p);
+            }));
+        console.log(`Nuevo GET a ${rutavse}/${product}/${type}`);
         } else {
-        res.status(404).json({ message: `No existe ningún recurso para el producto: ${product} del tipo: ${type} en el mercado de : ${market}.` });
+        res.status(404).json({ message: `No existe ningún recurso para el producto: ${product} en el tipo: ${type} ` });
         }
     });
 });
@@ -129,8 +130,10 @@ function vse (app){
             } else if (docs.length === 0) {
                 res.status(404).json(`No existe ningún recurso.`);
             } else {
-                delete(docs._id);
-                res.status(200).json(docs);
+                res.status(200).json(docs.map((p) => {
+                    delete p._id;
+                    return(p);
+                }));
             }
         });
 
@@ -236,12 +239,12 @@ function vse (app){
 
 
   //DELETE de un recurso.
-  app.delete(rutavse + "/:market/:product/:type", (req, res) => {
-      const market = req.params.market;
+  app.delete(rutavse + "/:product/:date/:market", (req, res) => {
       const product = req.params.product;
-      const type = req.params.type;
+      const date = req.params.date;
+      const market = req.params.market;
       
-      db.remove({ market: market, product: product, type: type }, {}, (err, numRemoved) => {
+      db.remove({ product: product, date: date, market: market }, {}, (err, numRemoved) => {
       if (err) {
         res.status(500).json({message: "Error interno del servidor."});
       } else if (numRemoved === 0) {
