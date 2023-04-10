@@ -1,9 +1,9 @@
 import express from "express";
-//import { handler } from "./frontend/build/handler.js";
+import { handler } from "./frontend/build/handler.js";
 var port = process.env.PORT || 12345;
 
 var app = express();
-//app.use("/", express.static("./public"));
+app.use("/", express.static("./public"));
 app.use(express.json());
 
 
