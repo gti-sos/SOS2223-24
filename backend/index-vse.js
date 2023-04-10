@@ -49,8 +49,7 @@ function vse (app){
         res.status(500).json({ message: 'Error interno del servidor' });
         } else if (docs.length > 0) {
             if(docs.length == 1){
-                delete res._id;
-                res.json({...docs[0]});
+                res.json({...docs[0], _id: undefined})
             }
             else{
                 res.status(200).json(docs.map((p) => {
