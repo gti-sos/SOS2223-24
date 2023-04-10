@@ -48,10 +48,16 @@ function vse (app){
         if (err) {
         res.status(500).json({ message: 'Error interno del servidor' });
         } else if (docs.length > 0) {
-            res.status(200).json(docs.map((p) => {
-                delete p._id;
-                return(p);
-            }));
+            if(docs.length == 1){
+                delete res._id;
+                res.json({...docs[0]});
+            }
+            else{
+                res.status(200).json(docs.map((p) => {
+                    delete p._id;
+                    return(p);
+                }));
+            }
         console.log(`Nuevo GET a ${rutavse}/${product}/${type}`);
         } else {
         res.status(404).json({ message: `No existe ningún recurso para el producto: ${product} en el tipo: ${type} ` });
