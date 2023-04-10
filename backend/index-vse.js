@@ -135,10 +135,15 @@ function vse (app){
             } else if (docs.length === 0) {
                 res.status(404).json(`No existe ningún recurso.`);
             } else {
-                res.status(200).json(docs.map((p) => {
-                    delete p._id;
-                    return(p);
-                }));
+                if(docs.length == 1){
+                    res.json({...docs[0], _id: undefined})
+                }
+                else{
+                    res.status(200).json(docs.map((p) => {
+                        delete p._id;
+                        return(p);
+                    }));
+                }
             }
         });
 
