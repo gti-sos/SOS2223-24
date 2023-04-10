@@ -186,15 +186,16 @@ function vse (app){
   
 
       //PUT actualizar precio de un producto en un mercado en la semana 1
-      app.put(rutavse + '/:market' + '/:product', (req, res) => {
+      app.put(rutavse + '/:market' + '/:product' , (req, res) => {
         const market = req.params.market;
         const product = req.params.product;
+        
 
-        db.findOne({ market: market, product: product}, (err, existe) => {
+        db.findOne({ market: market, product: product }, (err, existe) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            if (!existe || market !== req.body.market || product !== req.body.product) {
+            if (!existe || market !== req.body.market || product !== req.body.product ) {
                 return res.status(400).send("Disposición incorrecta.");
             } else {
                 existe.type = req.body.type || existe.type;
