@@ -139,6 +139,7 @@ function vse (app){
       // POST
       app.post(rutavse, (req, res) => {
         console.log(req.body);
+        let newReq = req.body;
         if (!req.body || !newReq.hasOwnProperty('product') || !newReq.hasOwnProperty('type') || 
         !newReq.hasOwnProperty('class') || !newReq.hasOwnProperty('unit') || 
         !newReq.hasOwnProperty('market') || !newReq.hasOwnProperty('commpos') ||
