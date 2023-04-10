@@ -1,5 +1,5 @@
 import express from "express";
-import { handler } from "./frontend/build/handler.js";
+//import { handler } from "./frontend/build/handler.js";
 var port = process.env.PORT || 12345;
 
 var app = express();
@@ -18,7 +18,7 @@ import { arc } from "./backend/index-arc.js";
 arc(app);
 
 
-app.use(handler);
+//app.use(handler);
 
 app.listen(port, ()=>{
   console.log(`server ready in port ${port}`);
