@@ -113,9 +113,9 @@ function arc(app){
                     console.log(`Data is already stored.`);
                     res.sendStatus(200);
                 }else{
-                    let datos = await Papa.parse(data_arc,config);
-                    db.insert(datos);
-                    console.log(`Inserted ${datos.length} data in the database.`);
+                    //let datos = await Papa.parse(data_arc,config);
+                    db.insert(data_arc);
+                    console.log(`Inserted ${data_arc.length} data in the database.`);
                     res.sendStatus(201);
                 }
             });

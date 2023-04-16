@@ -8,7 +8,7 @@
 <style>
 
     div {
-        background-color: #1e90ff;
+        background-color: #741eff;
         color: #ffffff;
         padding: 5px;   
     }

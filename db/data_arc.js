@@ -1,232 +1,904 @@
-const data_arc = `state_s;station_s;year;day;temp_max;temp_min;temp_average
-Almería;La-Mojonera;2000;31;135;1067;1126
-Almería;La-Mojonera;2000;32;1916;794;1328
-Almería;La-Mojonera;2000;33;201;942;1429
-Almería;La-Mojonera;2000;34;1942;1049;1468
-Almería;La-Mojonera;2000;35;1788;1104;1443
-Almería;La-Mojonera;2000;36;1932;956;148
-Almería;La-Mojonera;2000;37;1661;775;1222
-Almería;La-Mojonera;2000;38;2084;888;1396
-Almería;La-Mojonera;2000;39;1923;1016;1442
-Almería;La-Mojonera;2000;40;1983;1029;1468
-Almería;La-Mojonera;2000;41;1828;1017;1381
-Almería;La-Mojonera;2000;42;1794;956;1349
-Almería;La-Mojonera;2000;43;1895;929;1361
-Almería;La-Mojonera;2000;44;1675;983;1279
-Almería;La-Mojonera;2000;45;1876;902;138
-Almería;La-Mojonera;2000;46;2002;975;1409
-Almería;La-Mojonera;2000;47;2056;929;1498
-Almería;La-Mojonera;2000;48;207;1171;1557
-Almería;La-Mojonera;2000;49;2022;1151;1542
-Almería;La-Mojonera;2000;50;211;997;1501
-Almería;La-Mojonera;2000;51;2036;869;1405
-Almería;La-Mojonera;2000;52;174;915;1317
-Almería;La-Mojonera;2000;53;172;1211;141
-Almería;La-Mojonera;2000;54;1761;1049;1358
-Almería;La-Mojonera;2000;55;1661;1064;1338
-Almería;La-Mojonera;2000;56;1869;949;1438
-Almería;La-Mojonera;2000;57;1794;942;134
-Almería;La-Mojonera;2000;58;1814;923;1301
-Almería;La-Mojonera;2000;59;1734;1037;1319
-Almería;La-Mojonera;2000;60;1668;1044;1298
-Almería;La-Mojonera;2000;61;1862;1044;1409
-Almería;La-Mojonera;2000;62;1728;101;1435
-Almería;La-Mojonera;2000;63;1781;909;1279
-Almería;La-Mojonera;2000;64;1861;97;1347
-Almería;La-Mojonera;2000;65;2091;983;1511
-Almería;La-Mojonera;2000;66;1929;1111;1481
-Almería;La-Mojonera;2000;67;17;1064;1329
-Almería;La-Mojonera;2000;68;1707;1037;1317
-Almería;La-Mojonera;2000;69;1861;97;1388
-Almería;La-Mojonera;2000;70;2203;942;1553
-Almería;La-Mojonera;2000;71;2259;1164;1701
-Almería;La-Mojonera;2000;72;2185;1245;1611
-Almería;La-Mojonera;2000;73;1902;1105;1478
-Almería;La-Mojonera;2000;74;1888;1144;1482
-Almería;La-Mojonera;2000;75;2036;997;149
-Almería;La-Mojonera;2000;76;188;1057;1459
-Almería;La-Mojonera;2000;77;1747;1077;135
-Almería;La-Mojonera;2000;78;1861;99;1364
-Almería;La-Mojonera;2000;79;1646;1003;133
-Almería;La-Mojonera;2000;80;1828;1111;1475
-Almería;La-Mojonera;2000;81;2098;1392;1708
-Almería;La-Mojonera;2000;82;2016;1212;1563
-Almería;La-Mojonera;2000;83;1828;1144;1483
-Almería;La-Mojonera;2000;84;1934;1023;148
-Almería;La-Mojonera;2000;85;1988;1103;1569
-Almería;La-Mojonera;2000;86;2048;1137;1533
-Almería;La-Mojonera;2000;87;1921;99;1458
-Almería;La-Mojonera;2000;88;2009;1058;1474
-Almería;La-Mojonera;2000;89;1654;111;1357
-Almería;La-Mojonera;2000;90;1895;107;1442
-Almería;La-Mojonera;2000;91;1909;983;148
-Almería;La-Mojonera;2000;92;2081;1151;1585
-Almería;La-Mojonera;2000;93;183;1232;1451
-Almería;La-Mojonera;2000;94;142;994;1181
-Almería;La-Mojonera;2000;95;1587;1029;1303
-Almería;La-Mojonera;2000;96;1659;895;1312
-Almería;La-Mojonera;2000;97;1788;1017;1404
-Almería;La-Mojonera;2000;98;2186;1184;1645
-Almería;La-Mojonera;2000;99;2026;1285;1592
-Almería;La-Mojonera;2000;100;1944;1291;1536
-Almería;La-Mojonera;2000;101;2037;1293;1564
-Almería;La-Mojonera;2000;102;1862;1117;1474
-Almería;La-Mojonera;2000;103;1869;949;1405
-Almería;La-Mojonera;2000;104;1848;922;142
-Almería;La-Mojonera;2000;105;1903;1225;1558
-Almería;La-Mojonera;2000;106;2194;1198;1754
-Almería;La-Mojonera;2000;107;1743;1225;1439
-Almería;La-Mojonera;2000;108;1943;936;1468
-Almería;La-Mojonera;2000;109;1862;963;1473
-Almería;La-Mojonera;2000;110;2452;1158;1736
-Almería;La-Mojonera;2000;111;2351;1386;1831
-Almería;La-Mojonera;2000;112;2479;1151;1764
-Almería;La-Mojonera;2000;113;2178;1252;1734
-Almería;La-Mojonera;2000;114;1929;989;1496
-Almería;La-Mojonera;2000;115;215;1151;1581
-Almería;La-Mojonera;2000;116;2151;1024;1582
-Almería;La-Mojonera;2000;117;2097;1245;1628
-Almería;La-Mojonera;2000;118;1708;113;1372
-Almería;La-Mojonera;2000;119;1761;929;1362
-Almería;La-Mojonera;2000;120;1895;1024;1533
-Almería;La-Mojonera;2000;121;215;1332;1669
-Almería;La-Mojonera;2000;122;2095;1198;146
-Almería;La-Mojonera;2000;123;225;1171;1733
-Almería;La-Mojonera;2000;124;2756;1299;1939
-Almería;La-Mojonera;2000;125;2499;1487;1949
-Almería;La-Mojonera;2000;126;2223;1352;1702
-Almería;La-Mojonera;2000;127;1945;1306;1548
-Almería;La-Mojonera;2000;128;2305;1198;1761
-Almería;La-Mojonera;2000;129;2164;1406;17
-Almería;La-Mojonera;2000;130;2043;1419;1657
-Almería;La-Mojonera;2000;131;205;1346;1708
-Almería;La-Mojonera;2000;132;2298;1245;1842
-Almería;La-Mojonera;2000;133;2554;1427;1855
-Almería;La-Mojonera;2000;134;2323;1386;188
-Almería;La-Mojonera;2000;135;2298;1467;1851
-Almería;La-Mojonera;2000;136;2775;1601;2205
-Almería;La-Mojonera;2000;137;2883;1722;2294
-Almería;La-Mojonera;2000;138;2479;1629;2041
-Almería;La-Mojonera;2000;139;2391;1574;194
-Almería;La-Mojonera;2000;140;2445;1413;1939
-Almería;La-Mojonera;2000;141;2398;1594;194
-Almería;La-Mojonera;2000;142;2212;1588;1852
-Almería;La-Mojonera;2000;143;2458;1507;1971
-Almería;La-Mojonera;2000;144;2447;1676;1997
-Almería;La-Mojonera;2000;145;2233;1675;189
-Almería;La-Mojonera;2000;146;256;1561;2011
-Almería;La-Mojonera;2000;147;2607;1682;2114
-Almería;La-Mojonera;2000;148;262;1763;2192
-Almería;La-Mojonera;2000;149;2553;1676;2134
-Almería;La-Mojonera;2000;150;2988;1722;2387
-Almería;La-Mojonera;2000;151;2995;1923;2471
-Almería;La-Mojonera;2000;152;2914;1957;2513
-Almería;La-Mojonera;2000;153;3325;2105;2827
-Almería;La-Mojonera;2000;154;3082;1977;2571
-Almería;La-Mojonera;2000;155;276;1924;2303
-Almería;La-Mojonera;2000;156;2686;1984;2275
-Almería;La-Mojonera;2000;157;2666;1789;2229
-Almería;La-Mojonera;2000;158;2492;183;2172
-Almería;La-Mojonera;2000;159;2506;1669;214
-Almería;La-Mojonera;2000;160;2802;173;2207
-Almería;La-Mojonera;2000;161;248;1804;2115
-Almería;La-Mojonera;2000;162;2479;1541;1992
-Almería;La-Mojonera;2000;163;2667;1635;2136
-Almería;La-Mojonera;2000;164;2425;1662;2057
-Almería;La-Mojonera;2000;165;2378;1823;21
-Almería;La-Mojonera;2000;166;2507;1817;2152
-Almería;La-Mojonera;2000;167;2627;1803;2263
-Almería;La-Mojonera;2000;168;2976;1964;2585
-Almería;La-Mojonera;2000;169;3266;2379;2942
-Almería;La-Mojonera;2000;170;3197;2078;2762
-Almería;La-Mojonera;2000;171;26;179;2254
-Almería;La-Mojonera;2000;172;2592;1764;2179
-Almería;La-Mojonera;2000;173;2618;1824;223
-Almería;La-Mojonera;2000;174;2706;1977;2293
-Almería;La-Mojonera;2000;175;2767;1951;2304
-Almería;La-Mojonera;2000;176;2915;1944;2438
-Almería;La-Mojonera;2000;177;303;2045;2513
-Almería;La-Mojonera;2000;178;2821;2138;2396
-Almería;La-Mojonera;2000;179;2934;2112;2395
-Almería;La-Mojonera;2000;180;3359;2051;2663
-Almería;La-Mojonera;2000;181;2846;2011;2397
-Almería;La-Mojonera;2000;182;2848;2072;2357
-Almería;La-Mojonera;2000;183;3021;1978;2434
-Almería;La-Mojonera;2000;184;3123;2024;2518
-Almería;La-Mojonera;2000;185;3044;2051;2462
-Almería;La-Mojonera;2000;186;2849;1796;2341
-Almería;La-Mojonera;2000;187;294;1817;2439
-Almería;La-Mojonera;2000;188;2866;2091;2429
-Almería;La-Mojonera;2000;189;2768;1944;2359
-Almería;La-Mojonera;2000;191;2996;2138;2477
-Almería;La-Mojonera;2000;192;2688;1971;2292
-Almería;La-Mojonera;2000;193;2875;1964;2394
-Almería;La-Mojonera;2000;194;2815;189;2361
-Almería;La-Mojonera;2000;195;2762;1971;2359
-Almería;La-Mojonera;2000;196;2881;1871;2391
-Almería;La-Mojonera;2000;197;3188;191;2521
-Almería;La-Mojonera;2000;198;3122;2058;2723
-Almería;La-Mojonera;2000;199;2814;2059;2398
-Almería;La-Mojonera;2000;200;2766;1964;2359
-Almería;La-Mojonera;2000;201;2852;2018;2406
-Almería;La-Mojonera;2000;202;2828;2065;2402
-Almería;La-Mojonera;2000;203;2976;2019;2467
-Almería;La-Mojonera;2000;204;294;2165;2501
-Almería;La-Mojonera;2000;205;283;2038;2374
-Almería;La-Mojonera;2000;206;2787;177;2302
-Almería;La-Mojonera;2000;207;2861;1958;2395
-Almería;La-Mojonera;2000;208;3001;1857;2388
-Almería;La-Mojonera;2000;209;3001;181;2473
-Almería;La-Mojonera;2000;210;319;1918;2511
-Almería;La-Mojonera;2000;211;3037;2025;256
-Almería;La-Mojonera;2000;212;3192;2192;2675
-Almería;La-Mojonera;2000;213;3122;2112;2516
-Almería;La-Mojonera;2000;214;3109;2139;2643
-Almería;La-Mojonera;2000;215;3343;2179;2704
-Almería;La-Mojonera;2000;216;3077;2186;262
-Almería;La-Mojonera;2000;217;2861;2213;2478
-Almería;La-Mojonera;2000;218;276;2105;2412
-Almería;La-Mojonera;2000;219;2836;2273;2549
-Almería;La-Mojonera;2000;220;2796;2246;2548
-Almería;La-Mojonera;2000;221;2942;2099;2543
-Almería;La-Mojonera;2000;222;2793;185;2388
-Almería;La-Mojonera;2000;223;3156;2019;2605
-Almería;La-Mojonera;2000;224;2942;2099;2486
-Almería;La-Mojonera;2000;225;3129;2105;2563
-Almería;La-Mojonera;2000;226;2834;2039;24
-Almería;La-Mojonera;2000;227;3143;1986;2545
-Almería;La-Mojonera;2000;228;341;2268;284
-Almería;La-Mojonera;2000;229;3305;228;2844
-Almería;La-Mojonera;2000;230;3222;2253;2741
-Almería;La-Mojonera;2000;231;2967;2166;2514
-Almería;La-Mojonera;2000;232;3611;1991;2696
-Almería;La-Mojonera;2000;233;3613;2273;2835
-Almería;La-Mojonera;2000;234;2897;1944;2471
-Almería;La-Mojonera;2000;235;3071;1601;2282
-Almería;La-Mojonera;2000;236;2621;1917;2211
-Almería;La-Mojonera;2000;237;3062;1897;2491
-Almería;La-Mojonera;2000;238;2987;2078;2464
-Almería;La-Mojonera;2000;239;2702;1723;2225
-Almería;La-Mojonera;2000;240;297;173;2366
-Almería;La-Mojonera;2000;241;2969;2032;2508
-Almería;La-Mojonera;2000;242;3002;2172;2511
-Almería;La-Mojonera;2000;243;2895;2172;2476
-Almería;La-Mojonera;2000;244;2821;2004;238
-Almería;La-Mojonera;2000;245;2834;2206;2471
-Almería;La-Mojonera;2000;246;2954;2004;2448
-Almería;La-Mojonera;2000;247;2841;2099;2416
-Almería;La-Mojonera;2000;248;284;2032;2446
-Almería;La-Mojonera;2000;249;2809;2206;2489
-Almería;La-Mojonera;2000;250;2787;2012;2349
-Almería;La-Mojonera;2000;251;2954;1831;2342
-Almería;La-Mojonera;2000;252;2949;1926;2471
-Almería;La-Mojonera;2000;253;2749;2113;2452
-Almería;La-Mojonera;2000;254;2735;1971;2292
-Almería;La-Mojonera;2000;255;26;1879;2186
-Almería;La-Mojonera;2000;256;2618;177;2177
-Almería;La-Mojonera;2000;257;2767;1891;2265
-Almería;La-Mojonera;2000;258;2805;1864;2313
-Almería;La-Mojonera;2000;259;2794;1795;2298
-Almería;Tíjola;2000;353;1455;1563;717`
+var data_arc = [
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 31,
+      temp_max: 135,
+      temp_min: 1067,
+      temp_average: 1126
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 32,
+      temp_max: 1916,
+      temp_min: 794,
+      temp_average: 1328
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 33,
+      temp_max: 201,
+      temp_min: 942,
+      temp_average: 1429
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 34,
+      temp_max: 1942,
+      temp_min: 1049,
+      temp_average: 1468
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 35,
+      temp_max: 1788,
+      temp_min: 1104,
+      temp_average: 1443
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 36,
+      temp_max: 1932,
+      temp_min: 956,
+      temp_average: 148
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 37,
+      temp_max: 1661,
+      temp_min: 775,
+      temp_average: 1222
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 38,
+      temp_max: 2084,
+      temp_min: 888,
+      temp_average: 1396
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 39,
+      temp_max: 1923,
+      temp_min: 1016,
+      temp_average: 1442
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 40,
+      temp_max: 1983,
+      temp_min: 1029,
+      temp_average: 1468
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 41,
+      temp_max: 1828,
+      temp_min: 1017,
+      temp_average: 1381
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 42,
+      temp_max: 1794,
+      temp_min: 956,
+      temp_average: 1349
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 43,
+      temp_max: 1895,
+      temp_min: 929,
+      temp_average: 1361
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 44,
+      temp_max: 1675,
+      temp_min: 983,
+      temp_average: 1279
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 45,
+      temp_max: 1876,
+      temp_min: 902,
+      temp_average: 138
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 46,
+      temp_max: 2002,
+      temp_min: 975,
+      temp_average: 1409
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 47,
+      temp_max: 2056,
+      temp_min: 929,
+      temp_average: 1498
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 48,
+      temp_max: 207,
+      temp_min: 1171,
+      temp_average: 1557
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 49,
+      temp_max: 2022,
+      temp_min: 1151,
+      temp_average: 1542
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 50,
+      temp_max: 211,
+      temp_min: 997,
+      temp_average: 1501
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 51,
+      temp_max: 2036,
+      temp_min: 869,
+      temp_average: 1405
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 52,
+      temp_max: 174,
+      temp_min: 915,
+      temp_average: 1317
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 53,
+      temp_max: 172,
+      temp_min: 1211,
+      temp_average: 141
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 54,
+      temp_max: 1761,
+      temp_min: 1049,
+      temp_average: 1358
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 55,
+      temp_max: 1661,
+      temp_min: 1064,
+      temp_average: 1338
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 56,
+      temp_max: 1869,
+      temp_min: 949,
+      temp_average: 1438
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 57,
+      temp_max: 1794,
+      temp_min: 942,
+      temp_average: 134
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 58,
+      temp_max: 1814,
+      temp_min: 923,
+      temp_average: 1301
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 59,
+      temp_max: 1734,
+      temp_min: 1037,
+      temp_average: 1319
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 60,
+      temp_max: 1668,
+      temp_min: 1044,
+      temp_average: 1298
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 61,
+      temp_max: 1862,
+      temp_min: 1044,
+      temp_average: 1409
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 62,
+      temp_max: 1728,
+      temp_min: 101,
+      temp_average: 1435
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 63,
+      temp_max: 1781,
+      temp_min: 909,
+      temp_average: 1279
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 64,
+      temp_max: 1861,
+      temp_min: 97,
+      temp_average: 1347
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 65,
+      temp_max: 2091,
+      temp_min: 983,
+      temp_average: 1511
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 66,
+      temp_max: 1929,
+      temp_min: 1111,
+      temp_average: 1481
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 67,
+      temp_max: 17,
+      temp_min: 1064,
+      temp_average: 1329
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 68,
+      temp_max: 1707,
+      temp_min: 1037,
+      temp_average: 1317
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 69,
+      temp_max: 1861,
+      temp_min: 97,
+      temp_average: 1388
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 70,
+      temp_max: 2203,
+      temp_min: 942,
+      temp_average: 1553
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 71,
+      temp_max: 2259,
+      temp_min: 1164,
+      temp_average: 1701
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 72,
+      temp_max: 2185,
+      temp_min: 1245,
+      temp_average: 1611
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 73,
+      temp_max: 1902,
+      temp_min: 1105,
+      temp_average: 1478
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 74,
+      temp_max: 1888,
+      temp_min: 1144,
+      temp_average: 1482
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 75,
+      temp_max: 2036,
+      temp_min: 997,
+      temp_average: 149
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 76,
+      temp_max: 188,
+      temp_min: 1057,
+      temp_average: 1459
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 77,
+      temp_max: 1747,
+      temp_min: 1077,
+      temp_average: 135
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 78,
+      temp_max: 1861,
+      temp_min: 99,
+      temp_average: 1364
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 79,
+      temp_max: 1646,
+      temp_min: 1003,
+      temp_average: 133
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 80,
+      temp_max: 1828,
+      temp_min: 1111,
+      temp_average: 1475
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 81,
+      temp_max: 2098,
+      temp_min: 1392,
+      temp_average: 1708
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 82,
+      temp_max: 2016,
+      temp_min: 1212,
+      temp_average: 1563
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 83,
+      temp_max: 1828,
+      temp_min: 1144,
+      temp_average: 1483
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 84,
+      temp_max: 1934,
+      temp_min: 1023,
+      temp_average: 148
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 85,
+      temp_max: 1988,
+      temp_min: 1103,
+      temp_average: 1569
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 86,
+      temp_max: 2048,
+      temp_min: 1137,
+      temp_average: 1533
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 87,
+      temp_max: 1921,
+      temp_min: 99,
+      temp_average: 1458
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 88,
+      temp_max: 2009,
+      temp_min: 1058,
+      temp_average: 1474
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 89,
+      temp_max: 1654,
+      temp_min: 111,
+      temp_average: 1357
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 90,
+      temp_max: 1895,
+      temp_min: 107,
+      temp_average: 1442
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 91,
+      temp_max: 1909,
+      temp_min: 983,
+      temp_average: 148
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 92,
+      temp_max: 2081,
+      temp_min: 1151,
+      temp_average: 1585
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 93,
+      temp_max: 183,
+      temp_min: 1232,
+      temp_average: 1451
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 94,
+      temp_max: 142,
+      temp_min: 994,
+      temp_average: 1181
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 95,
+      temp_max: 1587,
+      temp_min: 1029,
+      temp_average: 1303
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 96,
+      temp_max: 1659,
+      temp_min: 895,
+      temp_average: 1312
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 97,
+      temp_max: 1788,
+      temp_min: 1017,
+      temp_average: 1404
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 98,
+      temp_max: 2186,
+      temp_min: 1184,
+      temp_average: 1645
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 99,
+      temp_max: 2026,
+      temp_min: 1285,
+      temp_average: 1592
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 100,
+      temp_max: 1944,
+      temp_min: 1291,
+      temp_average: 1536
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 101,
+      temp_max: 2037,
+      temp_min: 1293,
+      temp_average: 1564
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 102,
+      temp_max: 1862,
+      temp_min: 1117,
+      temp_average: 1474
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 103,
+      temp_max: 1869,
+      temp_min: 949,
+      temp_average: 1405
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 104,
+      temp_max: 1848,
+      temp_min: 922,
+      temp_average: 142
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 105,
+      temp_max: 1903,
+      temp_min: 1225,
+      temp_average: 1558
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 106,
+      temp_max: 2194,
+      temp_min: 1198,
+      temp_average: 1754
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 107,
+      temp_max: 1743,
+      temp_min: 1225,
+      temp_average: 1439
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 108,
+      temp_max: 1943,
+      temp_min: 936,
+      temp_average: 1468
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 109,
+      temp_max: 1862,
+      temp_min: 963,
+      temp_average: 1473
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 110,
+      temp_max: 2452,
+      temp_min: 1158,
+      temp_average: 1736
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 111,
+      temp_max: 2351,
+      temp_min: 1386,
+      temp_average: 1831
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 112,
+      temp_max: 2479,
+      temp_min: 1151,
+      temp_average: 1764
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 113,
+      temp_max: 2178,
+      temp_min: 1252,
+      temp_average: 1734
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 114,
+      temp_max: 1929,
+      temp_min: 989,
+      temp_average: 1496
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 115,
+      temp_max: 215,
+      temp_min: 1151,
+      temp_average: 1581
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 116,
+      temp_max: 2151,
+      temp_min: 1024,
+      temp_average: 1582
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 117,
+      temp_max: 2097,
+      temp_min: 1245,
+      temp_average: 1628
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 118,
+      temp_max: 1708,
+      temp_min: 113,
+      temp_average: 1372
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 119,
+      temp_max: 1761,
+      temp_min: 929,
+      temp_average: 1362
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 120,
+      temp_max: 1895,
+      temp_min: 1024,
+      temp_average: 1533
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 121,
+      temp_max: 215,
+      temp_min: 1332,
+      temp_average: 1669
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 122,
+      temp_max: 2095,
+      temp_min: 1198,
+      temp_average: 146
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 123,
+      temp_max: 225,
+      temp_min: 1171,
+      temp_average: 1733
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 124,
+      temp_max: 2756,
+      temp_min: 1299,
+      temp_average: 1939
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 125,
+      temp_max: 2499,
+      temp_min: 1487,
+      temp_average: 1949
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 126,
+      temp_max: 2223,
+      temp_min: 1352,
+      temp_average: 1702
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 127,
+      temp_max: 1945,
+      temp_min: 1306,
+      temp_average: 1548
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 128,
+      temp_max: 2305,
+      temp_min: 1198,
+      temp_average: 1761
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 129,
+      temp_max: 2164,
+      temp_min: 1406,
+      temp_average: 17
+    },
+    {
+      'state_s': 'Almería',
+      station_s: 'La-Mojonera',
+      year: 2000,
+      day: 130,
+      temp_max: 2043,
+      temp_min: 1419,
+      temp_average: 1657
+    }
+]
 
 export { data_arc };
