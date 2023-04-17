@@ -5,8 +5,8 @@ import cors from 'cors';
 var port = process.env.PORT || 12345;
 var app = express();
 app.use(cors());
+
 app.use(express.json());
-// app.use("/", express.static("./public"));
 
 
 
@@ -22,7 +22,8 @@ import { arc } from "./backend/index-arc.js";
 arc(app);
 
 
-app.use(handler);
+//app.use(handler);
+
 app.listen(port, ()=>{
   console.log(`server ready in port ${port}`);
 });

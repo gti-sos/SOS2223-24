@@ -1,0 +1,15 @@
+{
+	"id": "df110e25-4dd9-4baa-b872-817b1a678ac9",
+	"name": "Gcloud",
+	"values": [
+		{
+			"key": "URLbase",
+			"value": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-04-17T07:41:22.647Z",
+	"_postman_exported_using": "Postman/10.12.12-230410-1611"
+}

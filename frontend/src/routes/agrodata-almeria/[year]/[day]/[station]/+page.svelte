@@ -3,7 +3,7 @@
     
         import { onMount } from 'svelte';
         import { dev } from '$app/environment';
-        import { Button, Table } from 'sveltestrap';
+        import { Button, Table, Col, Row, Alert } from 'sveltestrap';
         import { page } from '$app/stores';
         onMount(async () => {
             getRecurse();
@@ -12,13 +12,13 @@
         let year = $page.params.year;
         let day = $page.params.day;
         let station = $page.params.station;
-        let API = `/api/v1/ss-affiliates/${year}/${day}/${station}`;
+        let API = "/api/v1/agrodata-almeria" + "/" + year + "/" + day+ "/" + station;
         
         if(dev)
             API = 'http://localhost:12345'+API
             
-        let updatedState = state_s;
-        let updatedStation = station_s;
+        let updatedState = "";
+        let updatedStation = station;
         let updatedYear = year;
         let updatedDay = day;
         let updatedTemp_max = 0;
@@ -26,8 +26,10 @@
         let updatedTemp_average = 0;
    
         
-        let result = "";
-        let resultStatus = "";
+        let message = "";
+    let color_alert;
+    let result = "";
+    let resultStatus = "";
     
         async function getRecurse () {
             resultStatus = result = "";
@@ -75,44 +77,51 @@
             }
         }
 </script>
-<main>
-    <h1> Detalles del recurso:</h1>
-    
-    <Table>
-        <thead>
-          <tr>
-            <th>Provincia</th>
+
+<div class="cabecera">
+    <Row >
+        <Col xs="3">
+            <h2>Detalles del recurso</h2>
+        </Col>
+        <Col xs="3"> 
+            {#if message != ""}
+            <Alert fade={true} color={color_alert} dismissible>{message}</Alert>
+        {/if}
+        </Col>
+    </Row>
+</div>
+
+<Table bordered striped>
+    <thead>
+        <tr>
             <th>Estacion</th>
             <th>Año</th>
             <th>Dia</th>
+            <th>Provincia</th>
             <th>Temperatura Máxima</th>
-            <th>Temperatura Mínima</th>
+            <th>Temperatura Míxima</th>
             <th>Temperatura Media</th>
-            <th>Accion</th>
-          </tr>
-        </thead>
-        <tbody>
-           <tr>
-                <td>{updatedYear}</td>
-                <td>{updatedDay}</td>
-                <td>{updatedStation}</td>
-                <td><input bind:value={updatedState}></td>
-                <td><input bind:value={updatedTemp_max}></td>
-                <td><input bind:value={updatedTemp_min}></td>
-                <td><input bind:value={updatedTemp_average}></td>
-                <td><Button on:click={updateRecurse}>Actualizar</Button></td>
-            </tr>
-     </tbody>
-      </Table>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{updatedStation} </td>
+            <td>{updatedYear} </td>
+            <td>{updatedDay} </td>
+            <td>{updatedState}</td>
+            <td><input bind:value={updatedTemp_max} /></td>
+            <td><input bind:value={updatedTemp_min} /></td>
+            <td><input bind:value={updatedTemp_average} /></td>
+            <td><Button color="primary" on:click={updateRecurse}>Actualizar</Button></td>
+        </tr>
+    </tbody>
+</Table>
 
 
-    {#if resultStatus != ""}
-        <p>
-            Resultado:
-        </p>
-        <pre>
-{resultStatus}
-{result}
-        </pre>
-    {/if}
-</main>
+<style>
+    .cabecera {
+        margin-top: 1%;
+        margin-left: 1.5%;
+        margin-bottom: 1%;
+    }
+</style>

@@ -11,16 +11,16 @@
         let API = '/api/v1/agrodata-almeria';
         
         if(dev)
-            API = 'http://localhost:12345'+API
+            API = 'http://localhost:12345'+ API;
             
         let agrodata = [];
-        let newState_s = 'Province';
-        let newStation_s = 'Station';
-        let newYear = 'year';
-        let newDay = 'day';
-        let newTemp_max = 'temp_max';
-        let newTemp_min = 'temp_min';
-        let newTemp_average = 'temp_average';
+        let newState_s = '';
+        let newStation_s = '';
+        let newYear = '';
+        let newDay = '';
+        let newTemp_max = '';
+        let newTemp_min = '';
+        let newTemp_average = '';
         let message = "";
     
         let result = "";
@@ -31,12 +31,27 @@
             const res = await fetch(API+'/loadInitialData', {
                 method: 'GET'
             });
-            const status = await res.status;
-            resultStatus = status;
-            if(status==201){
-                getAgrodata(); 
-            }	
+            try {
+            const data = await res.json();
+            result = JSON.stringify(data, null, 2);
+            agrodata = data;
+        } catch (error) {
+            console.log(`Error parsing result: ${error}`);
         }
+        const status = await res.status;
+        resultStatus = status;
+        if (status == 400) {
+            message = "Ha habido un error en la petición";
+            color_alert = "danger";
+        } else if (status == 200) {
+            message = "Datos iniciales cargados correctamente";
+            color_alert = "success";
+            getAgrodata();
+        } else if (status == 201){
+            message = "Ya hay datos cargados";
+            color_alert = "danger";
+        }
+    }
 
         async function getAgrodata() {
             resultStatus = result = "";
@@ -72,26 +87,48 @@
                 })
             });
             const status = await res.status;
-            resultStatus = status;	           
-            if(status==201){
-                getAgrodata();
-            } 
-            if(status==200){
-                getAgrodata();
+        resultStatus = status;
+        if (status == 201) {
+            message = "Recurso creado correctamente";
+            color_alert = "success";
+            getAgrodata();
+        }else{
+            if (status == 400) {
+                message = "Hay que insertar datos o hay campos vacios";
+                color_alert = "danger";
+            }else{
+                if(status == 409){
+                    message = "El recurso ya existe o la provincia no pertenece a Andalucia";
+                    color_alert = "danger";
+                }
             }
         }
-
-        async function deleteAgrodata(year,day,station) {
-            resultStatus = result = "";
-            const res = await fetch(API+"/"+year+"/"+day+"/"+station, {
-                method: 'DELETE'
-            });
-            const status = await res.status;
-            resultStatus = status;	           
+    }
+        async function deleteAll() {
+        resultStatus = result = "";
+        const res = await fetch(API, {
+            method: "DELETE",
+        });
+        const status = await res.status;
+        resultStatus = status;
             if(status==200){
                 getAgrodata(); 
             }
+    }
+
+        async function deleteAgrodata(year, day, station_s) {
+        resultStatus = result = "";
+        const res = await fetch(API + "/" + year + "/" + day + "/" + station_s, {
+            method: "DELETE",
+        });
+        const status = await res.status;
+        resultStatus = status;
+        if (status == 200) {
+            message = "Recurso borrado correctamente";
+            color_alert = "success";
+            getAgrodata();
         }
+    }
     
 </script>
 <main>
@@ -100,6 +137,7 @@
     <div class="botones">
         <ButtonToolbar>
             <Button outline on:click={loadData}>Cargar Datos Iniciales</Button>
+            <Button outline on:click={deleteAll}>Borrar Datos</Button>
         </ButtonToolbar>
     </div>
 
@@ -136,28 +174,18 @@
             <td>{agro.temp_max}</td>
             <td>{agro.temp_min}</td>
             <td>{agro.temp_average}</td>
-            <td><Button><a href='agrodata-almeria/{agro.year}/{agro.day}/{agro.station_s}'>Editar</a></Button></td>
-            <td><Button on:click={deleteAgrodata(`${agro.year}/${agro.day}/${agro.station_s}`)}>Borrar</Button></td>
+            <td><Button><a href="agrodata-almeria/{agro.year}/{agro.day}/{agro.station_s}">Editar</a></Button></td>
+            <td
+                    ><Button
+                        color="danger"
+                        on:click={deleteAgrodata(agro.year, agro.day, agro.station_s)}
+                        >Borrar</Button
+                    ></td>
             <td>&nbsp</td>
           </tr>
           {/each} 
         </tbody>
       </Table>
-
-      {#if message != ""}
-      <h1 style="color:red">{message}</h1>
-      {/if}
-      
-    {#if resultStatus != ""}
-        <p>
-            Resultado:
-        </p>
-        <pre>
-{resultStatus}
-{result}
-        </pre>
-    {/if}
-
 </main>
 
 <style>

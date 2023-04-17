@@ -21,12 +21,12 @@
 
 <style>
     a {
-        color: #1e90ff;
+        color: #1eff96;
         text-decoration: none;
         font-weight: bold;
     }
     div {
-        background-color: #1e90ff;
+        background-color: #741eff;
         color: #ffffff;
         padding: 5px;   
     }
