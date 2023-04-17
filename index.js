@@ -5,7 +5,6 @@ import cors from 'cors';
 var port = process.env.PORT || 12345;
 var app = express();
 app.use(cors());
-
 app.use(express.json());
 
 
