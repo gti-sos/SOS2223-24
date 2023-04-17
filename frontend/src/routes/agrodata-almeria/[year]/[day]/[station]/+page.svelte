@@ -16,7 +16,7 @@
         
         if(dev)
             API = 'http://localhost:12345'+API
-            
+        
         let updatedState = "";
         let updatedStation = station;
         let updatedYear = year;
@@ -27,9 +27,9 @@
    
         
         let message = "";
-    let color_alert;
-    let result = "";
-    let resultStatus = "";
+        let color_alert = "";
+        let result = "";
+        let resultStatus = "";
     
         async function getRecurse () {
             resultStatus = result = "";

@@ -29,6 +29,7 @@
     
         let result = "";
         let resultStatus = "";
+        let color_alert = "";
 
         let valor = -1;
         let warning = "";
@@ -73,13 +74,17 @@
             const res = await fetch(API+"?"+"limit=10&"+"offset="+pagination*10, {
                 method: "GET"
             });
-            try{
-                const data = await res.json();
-                result = JSON.stringify(data,null,2);
-                agrodata = data;
-            }catch(error){
-                console.log(`Error parsing result: ${error}`);
-            }
+            try {
+            const status = await res.status;
+                if (status === 404) {
+                    agrodata = [];
+                }
+            const data = await res.json();
+            result = JSON.stringify(data, null, 2);
+            agrodata = data;
+            } catch (error) {
+            console.log(`Error parsing result: ${error}`);
+            } 
             const status = await res.status;
             resultStatus = status;	
         }
@@ -103,7 +108,7 @@
             });
         const status = await res.status;
         resultStatus = status;
-        if (status == 201) {
+        if (status == 201 || status == 204) {
             message = "Recurso creado correctamente";
             color_alert = "success";
             getAgrodata();
@@ -126,7 +131,7 @@
         });
         const status = await res.status;
         resultStatus = status;
-            if(status==200){
+            if(status==200 || status == 204){
                 getAgrodata(); 
             }	
         }
@@ -179,7 +184,7 @@ async function getConsult() {
   try {
     resultStatus = result = "";
     formConsult();
-    const res = await fetch(API + "?" + consultAPI + "limit=10&offset=" + pagination, {
+    const res = await fetch(API + "?" + consultAPI, {
       method: "GET"
     });
     const status = res.status;
