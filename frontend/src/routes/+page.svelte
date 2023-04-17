@@ -1,8 +1,11 @@
 <script>
     import { dev } from '$app/environment';
     let API = '/api/v1';
+    let APIf='';
     if (dev)
         API = 'http://localhost:12345'+API;
+        APIf = 'http://localhost:12345';
+
 </script>
 <main>
     <br>
@@ -35,14 +38,17 @@
         <ul>
             <li><a href="{API}/agrodata-almeria/docs">Documentacion agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
             <li><a href="{API}/agroprices-weekly/docs">Documentacion agroprices-weekly</a> (developed by Victor Manuel Sanchez Espada)</li>
-            <li><a href="{API}/provisions-for-the-year-2014/docs">Documentacion provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
+            <li><a href="{API}/provisions-for-the-year-2014/docsv1">Documentacion provisions-for-the-year-2014 V1</a> (developed by Ouael Boussiali)</li>
+            <li><a href="{API}/provisions-for-the-year-2014/docsv2">Documentacion provisions-for-the-year-2014 V2</a> (developed by Ouael Boussiali)</li>
+
         </ul>
         <br>
         <li><b>Frontends de las APIS:</b></li>
         <br>
         <ul>
             <li><a href="{API}/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
-    
+            <li><a href="{APIf}/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
+
         </ul>
     </ul>
 </main>

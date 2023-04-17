@@ -1,21 +1,25 @@
 import express from "express";
 import { handler } from "./frontend/build/handler.js";
-var port = process.env.PORT || 12345;
+import cors from 'cors';
 
+var port = process.env.PORT || 12345;
 var app = express();
-//app.use("/", express.static("./public"));
+app.use(cors());
 app.use(express.json());
 
 
 
 const BASE_API_URL = "/api/v1";
 
+import{oua2} from "./backend/index-oua-v2.js";
 import { oua } from "./backend/index-oua.js";
-oua(app);
+//oua(app);
+oua2(app);
 import { vse } from "./backend/index-vse.js";
 vse(app);
 import { arc } from "./backend/index-arc.js";
 arc(app);
+
 
 app.use(handler);
 

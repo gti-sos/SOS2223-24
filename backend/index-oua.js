@@ -9,7 +9,7 @@ function oua(app){
     const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26056359/2s93JzN1dS";
 
     //POSTMAN docs
-    app.get(rutaoua+"/docs",(req,res)=>{
+    app.get(rutaoua+"/docsv1",(req,res)=>{
         res.redirect(API_DOC_PORTAL);
       });
 
@@ -128,7 +128,21 @@ function oua(app){
                         date_of_disposition: "01-12-2014",
                         section_number: 3,
                         section: "Otras disposiciones"
+                      },
+
+                      {
+                        province: "Sevilla",
+                        year: 2012,
+                        organization: "Consejería de Educación, Cultura y Deporte",
+                        disposal_type: "Órdenes",
+                        disposal_number: 5,
+                        number_of_the_bulletin: 252,
+                        date_of_disposition: "01-12-2012",
+                        section_number: 3,
+                        section: "Otras disposiciones"
                       }
+
+                      
             ], function (err, newDocs) {
               res.status(201).json('Se han creado 10 datos');
               console.log("Se han creado 10 datos");
@@ -459,5 +473,5 @@ function oua(app){
     });
 }
 
-export {oua}
+export {oua};
 // Comprobacion 
