@@ -21,7 +21,7 @@ import { arc } from "./backend/index-arc.js";
 arc(app);
 
 
-//app.use(handler);
+app.use(handler);
 
 app.listen(port, ()=>{
   console.log(`server ready in port ${port}`);
