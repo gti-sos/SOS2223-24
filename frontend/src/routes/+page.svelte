@@ -48,6 +48,8 @@
         <ul>
             <li><a href="{APIf}/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
             <li><a href="{APIf}/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
+            <li><a href="{APIf}/agroprices-weekly">Frontend de agroprices-weekly</a> (developed by Víctor Manuel Sánchez Espada)</li>
+
 
         </ul>
     </ul>
