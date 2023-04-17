@@ -18,13 +18,13 @@
             API = 'http://localhost:12345'+ API;
             
         let agrodata = [];
-        let newState_s = '';
-        let newStation_s = '';
-        let newYear = '';
-        let newDay = '';
-        let newTemp_max = '';
-        let newTemp_min = '';
-        let newTemp_average = '';
+        let newState_s = 'Sevilla';
+        let newStation_s = 'Olivares';
+        let newYear = '2023';
+        let newDay = '1';
+        let newTemp_max = '1000';
+        let newTemp_min = '1000';
+        let newTemp_average = '1000';
         let message = "";
     
         let result = "";
@@ -44,18 +44,18 @@
         let myOpen = false;
         let consultAPI = "";
         let v_consult = true;
-        let pagination = 0;
+        let pagina = 1;
 
-        let consultYear = null;
-        let consultState_s = null;
-        let consultStation_s= null;
-        let consultDay = null;
-        let consultTemp_max = null;
-        let consultTemp_min = null;
-        let consultTemp_average = null;
-        let fromYear = null;
-        let toYear = null;
-
+        let search_station_s = "";
+        let search_year = 0;
+        let search_day = 0;
+        let search = {
+        temp_max_: "",
+        temp_min: "",
+        temp_average: "",
+        from: "",
+        to: "",
+    }
 
         async function loadData() {
         resultStatus = result = "";
@@ -70,11 +70,35 @@
         }
 
         async function getAgrodata() {
-            resultStatus = result = "";
-            const res = await fetch(API+"?"+"limit=10&"+"offset="+pagination*10, {
-                method: "GET"
-            });
-            try {
+        let limit = 10;
+        let offset = (pagina - 1) * limit;
+        let query = `?limit=${limit}&offset=${offset}`;
+        var params = query;
+        var params_ids = "";
+        for (const [key, value] of Object.entries(search)) {     
+                    if (value != ""){
+                    params += "&" + key + "=" + value;}
+        }
+        resultStatus = result = "";
+        if(search_year && search_day && search_station_s){
+            params_ids = "/" + search_year + "/" + search_day + "/" + search_station_s + params;
+        }else{
+            if(search_year){
+                params_ids = params + "&year=" + search_year ;
+            }if(search_day){
+                params_ids = params + "&day=" + search_day ;
+            }else{
+                if(search_station_s){
+                    params_ids = params + "&station_s=" + search_station_s ;
+                }else{
+                    params_ids = params;
+                }
+            }
+        }
+        const res = await fetch(API + params_ids, {
+            method: "GET",
+        });
+        try {
             const status = await res.status;
                 if (status === 404) {
                     agrodata = [];
@@ -88,7 +112,8 @@
             const status = await res.status;
             resultStatus = status;	
         }
-      
+
+
         async function createAgrodata() {
             resultStatus = result = "";
             const res = await fetch(API, {
@@ -148,110 +173,27 @@
             }	
         }
 
-        function formConsult() {
-  consultAPI = '';
-  if (consultYear != null) {
-    consultAPI = consultAPI + `year=${consultYear}&`;
-  }
-  if (consultState_s != null) {
-    consultAPI = consultAPI + `state_s=${consultState_s}&`;
-  }
-  if (consultStation_s != null) {
-    consultAPI = consultAPI + `station_s=${consultStation_s}&`;
-  }
-  if (consultDay != null) {
-    consultAPI = consultAPI + `day=${consultDay}&`;
-  }
-  if (consultTemp_max != null) {
-    consultAPI = consultAPI + `temp_max=${consultTemp_max}&`;
-  }
-  if (consultTemp_min != null) {
-    consultAPI = consultAPI + `temp_min=${consultTemp_min}&`;
-  }
-  if (consultTemp_average != null) {
-    consultAPI = consultAPI + `temp_average=${consultTemp_average}&`;
-  }
-  if (fromYear != null) {
-    consultAPI = consultAPI + `from=${fromYear}&`;
-  }
-  if (toYear != null) {
-    consultAPI = consultAPI + `to=${fromYear}&`;
-  }
-  console.log(consultAPI);
-}
-
-async function getConsult() {
-  try {
-    resultStatus = result = "";
-    formConsult();
-    const res = await fetch(API + "?" + consultAPI, {
-      method: "GET"
-    });
-    const status = res.status;
-    resultStatus = status;
-    if (status == 404) {
-      throw new Error("No hay datos cargados en la base de datos");
+        async function previousPage() {
+        if (pagina > 1) { 
+        pagina--;
+        getAgrodata()
+        }else{
+            message = "Estás en la primera página";
+            color_alert = "danger";
+            open = false;
+        }
     }
-    const data = await res.json();
-    result = JSON.stringify(data, null, 2);
-    agrodata = data;
-    v_consult = false;
-  } catch (error) {
-    console.log(`Error en la consulta: ${error}`);
-    v_warning = true;
-    warning = error.message;
-  }
-}
-
-function cleanFilter() {
-  consultAPI = "";
-  consultYear = null;
-  consultState_s = null;
-  consultStation_s = null;
-  consultDay = null;
-  consultTemp_max = null;
-  consultTemp_min = null;
-  consultTemp_average = null;
-  fromYear = null;
-  toYear = null;
-  getConsult();
-}
-
-        async function countData(){
-            const res = await fetch(API, {
-                method: 'GET'
-            });
-            const data = await res.json()
-            let numElements = Array.isArray(data) ? data.length : 0;
-            let ultPage = Math.floor(numElements/10);
-            valor = ultPage
-            ;
-        }
-        function firstPage() {
-            pagination=0;
+    async function nextPage() {
+        if (agrodata.length >= 10) {
+            pagina++;
             getAgrodata();
-        }
-        function nextPage() {
-            if (pagination!=valor) {
-                pagination++;
-                getAgrodata();
-            }
-        }
-  
-        function previousPage() {
-            if (pagination >= 1) {
-                pagination--;
-                getAgrodata();
-            }
-        }
-        function lastPage() {
-            pagination=valor;
-            getAgrodata();
-        }
-        function infoPage(inf,v_inf){
-            info = inf;
-            v_info = v_inf;
-        }
+         }else{
+            message = "No hay más páginas";
+            color_alert = "danger";
+            open = false;
+         }
+                      
+    }
 
 </script>
 <main>
@@ -261,140 +203,37 @@ function cleanFilter() {
         <ButtonToolbar>
             <Button outline on:click={loadData}>Cargar Datos Iniciales</Button>
             <Button outline on:click={deleteAll}>Borrar Datos</Button>
-            <Button color=primary class=botones_iniciales outline on:click={myToggle}>Filtros</Button>
-            <Modal isOpen={myOpen} {myToggle}>
-                
-              </Modal>
-
-              <Modal class="modal-dialog modal-xl" isOpen={myOpen} {myToggle}>
-                <ModalHeader {myToggle}>"Consulta"</ModalHeader>
-                <ModalBody >
-                    <Container class = 'mb-3'>
-                        <Row><Col><h5>Introduzca los valores por los que quiere consultar datos</h5></Col></Row>
-                        <hr>
-                        <Row><Col><h6>Estos campos devolverán un único dato</h6></Col></Row>
-                        <br>
-                        {consultAPI}  
-                        <!-- -->
-                        <Row>
-                            <Col>
-                                <FormGroup>
-                                    <Label>Por año:</Label>
-                                    <Input
-                                        disabled={fromYear != null || toYear != null  ? true:false}
-                                        type="number"                                     
-                                        placeholder="Busqueda por un año"
-                                        bind:value={consultYear}                                      
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup>
-                                    <Label>Por provincia:</Label>
-                                    <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
-                                        type="text"                                       
-                                        placeholder="Busqueda por una provincia"
-                                        bind:value={consultState_s} 
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup>
-                                    <Label>Por Estacion:</Label>
-                                    <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
-                                        type="text"                                        
-                                        placeholder="Busqueda por género"
-                                        bind:value={consultStation_s}                                        
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup>
-                                    <Label>Por Dias:</Label>
-                                    <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
-                                        type="text"                                        
-                                        placeholder="Busqueda por género"
-                                        bind:value={consultDay}                                        
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup>
-                                    <Label>Por Temperatura Máxima:</Label>
-                                    <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
-                                        type="text"                                        
-                                        placeholder="Busqueda por género"
-                                        bind:value={consultTemp_max}                                        
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup>
-                                    <Label>Por Temperatura Mínima:</Label>
-                                    <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
-                                        type="text"                                        
-                                        placeholder="Busqueda por género"
-                                        bind:value={consultTemp_min}                                        
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col>
-                                <FormGroup>
-                                    <Label>Por Temperatura Media:</Label>
-                                    <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
-                                        type="text"                                        
-                                        placeholder="Busqueda por género"
-                                        bind:value={consultTemp_average}                                        
-                                    />
-                                </FormGroup>
-                            </Col>
-                            
-                        </Row>
-                        <hr>
-                        <Row><Col><h6>Estos campos devolverán todos los datos que se correspondan con la consulta solicitada</h6></Col></Row>
-                        <br>
-                        <Row>
-                            <Col class = 'mb-3'>
-                                <FormGroup>
-                                    <Label>Desde el año:</Label>
-                                    <Input 
-                                        disabled={consultYear != null  ? true:false}
-                                        type="number"
-                                        placeholder="Escribe un año"
-                                        bind:value={fromYear}                                        
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col class = 'mb-3'>
-                                <FormGroup>
-                                    <Label>Hasta el año:</Label>
-                                    <Input
-                                        disabled={consultYear != null ? true:false}
-                                        type="number"
-                                        placeholder="Escribe un año"
-                                        bind:value={toYear} 
-                                    />
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                    </Container>
-
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="primary" on:click={() => {getConsult(); myToggle()}}>Consulta</Button>
-                  <Button color="secondary" on:click={myToggle}>Cancelar</Button>
-                </ModalFooter>
-              </Modal>
         </ButtonToolbar>
-        <Button outline style=position:absolute;right:0;margin-right:15px color="secondary" on:click={() => 
-        {cleanFilter();infoPage("Se han limpiado los campos de consulta",true)}}>Borrar consulta</Button>
     </div>
+    <Table bordered striped>
+        <thead>
+            <tr>
+                <th>Estacion</th>
+                <th>Año</th>
+                <th>Día</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+                <th>Temperatura máxima menor</th>
+                <th>Temperatura mínima menor</th>
+                <th>Temperatura media menor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input bind:value={search_station_s} /></td>
+                <td><input bind:value={search_year} /></td>
+                <td><input bind:value={search_day} /></td>
+                <td><input bind:value={search.from} /></td>
+                <td><input bind:value={search.to} /></td>
+                <td><input bind:value={search.temp_max} /></td>
+                <td><input bind:value={search.temp_min} /></td>
+                <td><input bind:value={search.temp_average} /></td>
+                <td>
+                    <Button color="success" on:click={getAgrodata}>Buscar</Button>
+                </td>
+            </tr>
+        </tbody>
+    </Table>
     <Table>
         <thead>
           <tr>
@@ -440,22 +279,15 @@ function cleanFilter() {
           {/each} 
         </tbody>
       </Table>
-      <Pagination ariaLabel="Page navigation example">
-        {#if v_consult}
-            <PaginationItem>
-                <PaginationLink style=color:#696969 first on:click={() => {firstPage();}} disabled={pagination === 0}></PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-                <PaginationLink style=color:#696969 on:click={()=>{previousPage();}} disabled={pagination === 0}>Previous</PaginationLink>
-            </PaginationItem>
-            <PaginationItem >
-                <PaginationLink style=color:#696969 on:click={() => {countData();nextPage();}} disabled={pagination === valor}>Next</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-                <PaginationLink style=color:#696969 last on:click={()=>{lastPage();}} disabled={pagination === valor}></PaginationLink>
-            </PaginationItem>
-        {/if}
-    </Pagination>
+      <Row>
+        <Col xs="5">
+        </Col>
+        <Col xs="4">
+            <Button on:click={previousPage}>&lt;</Button>
+            <span>Página: {pagina}</span>
+            <Button on:click={nextPage}>&gt;</Button>
+        </Col>
+    </Row>
 </main>
 
 <style>
