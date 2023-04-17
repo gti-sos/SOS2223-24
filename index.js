@@ -36,4 +36,6 @@ app.listen(port, ()=>{
 //var backend_arc = require("./backend/index-arc");
 //backend_arc(app);
 
+//"test": "npm run test-agroprices-weekly && npm run test-provisions-for-the-year-2014 && npm run test-agrodata-almeria "
+
 
