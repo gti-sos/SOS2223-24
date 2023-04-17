@@ -38,7 +38,9 @@
         <ul>
             <li><a href="{API}/agrodata-almeria/docs">Documentacion agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
             <li><a href="{API}/agroprices-weekly/docs">Documentacion agroprices-weekly</a> (developed by Victor Manuel Sanchez Espada)</li>
-            <li><a href="{API}/provisions-for-the-year-2014/docs">Documentacion provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
+            <li><a href="{API}/provisions-for-the-year-2014/docsv1">Documentacion provisions-for-the-year-2014 V1</a> (developed by Ouael Boussiali)</li>
+            <li><a href="{API}/provisions-for-the-year-2014/docsv2">Documentacion provisions-for-the-year-2014 V2</a> (developed by Ouael Boussiali)</li>
+
         </ul>
         <br>
         <li><b>Frontends de las APIS:</b></li>

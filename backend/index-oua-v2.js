@@ -7,11 +7,11 @@ function oua2(app){
     
     const db = new Datastore();
     const rutaoua = "/api/v2/provisions-for-the-year-2014";
-    const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26056359/2s93JzN1dS";
+    const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26056359/2s93XyVPEC";
 
 
     //POSTMAN docs
-    app.get(rutaoua+"/docs",(req,res)=>{
+    app.get(rutaoua+"/docsv2",(req,res)=>{
         res.redirect(API_DOC_PORTAL);
       });
 

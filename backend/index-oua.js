@@ -9,7 +9,7 @@ function oua(app){
     const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26056359/2s93JzN1dS";
 
     //POSTMAN docs
-    app.get(rutaoua+"/docs",(req,res)=>{
+    app.get(rutaoua+"/docsv1",(req,res)=>{
         res.redirect(API_DOC_PORTAL);
       });
 
