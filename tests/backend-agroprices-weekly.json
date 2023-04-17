@@ -196,7 +196,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/CLEMENTINA MEDIA TEMPORADA-CLEMENULES/MANDARINA",
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly/CABALLAR/CEBADA",
 					"protocol": "https",
 					"host": [
 						"sos2223-24",
@@ -207,8 +207,8 @@
 						"api",
 						"v1",
 						"agroprices-weekly",
-						"CLEMENTINA MEDIA TEMPORADA-CLEMENULES",
-						"MANDARINA"
+						"CABALLAR",
+						"CEBADA"
 					]
 				},
 				"description": "**GET de recurso específico**\n\nSe necesita introducir producto tipo y mercado del elemento a obtener"
@@ -486,6 +486,51 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n        \"product\": \"REFINADOa\",\r\n        \"type\": \"Aceites de girasolv\",\r\n        \"class\": \"S.E.\",\r\n        \"unit\": \"100 kg\",\r\n        \"market\": \"CO-Córdoba\",\r\n        \"commpos\": \"A.I.\",\r\n        \"price\": 77.53,\r\n        \"date\": \"6/1/2014 - 12/1/2014\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-24.appspot.com/api/v1/agroprices-weekly",
+					"protocol": "https",
+					"host": [
+						"sos2223-24",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"agroprices-weekly"
+					]
+				},
+				"description": "**POST URL base**\n\nIntroduce el elemento en la BD"
+			},
+			"response": []
+		},
+		{
+			"name": "POST URL base 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"product\": \"REFINADOa\",\r\n        \"type\": \"Aceites de girasolv\",\r\n        \"class\": \"S.E.\",\r\n        \"unit\": \"100 kg\",\r\n        \"market\": \"CO-Córdoba\",\r\n        \"commpos\": \"A.I.\",\r\n        \"price\": 77.53\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"

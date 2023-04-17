@@ -48,6 +48,17 @@
         <ul>
             <li><a href="{APIf}/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
             <li><a href="{APIf}/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
+            <li><a href="https://sos2223-24.appspot.com/agroprices-weekly">Frontend de agroprices-weekly</a> (developed by Víctor Manuel Sánchez Espada)</li>
+
+
+        </ul>
+
+        <br>
+        <ul>
+            <li><a href="{API}/agrodata-almeria">Backend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
+            <li><a href="{API}/provisions-for-the-year-2014">Backend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
+            <li><a href="https://sos2223-24.appspot.com/api/v1/agroprices-weekly">Backend de agroprices-weekly</a> (developed by Víctor Manuel Sánchez Espada)</li>
+
 
         </ul>
     </ul>
