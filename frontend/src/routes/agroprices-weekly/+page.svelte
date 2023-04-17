@@ -5,27 +5,28 @@
         import { dev } from '$app/environment';
         import { Button, Table, ButtonToolbar,Pagination, PaginationItem, PaginationLink,Input,Container, Row, Col } from 'sveltestrap';
         import { Modal,ModalBody,ModalFooter,ModalHeader, Alert, FormGroup, Label } from 'sveltestrap';
-        onMount(async () => {
-            getAgrodata();
-        });
 
+        onMount(async () => {
+            getMarkets();
+        });
+        
         const toggle = () => (open = !open);
         const myToggle = () => (myOpen = !myOpen);
-        
-        let API = '/api/v1/agrodata-almeria';
+
+        let API = '/api/v1/agroprices-weekly';
         
         if(dev)
             API = 'http://localhost:12345'+ API;
             
-        let agrodata = [];
-        let newState_s = '';
-        let newStation_s = '';
-        let newYear = '';
-        let newDay = '';
-        let newTemp_max = '';
-        let newTemp_min = '';
-        let newTemp_average = '';
-        let message = "";
+        let mercados = [];
+        let newMarket = '';
+        let newProduct = '';
+        let newDate = '';
+        let newType = '';
+        let newPrice = '';
+        let newCommpos = '';
+        let newUnit = '';
+        let newClass = '';
     
         let result = "";
         let resultStatus = "";
@@ -45,17 +46,18 @@
         let v_consult = true;
         let pagination = 0;
 
-        let consultYear = null;
-        let consultState_s = null;
-        let consultStation_s= null;
-        let consultDay = null;
-        let consultTemp_max = null;
-        let consultTemp_min = null;
-        let consultTemp_average = null;
-        let fromYear = null;
-        let toYear = null;
+        let consultMarket = null;
+        let consultProduct = null;
+        let consultDate= null;
+        let consultType = null;
+        let consultPrice = null;
+        let consultCommpos = null;
+        let consultUnit = null;
+        let consultClass = null;
 
-
+        let fromPeriod = null;
+        let toPeriod = null;
+    
         async function loadData() {
         resultStatus = result = "";
             const res = await fetch(API+'/loadInitialData', {
@@ -64,11 +66,11 @@
             const status = await res.status;
             resultStatus = status;
             if(status==201){
-                getAgrodata(); 
+                getMarkets(); 
             }	
         }
 
-        async function getAgrodata() {
+        async function getMarkets() {
             resultStatus = result = "";
             const res = await fetch(API+"?"+"limit=10&"+"offset="+pagination*10, {
                 method: "GET"
@@ -76,7 +78,7 @@
             try{
                 const data = await res.json();
                 result = JSON.stringify(data,null,2);
-                agrodata = data;
+                mercados = data;
             }catch(error){
                 console.log(`Error parsing result: ${error}`);
             }
@@ -84,7 +86,7 @@
             resultStatus = status;	
         }
       
-        async function createAgrodata() {
+        async function createEntry() {
             resultStatus = result = "";
             const res = await fetch(API, {
                 method: 'POST',
@@ -92,13 +94,14 @@
                     "Content-Type" : "application/json"
                 },
                 body:JSON.stringify({
-                    state_s: newState_s,
-                    station_s: newStation_s,
-                    year: newYear,
-                    day: newDay,
-                    temp_max: newTemp_max,
-                    temp_min: newTemp_min,
-                    temp_average: newTemp_average
+                    product: newProduct,
+                    type: newType,
+                    class: newClass,
+                    unit: newUnit,
+                    market: newMarket,
+                    commpos: newCommpos,
+                    price: newPrice,
+                    date: newDate
                 })
             });
         const status = await res.status;
@@ -106,7 +109,7 @@
         if (status == 201) {
             message = "Recurso creado correctamente";
             color_alert = "success";
-            getAgrodata();
+            getMarkets();
         }else{
             if (status == 400) {
                 message = "Hay que insertar datos o hay campos vacios";
@@ -119,54 +122,54 @@
             }
         }
     }
-        async function deleteAll() {
+    async function deleteAll() {
         resultStatus = result = "";
         const res = await fetch(API, {
             method: "DELETE",
         });
-        getAgrodata();	
+        getMarkets();	
         }
 
-        async function deleteAgrodata(year, day, station_s) {
-        resultStatus = result = "";
-        const res = await fetch(API + "/" + year + "/" + day + "/" + station_s, {
+        async function deleteEntry(market, product, date) {
+            resultStatus = result = "";
+        const res = await fetch(API + "/" + market + "/" + product + "/" + date, {
             method: "DELETE",
         });
         const status = await res.status;
             resultStatus = status;
             if(status==200){
-                getAgrodata(); 
+                getMarkets(); 
             }	
-        }
+    }
 
-        function formConsult() {
+    function formConsult() {
   consultAPI = '';
-  if (consultYear != null) {
-    consultAPI = consultAPI + `year=${consultYear}&`;
+  if (consultMarket != null) {
+    consultAPI = consultAPI + `market=${consultMarket}&`;
   }
-  if (consultState_s != null) {
-    consultAPI = consultAPI + `state_s=${consultState_s}&`;
+  if (consultProduct != null) {
+    consultAPI = consultAPI + `product=${consultProduct}&`;
   }
-  if (consultStation_s != null) {
-    consultAPI = consultAPI + `station_s=${consultStation_s}&`;
+  if (consultPrice != null) {
+    consultAPI = consultAPI + `price=${consultPrice}&`;
   }
-  if (consultDay != null) {
-    consultAPI = consultAPI + `day=${consultDay}&`;
+  if (consultClass != null) {
+    consultAPI = consultAPI + `class=${consultClass}&`;
   }
-  if (consultTemp_max != null) {
-    consultAPI = consultAPI + `temp_max=${consultTemp_max}&`;
+  if (consultCommpos != null) {
+    consultAPI = consultAPI + `commpos=${consultCommpos}&`;
   }
-  if (consultTemp_min != null) {
-    consultAPI = consultAPI + `temp_min=${consultTemp_min}&`;
+  if (consultUnit != null) {
+    consultAPI = consultAPI + `unit=${consultUnit}&`;
   }
-  if (consultTemp_average != null) {
-    consultAPI = consultAPI + `temp_average=${consultTemp_average}&`;
+  if (consultType != null) {
+    consultAPI = consultAPI + `type=${consultType}&`;
   }
-  if (fromYear != null) {
-    consultAPI = consultAPI + `from=${fromYear}&`;
+  if (fromPeriod != null) {
+    consultAPI = consultAPI + `from=${fromPeriod}&`;
   }
-  if (toYear != null) {
-    consultAPI = consultAPI + `to=${fromYear}&`;
+  if (toPeriod != null) {
+    consultAPI = consultAPI + `to=${toPeriod}&`;
   }
   console.log(consultAPI);
 }
@@ -185,7 +188,7 @@ async function getConsult() {
     }
     const data = await res.json();
     result = JSON.stringify(data, null, 2);
-    agrodata = data;
+    mercados = data;
     v_consult = false;
   } catch (error) {
     console.log(`Error en la consulta: ${error}`);
@@ -196,19 +199,20 @@ async function getConsult() {
 
 function cleanFilter() {
   consultAPI = "";
-  consultYear = null;
-  consultState_s = null;
-  consultStation_s = null;
-  consultDay = null;
-  consultTemp_max = null;
-  consultTemp_min = null;
-  consultTemp_average = null;
-  fromYear = null;
-  toYear = null;
+  consultMarket = null;
+  consultProduct = null;
+  consultDate= null;
+  consultType = null;
+  consultPrice = null;
+  consultCommpos = null;
+  consultUnit = null;
+  consultClass = null;
+  fromPeriod = null;
+  toPeriod = null;
   getConsult();
 }
 
-        async function countData(){
+async function countData(){
             const res = await fetch(API, {
                 method: 'GET'
             });
@@ -220,33 +224,33 @@ function cleanFilter() {
         }
         function firstPage() {
             pagination=0;
-            getAgrodata();
+            getMarkets();
         }
         function nextPage() {
             if (pagination!=valor) {
                 pagination++;
-                getAgrodata();
+                getMarkets();
             }
         }
   
         function previousPage() {
             if (pagination >= 1) {
                 pagination--;
-                getAgrodata();
+                getMarkets();
             }
         }
         function lastPage() {
             pagination=valor;
-            getAgrodata();
+            getMarkets();
         }
         function infoPage(inf,v_inf){
             info = inf;
             v_info = v_inf;
         }
-
+    
 </script>
 <main>
-    <h1> Listado de datos: agrodata-almeria</h1>
+    <h1> Listado de datos: agroprices-weekly</h1>
     
     <div class="botones">
         <ButtonToolbar>
@@ -268,7 +272,7 @@ function cleanFilter() {
                         {consultAPI}  
                         <!-- -->
                         <Row>
-                            <Col>
+                            <!-- <Col>
                                 <FormGroup>
                                     <Label>Por año:</Label>
                                     <Input
@@ -278,70 +282,74 @@ function cleanFilter() {
                                         bind:value={consultYear}                                      
                                     />
                                 </FormGroup>
-                            </Col>
+                            </Col> -->
                             <Col>
                                 <FormGroup>
-                                    <Label>Por provincia:</Label>
+                                    <Label>Por mercado:</Label>
                                     <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
                                         type="text"                                       
-                                        placeholder="Busqueda por una provincia"
-                                        bind:value={consultState_s} 
+                                        placeholder="Busqueda por un mercado"
+                                        bind:value={consultMarket} 
                                     />
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
-                                    <Label>Por Estacion:</Label>
+                                    <Label>Por producto:</Label>
                                     <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
                                         type="text"                                        
-                                        placeholder="Busqueda por género"
-                                        bind:value={consultStation_s}                                        
+                                        placeholder="Busqueda por producto"
+                                        bind:value={consultProduct}                                        
                                     />
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
-                                    <Label>Por Dias:</Label>
+                                    <Label>Por clase:</Label>
                                     <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
                                         type="text"                                        
-                                        placeholder="Busqueda por género"
-                                        bind:value={consultDay}                                        
+                                        placeholder="Busqueda por clase"
+                                        bind:value={consultClass}                                        
                                     />
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
-                                    <Label>Por Temperatura Máxima:</Label>
+                                    <Label>Por Tipo:</Label>
                                     <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
                                         type="text"                                        
-                                        placeholder="Busqueda por género"
-                                        bind:value={consultTemp_max}                                        
+                                        placeholder="Busqueda por tipo"
+                                        bind:value={consultType}                                        
                                     />
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
-                                    <Label>Por Temperatura Mínima:</Label>
+                                    <Label>Por Posicion comercial:</Label>
                                     <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
                                         type="text"                                        
-                                        placeholder="Busqueda por género"
-                                        bind:value={consultTemp_min}                                        
+                                        placeholder="Busqueda por posicion comercial"
+                                        bind:value={consultCommpos}                                        
                                     />
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
-                                    <Label>Por Temperatura Media:</Label>
+                                    <Label>Por unidad:</Label>
                                     <Input
-                                        disabled={fromYear != null || toYear != null ? true:false}
                                         type="text"                                        
-                                        placeholder="Busqueda por género"
-                                        bind:value={consultTemp_average}                                        
+                                        placeholder="Busqueda por unidad"
+                                        bind:value={consultUnit}                                        
+                                    />
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup>
+                                    <Label>Por precio:</Label>
+                                    <Input
+                                        type="text"                                        
+                                        placeholder="Busqueda por precio"
+                                        bind:value={consultPrice}                                        
                                     />
                                 </FormGroup>
                             </Col>
@@ -355,10 +363,9 @@ function cleanFilter() {
                                 <FormGroup>
                                     <Label>Desde el año:</Label>
                                     <Input 
-                                        disabled={consultYear != null  ? true:false}
-                                        type="number"
+                                        type="text"
                                         placeholder="Escribe un año"
-                                        bind:value={fromYear}                                        
+                                        bind:value={fromPeriod}                                        
                                     />
                                 </FormGroup>
                             </Col>
@@ -366,10 +373,9 @@ function cleanFilter() {
                                 <FormGroup>
                                     <Label>Hasta el año:</Label>
                                     <Input
-                                        disabled={consultYear != null ? true:false}
-                                        type="number"
+                                        type="text"
                                         placeholder="Escribe un año"
-                                        bind:value={toYear} 
+                                        bind:value={toPeriod} 
                                     />
                                 </FormGroup>
                             </Col>
@@ -389,48 +395,52 @@ function cleanFilter() {
     <Table>
         <thead>
           <tr>
-            <th>Provincia</th>
-            <th>Estacion</th>
-            <th>Año</th>
-            <th>Dia</th>
-            <th>Temperatura Máxima</th>
-            <th>Temperatura Mínima</th>
-            <th>Temperatura Media</th>
+            <th>Producto</th>
+            <th>Tipo</th>
+            <th>Clase</th>
+            <th>Unidad</th>
+            <th>Mercado</th>
+            <th>Posición Comercial</th>
+            <th>Precio</th>
+            <th>Fecha</th>
           </tr>
         </thead>
         <tbody>
            <tr>
-                <td><input bind:value={newState_s}></td>
-                <td><input bind:value={newStation_s}></td>
-                <td><input bind:value={newYear}></td>
-                <td><input bind:value={newDay}></td>
-                <td><input bind:value={newTemp_max}></td>
-                <td><input bind:value={newTemp_min}></td>
-                <td><input bind:value={newTemp_average}></td>
-                <td><Button on:click={createAgrodata}>Crear</Button></td>
+            <td><input bind:value={newProduct}></td>
+            <td><input bind:value={newType}></td>
+            <td><input bind:value={newClass}></td>
+            <td><input bind:value={newUnit}></td>
+            <td><input bind:value={newMarket}></td>
+            <td><input bind:value={newCommpos}></td>
+            <td><input bind:value={newPrice}></td>
+            <td><input bind:value={newDate}></td>
+            <td><Button on:click={createEntry}>Crear</Button></td>
             </tr>
     
-        {#each agrodata as agro}
-          <tr>
-            <td>{agro.state_s}</td>
-            <td>{agro.station_s}</td>
-            <td>{agro.year}</td>
-            <td>{agro.day}</td>
-            <td>{agro.temp_max}</td>
-            <td>{agro.temp_min}</td>
-            <td>{agro.temp_average}</td>
-            <td><Button><a href="agrodata-almeria/{agro.year}/{agro.day}/{agro.station_s}">Editar</a></Button></td>
-            <td
-                    ><Button
-                        color="danger"
-                        on:click={deleteAgrodata(agro.year, agro.day, agro.station_s)}
-                        >Borrar</Button
-                    ></td>
-            <td>&nbsp</td>
-          </tr>
-          {/each} 
+            {#each mercados as mercado}
+            <tr>
+              <td>{mercado.product}</td>
+              <td>{mercado.type}</td>
+              <td>{mercado.class}</td>
+              <td>{mercado.unit}</td>
+              <td>{mercado.market}</td>
+              <td>{mercado.commpos}</td>
+              <td>{mercado.price}</td>
+              <td>{mercado.date}</td>
+              <td><Button><a href="agroprices-weekly/{mercado.market}/{mercado.product}/{mercado.date}">Editar</a></Button></td>
+              <td
+                      ><Button
+                          color="danger"
+                          on:click={deleteEntry(mercado.market, mercado.product, mercado.date)}
+                          >Borrar</Button
+                      ></td>
+              <td>&nbsp</td>
+            </tr>
+            {/each} 
         </tbody>
       </Table>
+
       <Pagination ariaLabel="Page navigation example">
         {#if v_consult}
             <PaginationItem>

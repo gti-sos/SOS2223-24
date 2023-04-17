@@ -21,7 +21,7 @@ import { arc } from "./backend/index-arc.js";
 arc(app);
 
 
-//app.use(handler);
+app.use(handler);
 
 app.listen(port, ()=>{
   console.log(`server ready in port ${port}`);
@@ -35,5 +35,7 @@ app.listen(port, ()=>{
 
 //var backend_arc = require("./backend/index-arc");
 //backend_arc(app);
+
+//"test": "npm run test-agroprices-weekly && npm run test-provisions-for-the-year-2014 && npm run test-agrodata-almeria "
 
 
