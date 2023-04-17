@@ -1,0 +1,541 @@
+<script>
+// @ts-nocheck
+
+    import { onMount } from "svelte";
+    import { Pagination, PaginationItem, PaginationLink } from 'sveltestrap';
+    import {dev} from '$app/environment';
+    import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row, Table, Alert } from 'sveltestrap';
+    
+
+    let API = '/api/v2/provisions-for-the-year-2014';
+
+    if(dev) API = 'http://localhost:12345' + API;
+
+
+    onMount(async () => {
+        getProvisions();
+    });
+    function volverAtras (){
+        return history.back()
+    }
+
+
+    let open = false;
+    const toggle = () => (open = !open);
+
+
+
+
+
+    let result = "";
+    let resultStatus = 0;
+    let message = "";
+
+    function showMessage(message, type = "success") {
+      const messages = document.getElementById("messages");
+      const messageElement = document.createElement("div");
+      messageElement.className = `message ${type}`;
+      messageElement.innerHTML = message;
+      messages.appendChild(messageElement);
+      console.log(`Mensaje: ${message}, Tipo: ${type}`);
+      setTimeout(() => {
+        messageElement.remove();
+      }, 2000);
+    }
+
+
+  // --------------------------------------Pagination --------------------------------------------
+  
+  function setPage(pageNumber) {
+    page = pageNumber;
+  }
+  // Define la función getPages que calcula el número total de páginas
+  function getPages(totalItems, itemsPerPage) {
+    return Math.ceil(totalItems / itemsPerPage);
+  }
+  function goToPage(page) {
+  currentPage = page;
+  const offset = (currentPage - 1) * itemsPerPage;
+  const url = API + `?offset=${offset}&limit=${itemsPerPage}`;
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      bicyclePlans = data;
+    })
+    .catch(error => {
+      console.error('Error fetching bicycle plans:', error);
+    })
+    .finally(() => {
+      updateUrl();
+    });
+}
+ 
+  let offset = 0;
+  let limit = 10;
+  let currentPage = 1;
+  const itemsPerPage = 10;
+  const pageSize = 10;
+  const apiUrl = API+ `?offset=${(currentPage - 1) * pageSize}&limit=${pageSize}`;
+        
+    let search = false; // se ha buscado
+
+
+    let provisions = [{province: '',
+                        year: '',
+                        organization: '',
+                        disposal_type: '',
+                        disposal_number: '',
+                        number_of_the_bulletin: '',
+                        date_of_disposition: '',
+                        section_number:'',
+                        section:''
+                    }];
+    
+    async function loadProvisions() {
+      const res = await fetch(API, {
+        method: "GET"
+      });
+
+      try {
+        const data = await res.json();
+        provisions = data;
+        result = JSON.stringify(data, null, 2);
+      } catch (error) {
+        console.log(`Error parsing result: ${error}`);
+      }
+      const status = await res.status;
+      resultStatus = status;
+      
+    }
+
+
+
+
+          // Define el objeto de búsqueda
+          let query = {
+            province: "",
+            year: "",
+            organization: "",
+            disposal_type: "",
+            disposal_number: "",
+            disposal_number_over: "",
+            disposal_number_below: "",
+            number_of_the_bulletin: "",
+            number_of_the_bulletin_over: "",
+            number_of_the_bulletin_below: "",
+            date_of_disposition: "",
+            section_number: "",
+            section: "",
+            from:"",
+            to:"",
+            offset:"",
+            limit:""
+        };
+
+
+
+
+
+  // Función para obtener las provisions según el objeto de búsqueda y los parámetros de paginación
+  async function getProvisions(){
+    // Construye la URL para hacer la petición GET al backend
+    let url = API
+    if(query.offset && query.limit) url +=  `/?offset=${query.offset}&limit=${query.limit}`;
+    else    url += `/?offset=${offset}&limit=${limit}`;
+
+
+    // Agrega los parámetros de búsqueda a la URL, si existen
+
+    if (query.from) {
+      url += `&from=${query.from}`;
+    }
+    if (query.to) {
+      url += `&to=${query.to}`;
+    }
+
+    if (query.province) {
+      url += `&province=${query.province}`;
+    }
+    if (query.year) {
+      url += `&year=${query.year}`;
+    }
+    if (query.organization) {
+      url += `&organization=${query.organization}`;
+    }
+    if (query.disposal_type) {
+      url += `&disposal_type=${query.disposal_type}`;
+    }
+    if (query.disposal_number) {
+      url += `&disposal_number=${query.disposal_number}`;
+    }
+    if (query.disposal_number_over) {
+      url += `&disposal_number_over=${query.disposal_number_over}`;
+    }
+    if (query.disposal_number_below) {
+      url += `&disposal_number_below=${query.disposal_number_below}`;
+    }
+    if (query.number_of_the_bulletin) {
+      url += `&number_of_the_bulletin=${query.number_of_the_bulletin}`;
+    }
+    if (query.number_of_the_bulletin_over) {
+      url += `&number_of_the_bulletin_over=${query.number_of_the_bulletin_over}`;
+    }
+    if (query.number_of_the_bulletin_below) {
+      url += `&number_of_the_bulletin_below=${query.number_of_the_bulletin_below}`;
+    }
+    if (query.date_of_disposition) {
+      url += `&date_of_disposition=${query.date_of_disposition}`;
+    }
+    if (query.section_number) {
+      url += `&section_number=${query.section_number}`;
+    }
+    if (query.section) {
+      url += `&section=${query.section}`;
+    }
+
+
+    // Realiza la petición GET al backend
+    const res = await fetch(url, {
+      method: "GET"
+    });
+
+    try {
+      const data = await res.json();
+      provisions = data;
+      result = JSON.stringify(data, null, 2);
+    } catch (error) {
+      console.log(`Error parsing result: ${error}`);
+    }
+    const status = await res.status;
+    resultStatus = status;
+    
+  }
+
+
+
+
+  // Función para cambiar la página actual y obtener las provisions correspondientes
+  const cambiarPagina = (event) => {
+    offset = event.detail.offset;
+    obtenerprovisions();
+  };
+
+  // Función para buscar las provisions correspondientes al objeto de búsqueda actual
+  const buscarprovisions = () => {
+    offset = 0; // Reinicia el offset a cero para mostrar las primeras provisions de la nueva búsqueda
+    obtenerprovisions();
+  };
+
+
+
+  let newProvision = {province:"",
+                      year:"",
+                      organization:"",
+                      disposal_type:"",
+                      disposal_number:"",
+                      number_of_the_bulletin:"",
+                      date_of_disposition:"",
+                      section_number:"",
+                      section:""
+                    };
+  /*let newProvince, newYear, newOrganization, newDisposal_type, newDisposal_number, newNumber_of_the_bulletin, newDate_of_disposition, newSection_number, newSection;
+  newProvince= newYear= newOrganization= newDisposal_type= newDisposal_number= newNumber_of_the_bulletin= newDate_of_disposition= newSection_number= newSection = "";
+*/
+
+    async function createProvitions(){
+      resultStatus = result = "";
+      const year = Number(newProvision.year);
+      const disposal_number = Number(newProvision.disposal_number);
+      const number_of_the_bulletin = Number(newProvision.number_of_the_bulletin);
+      const section_number = Number(newProvision.section_number);
+    if (
+      newProvision.province == null||
+      year == null ||
+      newProvision.organization == null ||
+      newProvision.disposal_type == null ||
+      disposal_number == null ||
+      number_of_the_bulletin == null ||
+      newProvision.date_of_disposition == null ||
+      section_number == null ||
+      newProvision.section == null
+    ) {
+      showMessage(`Por favor, complete todos los campos con los tipos de datos correctos `,"error");
+
+      console.log(newProvision);
+      return;
+    }
+      const res = await fetch(API, {
+            method: 'POST',
+            headers:{
+              "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(newProvision)
+        });
+        const status = await res.status;
+        resultStatus = status;
+        if (res.ok ) {
+          showMessage("Recurso creado correctamente", "success");
+          getProvisions();
+        }else{
+            if (status == 400) {
+              showMessage(`Hay que insertar datos o hay campos vacios `);              
+            }else{
+                if(status == 409){
+                    showMessage("El recurso ya existe o la provincia no existe");
+                }
+            }
+        }
+    }
+
+  
+
+
+    
+
+    async function deleteProvisions() {
+        resultStatus = result = "";
+        const res = await fetch(API, {
+            method: "DELETE",
+        });
+        const status = await res.status;
+        resultStatus = status;
+        if (status == 200) {
+              open = false;
+            getProvisions();
+            message = "Recursos borrados correctamente";
+          
+            
+            
+        }
+    }
+
+    async function deleteProvision(province, year, disposal_number) {
+        resultStatus = result = "";
+        const res = await fetch(API + "/" + province + "/" + year + "/" + disposal_number, {
+            method: "DELETE",
+        });
+        const status = await res.status;
+        resultStatus = status;
+        if (status == 200) {
+            getProvisions();
+            message = "Recurso borrado correctamente";            
+        }
+    }
+
+
+
+</script>
+
+<h1>Provisiones</h1>
+<div id="messages" class="messages"></div>
+
+
+    <div class="cabecera">
+        <Col md>
+
+              <Row >
+                <Col><Button color="danger" on:click={toggle}>Borrar recursos</Button></Col>
+                <Col><Button color="secondary" on:click={loadProvisions}>Cargar Datos Iniciales</Button></Col>
+                <Col><Button color="secondary" on:click={volverAtras}>Volver Atras</Button>
+                </Col>
+
+              </Row>
+                        
+                
+                <Modal isOpen={open} {toggle}>
+                    <ModalHeader {toggle}>Procede a borrar todos los datos</ModalHeader>
+                    <ModalBody>¿Estás seguro?</ModalBody>
+                    <ModalFooter>
+                        <Button color="secondary" on:click={deleteProvisions}>Confirmar</Button>
+                        <Button color="secondary" on:click={toggle}>Cancelar</Button>
+                    </ModalFooter>
+                </Modal>
+                      </Col>
+    </div>
+
+
+
+
+    <div class="tablas">
+
+
+      <h2>Buscar y Filtrar por propiedades</h2>
+
+        <Table bordered>
+
+        <thead>
+              
+              
+          <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Limit</th>
+            <th>Offset</th>
+          </tr>
+          <tr>
+            <td><input type="number" placeholder="Desde el año: " bind:value={query.from} style="color: #888;" /></td>
+            <td><input type="number" placeholder="Hasta el año: " bind:value={query.to} style="color: #888;" /></td>
+            <td><input type="number" placeholder="Limit" bind:value={query.limit} style="color: #888;" /></td>
+            <td><input type="number" placeholder="Offset" bind:value={query.offset} style="color: #888;" /></td>
+          </tr>
+            
+            <tr>
+            <th>Número de Disposición Mayor</th>
+            <th>Número de Disposición Menor</th>
+            <th>Número de Boletín Mayor</th>
+            <th>Número de Boletín Menor</th>
+            </tr>
+            
+            <tr>
+            <td><input type="number" placeholder="Número de Disposición Mayor: " bind:value={query.disposal_number_over} style="color: #888;" /></td>
+            <td><input type="number" placeholder="Número de Disposición Menor: " bind:value={query.disposal_number_below} style="color: #888;" /></td>
+            <td><input type="number" placeholder="Número de Boletín Mayor" bind:value={query.number_of_the_bulletin_over} style="color: #888;" /></td>
+            <td><input type="number" placeholder="Número de Boletín Menor" bind:value={query.number_of_the_bulletin_below} style="color: #888;" /></td>
+            </tr>
+          <tr>
+            <th>Provincia</th>
+            <th>Año</th>
+            <th>Organización</th>
+            <th>Tipo de disposición</th>
+            <th>Número de Disposición</th>
+            <th>Número del Boletín</th>
+            <th>Fecha de disposición</th>
+            <th>Número de sección</th>
+            <th>Sección</th>
+
+
+            </tr>
+
+            <tr> 
+              <td><input type="text" placeholder="Provincia" bind:value={query.province} style="color: #888;" /></td>
+              <td><input type="text" placeholder="Año" bind:value={query.year} style="color: #888;" /></td>
+              <td><input type="text" placeholder="Organización" bind:value={query.organization} style="color: #888;" /></td>
+              <td><input type="text" placeholder="Tipo de disposición" bind:value={query.disposal_type} style="color: #888;" /></td>
+              <td><input type="text" placeholder="Número de Disposición" bind:value={query.disposal_number} style="color: #888;" /></td>
+              <td><input type="text" placeholder="Número del Boletín" bind:value={query.disposal_number} style="color: #888;" /></td>
+              <td><input type="text" placeholder="Fecha de disposición" bind:value={query.date_of_disposition} style="color: #888;" /></td>
+              <td><input type="text" placeholder="Número de sección" bind:value={query.section_number} style="color: #888;" /></td>
+              <td><input type="text" placeholder="Sección" bind:value={query.section} style="color: #888;" /></td>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <th style="text-align: center;">
+                <Button outline color="primary" on:click="{() =>getProvisions()}">Buscar</Button>
+            </th> 
+
+            <tr>
+              <th>Provincia</th>
+              <th>Año</th>
+              <th>Organización</th>
+              <th>Tipo de disposición</th>
+              <th>Número de Disposición</th>
+              <th>Número del Boletín</th>
+              <th>Fecha de disposición</th>
+              <th>Número de sección</th>
+              <th>Sección</th>
+  
+  
+              </tr>
+            
+
+            {#each  provisions as provision}
+                <tr> 
+                <td>{provision.province}</td>
+                <td>{provision.year}</td>
+                <td>{provision.organization}</td>
+                <td>{provision.disposal_type}</td>
+                <td>{provision.disposal_number}</td>
+                <td>{provision.number_of_the_bulletin}</td>
+                <td>{provision.date_of_disposition}</td>
+                <td>{provision.section_number}</td> 
+                <td>{provision.section}</td>
+                <td><Button
+                    color="danger"
+                    on:click={() => deleteProvision(provision.province, provision.year, provision.disposal_number)}
+                    >Borrar</Button>
+                  </td>
+                  <td><Button on:click><a href="provisions-for-the-year-2014/{provision.province}/{provision.year}/{provision.disposal_number}">Editar</a></Button></td>
+
+                </tr>
+            {/each}
+    
+        </tbody>
+    </Table>
+
+    <Pagination size="lg" ariaLabel="Page navigation example">
+      <PaginationItem>
+        <PaginationLink first on:click={() => goToPage(1)} href="#" />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink previous on:click={() => goToPage(currentPage-1)} href="#" />
+      </PaginationItem>
+      {#each Array.from({ length: Math.ceil(provisions.length/itemsPerPage) }, (_, i) => i+1) as page}
+        <PaginationItem>
+          <PaginationLink on:click={() => goToPage(page)} href="#">{page}</PaginationLink>
+        </PaginationItem>
+      {/each}
+      <PaginationItem>
+        <PaginationLink next on:click={() => goToPage(currentPage+1)} href="#" />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink last on:click={() => goToPage(Math.ceil(provisions.length/itemsPerPage))} href="#" />
+      </PaginationItem>
+    </Pagination>
+    </div>
+
+<div>
+    <h3>Crear una provision</h3>
+    <Table bordered>
+
+      <thead>
+            <tr>
+            <th>Provincia</th>
+            <th>Año</th>
+            <th>Organización</th>
+            <th>Tipo de disposición</th>
+            <th>Número de Disposición</th>
+            <th>Número del Boletín</th>
+            <th>Fecha de disposición</th>
+            <th>Número de sección</th>
+            <th>Sección</th>
+
+            </tr>
+      </thead>
+      <tbody>
+            <tr> 
+              <td><input placeholder="Provincia" bind:value={newProvision.province} style="color: #888;" /></td>
+              <td><input placeholder="Año" bind:value={newProvision.year} style="color: #888;" /></td>
+              <td><input placeholder="Organización" bind:value={newProvision.organization} style="color: #888;" /></td>
+              <td><input placeholder="Tipo de disposición" bind:value={newProvision.disposal_type} style="color: #888;" /></td>
+              <td><input placeholder="Número de Disposición" bind:value={newProvision.disposal_number} style="color: #888;" /></td>
+              <td><input placeholder="Número del Boletín" bind:value={newProvision.number_of_the_bulletin} style="color: #888;" /></td>
+              <td><input placeholder="Fecha de disposición" bind:value={newProvision.date_of_disposition} style="color: #888;" /></td>
+              <td><input placeholder="Número de sección" bind:value={newProvision.section_number} style="color: #888;" /></td>
+              <td><input placeholder="Sección" bind:value={newProvision.section} style="color: #888;" /></td>
+            </tr>
+        </tbody>
+
+            <td><Button
+              color="secondary"
+              on:click={() => createProvitions()}
+              >Crear Provisión</Button></td>
+    </Table>
+  </div>
+
+
+
+
+
+
+    {#if resultStatus != ""}
+        <p>
+            Result:
+        </p>
+        <pre>
+            {resultStatus}
+            {result}
+        </pre>
+    {/if}
+
+

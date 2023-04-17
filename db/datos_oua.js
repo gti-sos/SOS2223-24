@@ -1,3 +1,4 @@
+const datos_oua = 
 [
  {
   "province": "Huelva",
@@ -12341,4 +12342,6 @@
   "section_number": 5,
   "section": " Anuncios"
  }
-]
+];
+
+export {datos_oua};

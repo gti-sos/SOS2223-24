@@ -19,6 +19,8 @@ jobs:
 
       - run: npm test
 
+      -run: cd frontend; npm run build
+
       - id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:

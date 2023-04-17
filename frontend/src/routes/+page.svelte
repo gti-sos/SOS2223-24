@@ -1,8 +1,11 @@
 <script>
     import { dev } from '$app/environment';
     let API = '/api/v1';
+    let APIf='';
     if (dev)
         API = 'http://localhost:12345'+API;
+        APIf = 'http://localhost:12345';
+
 </script>
 <main>
     <br>
@@ -42,7 +45,8 @@
         <br>
         <ul>
             <li><a href="{API}/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
-    
+            <li><a href="{APIf}/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
+
         </ul>
     </ul>
 </main>
