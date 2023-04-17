@@ -124,7 +124,11 @@
         const res = await fetch(API, {
             method: "DELETE",
         });
-        getAgrodata();	
+        const status = await res.status;
+        resultStatus = status;
+            if(status==200){
+                getAgrodata(); 
+            }	
         }
 
         async function deleteAgrodata(year, day, station_s) {

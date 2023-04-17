@@ -14,9 +14,9 @@
         <li><b>Equipo:</b></li>
         <br>
         <ul>
-            <li><a href="https://github.com/AdolfoRdgzCab">Adolfo Rodriguez Cabezon</a></li>
-            <li><a href="https://github.com/vicsanesp">Victor Manuel Sanchez Espada</a></li>
-            <li><a href="https://github.com/OUABSL">Ouael Boussiali</a></li>
+            <li><a href="https://github.com/AdolfoRdgzCab">Adolfo Rodriguez Cabezon - agrodata-almeria </a></li>
+            <li><a href="https://github.com/vicsanesp">Victor Manuel Sanchez Espada - agroprices-weekly</a></li>
+            <li><a href="https://github.com/OUABSL">Ouael Boussiali - provisions-for-the-year-2014</a></li>
         </ul>
         <br>
         <br>
@@ -46,7 +46,7 @@
         <li><b>Frontends de las APIS:</b></li>
         <br>
         <ul>
-            <li><a href="{API}/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
+            <li><a href="{APIf}/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
             <li><a href="{APIf}/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
 
         </ul>
