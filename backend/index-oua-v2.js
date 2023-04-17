@@ -21,7 +21,7 @@ function oua2(app){
 
 
      
-      const datos_oua = [{
+        const datos_oua = [{
         province: "Huelva",
         year: 2014,
         organization: "Consejería de La Presidencia",
@@ -429,7 +429,7 @@ function oua2(app){
          "section_number": 5,
          "section": " Anuncios"
         }];
-
+        //db.remove({}, { multi: true }, (err, numRemoved) => {});
         db.insert(datos_oua);
               
 
@@ -758,4 +758,4 @@ function oua2(app){
     });
 }
 
-export {oua2}
+export {oua2};

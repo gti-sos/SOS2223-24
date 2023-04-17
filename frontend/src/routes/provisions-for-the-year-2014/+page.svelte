@@ -2,7 +2,7 @@
 // @ts-nocheck
 
     import { onMount } from "svelte";
-    import { Pagination, PaginationItem, PaginationLink } from 'sveltestrap';
+    import { Pagination, PaginationItem, PaginationLink, Styles } from 'sveltestrap';
     import {dev} from '$app/environment';
     import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row, Table, Alert } from 'sveltestrap';
     
@@ -28,16 +28,15 @@
 
 
     let result = "";
-    let resultStatus = 0;
+    let resultStatus = "";
     let message = "";
 
-    function showMessage(message, type = "success") {
+    function showMessage(message) {
       const messages = document.getElementById("messages");
       const messageElement = document.createElement("div");
-      messageElement.className = `message ${type}`;
       messageElement.innerHTML = message;
       messages.appendChild(messageElement);
-      console.log(`Mensaje: ${message}, Tipo: ${type}`);
+      console.log(`Mensaje: ${message}`);
       setTimeout(() => {
         messageElement.remove();
       }, 2000);
@@ -46,38 +45,73 @@
 
   // --------------------------------------Pagination --------------------------------------------
   
-  function setPage(pageNumber) {
-    page = pageNumber;
-  }
-  // Define la función getPages que calcula el número total de páginas
-  function getPages(totalItems, itemsPerPage) {
-    return Math.ceil(totalItems / itemsPerPage);
-  }
-  function goToPage(page) {
+ 
+  // --------------------------------------Pagination --------------------------------------------
+
+let currentPage = 1;
+const itemsPerPage = 10;
+
+function getTotalPages(totalItems) {
+  return Math.ceil(totalItems / itemsPerPage);
+}
+
+function updateUrl() {
+  const url = new URL(window.location);
+  url.searchParams.set("page", currentPage);
+  window.history.pushState({}, '', url);
+}
+
+function goToPage(page) {
   currentPage = page;
   const offset = (currentPage - 1) * itemsPerPage;
   const url = API + `?offset=${offset}&limit=${itemsPerPage}`;
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      bicyclePlans = data;
+      provisions = data;
     })
     .catch(error => {
-      console.error('Error fetching bicycle plans:', error);
+      console.error('Error fetching provisions:', error);
     })
     .finally(() => {
       updateUrl();
     });
 }
- 
+
+
+// fetch the initial data and calculate the total pages
+fetch(API)
+  .then(response => response.json())
+  .then(data => {
+    provisions = data;
+    const totalPages = getTotalPages(provisions.length);
+    // render the pagination links
+    // you can use a loop to generate the links
+    // each link should call the goToPage function with its page number
+  })
+  .catch(error => {
+    console.error('Error fetching provisions:', error);
+  });
+
+// render the items for the current page
+function renderItems() {
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const items = provisions.slice(startIndex, endIndex);
+  // render the items using a loop or a component
+}
+
+// call the renderItems function whenever the currentPage or provisions array changes
+
+
+
   let offset = 0;
   let limit = 10;
-  let currentPage = 1;
-  const itemsPerPage = 10;
   const pageSize = 10;
   const apiUrl = API+ `?offset=${(currentPage - 1) * pageSize}&limit=${pageSize}`;
-        
+      
     let search = false; // se ha buscado
+
 
 
     let provisions = [{province: '',
@@ -97,6 +131,7 @@
       });
 
       try {
+        const res = loadProvisions()
         const data = await res.json();
         provisions = data;
         result = JSON.stringify(data, null, 2);
@@ -203,6 +238,7 @@
       const data = await res.json();
       provisions = data;
       result = JSON.stringify(data, null, 2);
+      renderItems();
     } catch (error) {
       console.log(`Error parsing result: ${error}`);
     }
@@ -244,48 +280,65 @@
 
     async function createProvitions(){
       resultStatus = result = "";
-      const year = Number(newProvision.year);
-      const disposal_number = Number(newProvision.disposal_number);
-      const number_of_the_bulletin = Number(newProvision.number_of_the_bulletin);
-      const section_number = Number(newProvision.section_number);
-    if (
-      newProvision.province == null||
-      year == null ||
-      newProvision.organization == null ||
-      newProvision.disposal_type == null ||
-      disposal_number == null ||
-      number_of_the_bulletin == null ||
-      newProvision.date_of_disposition == null ||
-      section_number == null ||
-      newProvision.section == null
-    ) {
-      showMessage(`Por favor, complete todos los campos con los tipos de datos correctos `,"error");
+      let province = newProvision.province;
+      let year = Number(newProvision.year);
+      let disposal_number = Number(newProvision.disposal_number);
+      let number_of_the_bulletin = Number(newProvision.number_of_the_bulletin);
+      let section_number = Number(newProvision.section_number);
+      let organization = newProvision.organization;
+      let disposal_type = newProvision.disposal_type;
+      let date_of_disposition = newProvision.date_of_disposition;
+      let section = newProvision.section;
 
-      console.log(newProvision);
-      return;
-    }
+      
+
+      let consola = JSON.stringify(
+                              {province,
+                                year,
+                                organization,
+                                disposal_type,
+                                disposal_number,
+                                number_of_the_bulletin,
+                                date_of_disposition,
+                                section_number,
+                                section
+                              }
+                              );
+      console.log(consola);
       const res = await fetch(API, {
             method: 'POST',
             headers:{
               "Content-Type" : "application/json"
             },
-            body: JSON.stringify(newProvision)
+            body: JSON.stringify({province,
+                                year,
+                                organization,
+                                disposal_type,
+                                disposal_number,
+                                number_of_the_bulletin,
+                                date_of_disposition,
+                                section_number,
+                                section
+                              }
+                              )
+                              
         });
         const status = await res.status;
         resultStatus = status;
         if (res.ok ) {
-          showMessage("Recurso creado correctamente", "success");
+          showMessage("Recurso creado correctamente");
           getProvisions();
         }else{
             if (status == 400) {
-              showMessage(`Hay que insertar datos o hay campos vacios `);              
+              showMessage(`Hay que insertar datos o hay campos vacios (${status})`);              
             }else{
                 if(status == 409){
-                    showMessage("El recurso ya existe o la provincia no existe");
+                    showMessage(`El recurso ya existe o la provincia no existe(${status})`);
                 }
             }
         }
     }
+    
 
   
 
@@ -327,19 +380,21 @@
 </script>
 
 <h1>Provisiones</h1>
+<h2>Desarrollado por Ouael Boussiali</h2>
+<p>Provisions devueltos: {provisions.length}</p>
+
 <div id="messages" class="messages"></div>
 
 
     <div class="cabecera">
         <Col md>
 
-              <Row >
-                <Col><Button color="danger" on:click={toggle}>Borrar recursos</Button></Col>
-                <Col><Button color="secondary" on:click={loadProvisions}>Cargar Datos Iniciales</Button></Col>
-                <Col><Button color="secondary" on:click={volverAtras}>Volver Atras</Button>
-                </Col>
+              <tr class="btn-head" >
+                <td class = "borrar"><Button color="danger" on:click={toggle}>Borrar recursos</Button></td>
+                <td class = "volveratras"><Button color="info" on:click={volverAtras}>Volver Atras</Button>
+                </td>
 
-              </Row>
+              </tr>
                         
                 
                 <Modal isOpen={open} {toggle}>
@@ -359,7 +414,7 @@
     <div class="tablas">
 
 
-      <h2>Buscar y Filtrar por propiedades</h2>
+      <h3>Buscar y Filtrar por propiedades</h3>
 
         <Table bordered>
 
@@ -369,14 +424,10 @@
           <tr>
             <th>From</th>
             <th>To</th>
-            <th>Limit</th>
-            <th>Offset</th>
           </tr>
           <tr>
             <td><input type="number" placeholder="Desde el año: " bind:value={query.from} style="color: #888;" /></td>
             <td><input type="number" placeholder="Hasta el año: " bind:value={query.to} style="color: #888;" /></td>
-            <td><input type="number" placeholder="Limit" bind:value={query.limit} style="color: #888;" /></td>
-            <td><input type="number" placeholder="Offset" bind:value={query.offset} style="color: #888;" /></td>
           </tr>
             
             <tr>
@@ -420,8 +471,8 @@
         </thead>
         <tbody>
             
-            <th style="text-align: center;">
-                <Button outline color="primary" on:click="{() =>getProvisions()}">Buscar</Button>
+            <th class=btnBuscar>
+                <Button  color="success" on:click="{() =>getProvisions()}">Buscar</Button>
             </th> 
 
             <tr>
@@ -455,7 +506,7 @@
                     on:click={() => deleteProvision(provision.province, provision.year, provision.disposal_number)}
                     >Borrar</Button>
                   </td>
-                  <td><Button on:click><a href="provisions-for-the-year-2014/{provision.province}/{provision.year}/{provision.disposal_number}">Editar</a></Button></td>
+                  <td><Button color = "info" on:click><a href="provisions-for-the-year-2014/{provision.province}/{provision.year}/{provision.disposal_number}">Editar</a></Button></td>
 
                 </tr>
             {/each}
@@ -537,5 +588,48 @@
             {result}
         </pre>
     {/if}
+
+
+<style>
+
+h1{
+  text-align: center;
+  color: blueviolet;
+}
+
+h2{
+  text-align: center;
+}
+
+.cabecera {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: -1000px;
+        width: 100%; 
+    }
+
+  .btnBuscar {
+    text-align: center ;
+    display: inline-block;
+    margin: 0 10px;
+    position: relative;
+    right: -1000px;
+}
+
+.btn-head{
+  position: relative;
+  left: 1270px;
+
+}
+
+h3{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;}
+
+
+</style>
 
 
