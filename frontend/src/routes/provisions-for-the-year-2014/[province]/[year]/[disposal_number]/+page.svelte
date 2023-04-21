@@ -20,7 +20,7 @@
 
 
 
-    let API = '/api/v1/provisions-for-the-year-2014' + "/" + province + '/' + year + '/' + disposal_number;
+    let API = '/api/v2/provisions-for-the-year-2014' + "/" + province + '/' + year + '/' + disposal_number;
     if(dev) API = 'http://localhost:12345' + API;
 
 

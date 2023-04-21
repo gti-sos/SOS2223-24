@@ -2,12 +2,7 @@
   // @ts-nocheck
 
   import { onMount } from "svelte";
-  import {
-    Pagination,
-    PaginationItem,
-    PaginationLink,
-    Styles,
-  } from "sveltestrap";
+  import {Pagination,PaginationItem,PaginationLink,Styles,} from "sveltestrap";
   import { dev } from "$app/environment";
   import {
     Button,
@@ -21,7 +16,7 @@
     Alert,
   } from "sveltestrap";
 
-  let API = "/api/v1/provisions-for-the-year-2014";
+  let API = "/api/v2/provisions-for-the-year-2014";
 
   if (dev) API = "http://localhost:12345" + API;
 
@@ -38,8 +33,9 @@
   let result = "";
   let resultStatus = "";
   let message = "";
+  let search = [];
 
-  function showMessage(message) {
+  function showMessage(message ,color) {
     const messages = document.getElementById("messages");
     const messageElement = document.createElement("div");
     messageElement.innerHTML = message;
@@ -52,29 +48,53 @@
 
   // --------------------------------------Pagination --------------------------------------------
 
-  // fetch the initial data and calculate the total pages
-  fetch(API)
-    .then((response) => response.json())
-    .then((data) => {
-      provisions = data;
-      // render the pagination links
-      // you can use a loop to generate the links
-      // each link should call the goToPage function with its page number
-    })
-    .catch((error) => {
-      console.error("Error fetching provisions:", error);
-    });
+  function getTotalPages() {
+return Math.ceil(provisions.length / itemsPerPage);
+}
 
-  // render the items for the current page
-  function renderItems() {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const items = provisions.slice(startIndex, endIndex);
-    // render the items using a loop or a component
-  }
+function updateUrl() {
+    const url = new URL(window.location);
+    url.searchParams.set("page", currentPage);
+    url.searchParams.set("totalPages", getTotalPages);
+    window.history.pushState({}, '', url);
+    
+ 
+}
 
-  // call the renderItems function whenever the currentPage or provisions array changes
 
+
+
+function goToPage(page) {
+currentPage = page;
+let url = API; 
+console.log()
+if(search.length !== 0 && currentPage!== getTotalPages() ){
+  const offset = (currentPage - 1) * itemsPerPage;
+  url += `?offset=${offset}&limit=${itemsPerPage}`;
+
+fetch(url)
+  .then(response => response)
+  .then(data => {
+    search = data;
+  })
+  .catch(error => {
+    console.error('Error fetching Provisions-fo-the-year-2014:', error);
+  })
+  .finally(() => {
+    updateUrl();
+  });
+}
+}
+
+
+
+let currentPage = 1;
+const itemsPerPage = 10;
+
+const pageSize = 10;
+  
+
+  let datos = "";
   let provisions = [];
 
   async function loadProvisions() {
@@ -83,16 +103,18 @@
     const res = await fetch(API + "/loadInitialData", {
       method: "GET",
     });
+
     const status = await res.status;
     resultStatus = status;
     if (status == 201) {
+      datos = true;
       getProvisions();
     }
 
+
     try {
-      const data = await res.json();
-      provisions = data;
-      result = JSON.stringify(data, null, 2);
+      provisions = await res.json();
+      search = provisions;
     } catch (error) {
       console.log(`Error parsing result: ${error}`);
     }
@@ -114,85 +136,91 @@
     section_number: "",
     section: "",
     from: "",
-    to: "",
-    offset: "",
-    limit: "",
+    to: ""
   };
 
   // Función para obtener las provisions según el objeto de búsqueda y los parámetros de paginación
-  async function getProvisions() {
-    // Construye la URL para hacer la petición GET al backend
-    let url = API;
-    if (query.offset && query.limit)
-      url += `/?offset=${query.offset}&limit=${query.limit}`;
+  // Función para obtener las provisions según el objeto de búsqueda y los parámetros de paginación
+async function getProvisions() {
+  // Construye la URL para hacer la petición GET al backend
+  let url = API;
+  let params = '';
 
-    // Agrega los parámetros de búsqueda a la URL, si existen
-
-    if (query.from) {
-      url += `&from=${query.from}`;
+  // Agrega los parámetros de búsqueda a la URL, si existen
+  if (query.from) {
+    params += `&from=${query.from}`;
+  }
+  if (query.to) {
+    params += `&to=${query.to}`;
+  }
+  if (query.province) {
+    params += `&province=${query.province}`;
+  }
+  if (query.year) {
+    params += `&year=${query.year}`;
+  }
+  if (query.organization) {
+    params += `&organization=${query.organization}`;
+  }
+  if (query.disposal_type) {
+    params += `&disposal_type=${query.disposal_type}`;
+  }
+  if (query.disposal_number) {
+    params += `&disposal_number=${query.disposal_number}`;
+  }
+  if (query.disposal_number_over) {
+    params += `&disposal_number_over=${query.disposal_number_over}`;
+  }
+  if (query.disposal_number_below) {
+    params += `&disposal_number_below=${query.disposal_number_below}`;
+  }
+  if (query.number_of_the_bulletin) {
+    params += `&number_of_the_bulletin=${query.number_of_the_bulletin}`;
+  }
+  if (query.number_of_the_bulletin_over) {
+    params += `&number_of_the_bulletin_over=${query.number_of_the_bulletin_over}`;
+  }
+  if (query.number_of_the_bulletin_below) {
+    params += `&number_of_the_bulletin_below=${query.number_of_the_bulletin_below}`;
+  }
+  if (query.date_of_disposition) {
+    params += `&date_of_disposition=${query.date_of_disposition}`;
+  }
+  if (query.section_number) {
+    params += `&section_number=${query.section_number}`;
+  }
+  if (query.section) {
+    params += `&section=${query.section}`;
+  }
+  if(datos){
+     // Agrega los parámetros de búsqueda a la URL solo si ya existe algún parámetro en ella
+    if (params) {
+      url += `?${params.substring(1)}`;
     }
-    if (query.to) {
-      url += `&to=${query.to}`;
-    }
-
-    if (query.province) {
-      url += `&province=${query.province}`;
-    }
-    if (query.year) {
-      url += `&year=${query.year}`;
-    }
-    if (query.organization) {
-      url += `&organization=${query.organization}`;
-    }
-    if (query.disposal_type) {
-      url += `&disposal_type=${query.disposal_type}`;
-    }
-    if (query.disposal_number) {
-      url += `&disposal_number=${query.disposal_number}`;
-    }
-    if (query.disposal_number_over) {
-      url += `&disposal_number_over=${query.disposal_number_over}`;
-    }
-    if (query.disposal_number_below) {
-      url += `&disposal_number_below=${query.disposal_number_below}`;
-    }
-    if (query.number_of_the_bulletin) {
-      url += `&number_of_the_bulletin=${query.number_of_the_bulletin}`;
-    }
-    if (query.number_of_the_bulletin_over) {
-      url += `&number_of_the_bulletin_over=${query.number_of_the_bulletin_over}`;
-    }
-    if (query.number_of_the_bulletin_below) {
-      url += `&number_of_the_bulletin_below=${query.number_of_the_bulletin_below}`;
-    }
-    if (query.date_of_disposition) {
-      url += `&date_of_disposition=${query.date_of_disposition}`;
-    }
-    if (query.section_number) {
-      url += `&section_number=${query.section_number}`;
-    }
-    if (query.section) {
-      url += `&section=${query.section}`;
-    }
-
-    
 
     // Realiza la petición GET al backend
     const res = await fetch(url, {
-      method: "GET",
+      method: 'GET',
     });
 
     try {
       const data = await res.json();
       provisions = data;
-      result = JSON.stringify(data, null, 2);
+      search = provisions;
     } catch (error) {
       console.log(`Error parsing result: ${error}`);
-      provisions = [];
     }
+
     const status = await res.status;
     resultStatus = status;
+    if (status != 404) {
+      datos = true;
+    }
+
   }
+ 
+}
+
 
   let newProvision = {
     province: "",
@@ -221,6 +249,8 @@
     let date_of_disposition1 = newProvision.date_of_disposition;
     let section1 = newProvision.section;
 
+    console.log(newProvision);
+
     const res = await fetch(API, {
       method: "POST",
       headers: {
@@ -235,14 +265,27 @@
         number_of_the_bulletin: number_of_the_bulletin1,
         date_of_disposition: date_of_disposition1,
         section_number: section_number1,
-        section: section1,
+        section: section1
       }),
     });
     const status = await res.status;
     resultStatus = status;
     if (res.ok) {
       showMessage("Recurso creado correctamente");
+      provisions.insert(JSON.stringify({
+        province: province1,
+        year: year1,
+        organization: organization1,
+        disposal_type: disposal_type1,
+        disposal_number: disposal_number1,
+        number_of_the_bulletin: number_of_the_bulletin1,
+        date_of_disposition: date_of_disposition1,
+        section_number: section_number1,
+        section: section1
+      }));
       getProvisions();
+      newProvision = [];
+
     } else {
       if (status == 400) {
         showMessage(`Hay que insertar datos o hay campos vacios (${status})`);
@@ -265,6 +308,7 @@
     resultStatus = status;
     if (status == 200) {
       open = false;
+      datos = "";
       getProvisions();
       message = "Recursos borrados correctamente";
     }
@@ -287,6 +331,7 @@
   }
 </script>
 
+<main>
 <h1>Provisiones</h1>
 <h2>Desarrollado por Ouael Boussiali</h2>
 <p>Provisions devueltos: {provisions.length}</p>
@@ -296,15 +341,16 @@
 <div class="cabecera">
   <Col md>
     <tr class="btn-head">
+      <td>
+        <Button outline color ="secondary" on:click={loadProvisions}>Cargar Provisiones</Button
+        ></td
+      >
       <td class="borrar"
         ><Button color="danger" on:click={toggle}>Borrar recursos</Button></td
       >
       <td class="volveratras"
         ><Button color="info" on:click={volverAtras}>Volver Atras</Button>
-      </td><td
-        ><Button outline on:click={loadProvisions}>Cargar Provisiones</Button
-        ></td
-      >
+      </td>
     </tr>
 
     <Modal isOpen={open} {toggle}>
@@ -444,7 +490,7 @@
           ><input
             type="text"
             placeholder="Número del Boletín"
-            bind:value={query.disposal_number}
+            bind:value={query.number_of_the_bulletin}
             style="color: #888;"
           /></td
         >
@@ -475,8 +521,8 @@
       </tr>
     </thead>
     <tbody>
-      <th class="btnBuscar">
-        <Button color="success" on:click={() => getProvisions()}>Buscar</Button>
+      <th class="container">
+        <Button class="btnBuscar" color="success" on:click={() => getProvisions()}>Buscar</Button>
       </th>
 
       <tr>
@@ -490,8 +536,9 @@
         <th>Número de sección</th>
         <th>Sección</th>
       </tr>
-      
-      {#each provisions as provision}
+
+      {#if datos}
+      {#each provisions.slice((currentPage-1)*itemsPerPage, currentPage*itemsPerPage) as provision}
         <tr>
           <td>{provision.province}</td>
           <td>{provision.year}</td>
@@ -525,10 +572,39 @@
         
         
       {/each}
+      {/if}
+
+      
       
     </tbody>
   </Table>
+  {#if search.length > 0 || currentPage >= 1}
+  <Pagination size="lg" ariaLabel="Page navigation example">
+    <PaginationItem disabled={currentPage === 1}>
+      <PaginationLink first on:click={() => goToPage(1)} href="#" />
+    </PaginationItem>
+    <PaginationItem disabled={currentPage === 1}>
+      <PaginationLink previous on:click={() => goToPage(currentPage-1)} href="#" />
+    </PaginationItem>
+    <PaginationItem active>
+      <PaginationLink on:click={() => goToPage(currentPage)} href="#">{currentPage}</PaginationLink>
+    </PaginationItem>
+    <PaginationItem disabled={currentPage === Math.ceil(search.length/itemsPerPage)}>
+      <PaginationLink next on:click={() => goToPage(currentPage+1)} href="#" />
+    </PaginationItem>
+    <PaginationItem disabled={currentPage === Math.ceil(search.length/itemsPerPage)}>
+      <PaginationLink last on:click={() => goToPage(Math.ceil(search.length/itemsPerPage))} href="#" />
+    </PaginationItem>
+  </Pagination>
+{/if}
+
+
+
+
+
 </div>
+
+
 
 <div>
   <h3>Crear una provision</h3>
@@ -649,13 +725,12 @@
     width: 100%;
   }
 
-  .btnBuscar {
+  .container {
     text-align: center;
-    display: inline-block;
-    margin: 0 10px;
-    position: relative;
-    right: -1000px;
-  }
+    background-color: #28a745;
+    color: #fff;
+    font-size: 1rem;
+    }
 
   .btn-head {
     position: relative;
@@ -668,3 +743,4 @@
     margin-left: auto;
   }
 </style>
+</main>

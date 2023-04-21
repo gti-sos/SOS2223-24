@@ -15,423 +15,870 @@ function oua2(app){
         res.redirect(API_DOC_PORTAL);
       });
 
+    
 
-
-     
-
-
-     
-        const datos_oua = [{
-        province: "Huelva",
-        year: 2014,
-        organization: "Consejería de La Presidencia",
-        disposal_type: "Resoluciones",
-        disposal_number: 7,
-        number_of_the_bulletin: 133,
-        date_of_disposition: "01-07-2014",
-        section_number: 3,
-        section: "Otras disposiciones",
-      },
-      {
-        province: "Málaga",
-        year: 2014,
-        organization: "Consejería de Igualdad, Salud y Políticas Sociales",
-        disposal_type: "Acuerdos",
-        disposal_number: 161,
-        number_of_the_bulletin: 140,
-        date_of_disposition: "01-07-2014",
-        section_number: 5,
-        section: "Anuncios",
-      },
-      {
-        province: "Almería",
-        year: 2014,
-        organization: "Juzgados de Primera Instancia",
-        disposal_type: "Edictos",
-        disposal_number: 10,
-        number_of_the_bulletin: 251,
-        date_of_disposition: "01-09-2014",
-        section_number: 4,
-        section: "Administración de Justicia",
-      },
-      {
-        province: "Granada",
-        year: 2014,
-        organization: "Consejería de Agricultura, Pesca y Desarrollo Rural",
-        disposal_type: "Resoluciones",
-        disposal_number: 113,
-        number_of_the_bulletin: 204,
-        date_of_disposition: "01-09-2014",
-        section_number: 5,
-        section: "Anuncios",
-      },
-      {
-        province: "Granada",
-        year: 2014,
-        organization: "Consejería de Agricultura, Pesca y Desarrollo Rural",
-        disposal_type: "Acuerdos",
-        disposal_number: 118,
-        number_of_the_bulletin: 204,
-        date_of_disposition: "01-09-2014",
-        section_number: 5,
-        section: "Anuncios",
-      },
-      {
-        "province": "Almería",
-        "year": 2014,
-        "organization": "Consejería de La Presidencia",
-        "disposal_type": "Resoluciones",
-        "disposal_number": 2,
-        "number_of_the_bulletin": 235,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 2,
-        "section": " Autoridades y personal"
-       },
-       {
-        "province": "Granada",
-        "year": 2014,
-        "organization": "Consejería de Economía, Innovación, Ciencia y Empleo",
-        "disposal_type": "Resoluciones",
-        "disposal_number": 16,
-        "number_of_the_bulletin": 234,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 3,
-        "section": " Otras disposiciones"
-       },
-       {
-        "province": "Cádiz",
-        "year": 2014,
-        "organization": "Consejería de Medio Ambiente y Ordenación del Territorio",
-        "disposal_type": "Resoluciones",
-        "disposal_number": 18,
-        "number_of_the_bulletin": 241,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 3,
-        "section": " Otras disposiciones"
-       },
-       {
-        "province": "Córdoba",
-        "year": 2014,
-        "organization": "Universidades",
-        "disposal_type": "Resoluciones",
-        "disposal_number": 22,
-        "number_of_the_bulletin": 241,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 3,
-        "section": " Otras disposiciones"
-       },
-       {
-        "province": "Córdoba",
-        "year": 2014,
-        "organization": "Universidades",
-        "disposal_type": "Resoluciones",
-        "disposal_number": 23,
-        "number_of_the_bulletin": 241,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 3,
-        "section": " Otras disposiciones"
-       },
-       {
-        "province": "Córdoba",
-        "year": 2014,
-        "organization": "Universidades",
-        "disposal_type": "Resoluciones",
-        "disposal_number": 24,
-        "number_of_the_bulletin": 241,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 3,
-        "section": " Otras disposiciones"
-       },
-       {
-        "province": "Granada",
-        "year": 2014,
-        "organization": "Consejería de Economía, Innovación, Ciencia y Empleo",
-        "disposal_type": "Anuncios",
-        "disposal_number": 38,
-        "number_of_the_bulletin": 244,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 5,
-        "section": " Anuncios"
-       },
-       {
-        "province": "Sevilla",
-        "year": 2014,
-        "organization": "Consejería de Economía, Innovación, Ciencia y Empleo",
-        "disposal_type": "Anuncios",
-        "disposal_number": 39,
-        "number_of_the_bulletin": 253,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 5,
-        "section": " Anuncios"
-       },
-       {
-        "province": "Málaga",
-        "year": 2014,
-        "organization": "Universidades",
-        "disposal_type": "Resoluciones",
-        "disposal_number": 40,
-        "number_of_the_bulletin": 251,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 5,
-        "section": " Anuncios"
-       },
-       {
-        "province": "Jaén",
-        "year": 2014,
-        "organization": "Consejería de La Presidencia",
-        "disposal_type": "Anuncios",
-        "disposal_number": 44,
-        "number_of_the_bulletin": 239,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 5,
-        "section": " Anuncios"
-       },
-       {
-        "province": "Cádiz",
-        "year": 2014,
-        "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
-        "disposal_type": "Acuerdos",
-        "disposal_number": 48,
-        "number_of_the_bulletin": 235,
-        "date_of_disposition": "25-11-2014",
-        "section_number": 5,
-        "section": " Anuncios"
-       },
-      {
-        province: "Almería",
-        year: 2014,
-        organization: "Universidades",
-        disposal_type: "Resoluciones",
-        disposal_number: 3,
-        number_of_the_bulletin: 203,
-        date_of_disposition: "01-10-2014",
-        section_number: 2,
-        section: "Autoridades y personal",
-      },
-      {
-        province: "Cádiz",
-        year: 2014,
-        organization: "Consejería de Fomento y Vivienda",
-        disposal_type: "Anuncios",
-        disposal_number: 85,
-        number_of_the_bulletin: 218,
-        date_of_disposition: "01-10-2014",
-        section_number: 5,
-        section: "Anuncios",
-      },
-      {
-        province: "Sevilla",
-        year: 2014,
-        organization: "Consejería de Igualdad, Salud y Políticas Sociales",
-        disposal_type: "Anuncios",
-        disposal_number: 92,
-        number_of_the_bulletin: 199,
-        date_of_disposition: "01-10-2014",
-        section_number: 5,
-        section: "Anuncios",
-      },
-      {
-          province: "Huelva",
-          year: 2014,
-          organization: "Universidades",
-          disposal_type: "Resoluciones",
-          disposal_number: 9,
-          number_of_the_bulletin: 241,
-          date_of_disposition: "01-12-2014",
-          section_number: 2,
-          section: "Autoridades y personal"
-        },
-        {
-          province: "Málaga",
-          year: 2014,
-          organization: "Consejería de Educación, Cultura y Deporte",
-          disposal_type: "Órdenes",
-          disposal_number: 17,
-          number_of_the_bulletin: 252,
-          date_of_disposition: "01-12-2014",
-          section_number: 3,
-          section: "Otras disposiciones"
-        },
-
-        {
-          province: "Sevilla",
-          year: 2012,
-          organization: "Consejería de Educación, Cultura y Deporte",
-          disposal_type: "Órdenes",
-          disposal_number: 5,
-          number_of_the_bulletin: 252,
-          date_of_disposition: "01-12-2012",
-          section_number: 3,
-          section: "Otras disposiciones"
-        },
-        {
-         "province": "Granada",
-         "year": 2014,
-         "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
-         "disposal_type": "Anuncios",
-         "disposal_number": 50,
-         "number_of_the_bulletin": 235,
-         "date_of_disposition": "25-11-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Granada",
-         "year": 2014,
-         "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
-         "disposal_type": "Anuncios",
-         "disposal_number": 51,
-         "number_of_the_bulletin": 235,
-         "date_of_disposition": "25-11-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Granada",
-         "year": 2014,
-         "organization": "Consejería de Fomento y Vivienda",
-         "disposal_type": "Anuncios",
-         "disposal_number": 72,
-         "number_of_the_bulletin": 241,
-         "date_of_disposition": "25-11-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Cádiz",
-         "year": 2014,
-         "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
-         "disposal_type": "Resoluciones",
-         "disposal_number": 80,
-         "number_of_the_bulletin": 243,
-         "date_of_disposition": "25-11-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Málaga",
-         "year": 2014,
-         "organization": "Consejería de Fomento y Vivienda",
-         "disposal_type": "Anuncios",
-         "disposal_number": 149,
-         "number_of_the_bulletin": 238,
-         "date_of_disposition": "25-11-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Huelva",
-         "year": 2014,
-         "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
-         "disposal_type": "Anuncios",
-         "disposal_number": 138,
-         "number_of_the_bulletin": 51,
-         "date_of_disposition": "26-02-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Jaén",
-         "year": 2014,
-         "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
-         "disposal_type": "Acuerdos",
-         "disposal_number": 76,
-         "number_of_the_bulletin": 62,
-         "date_of_disposition": "26-03-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Almería",
-         "year": 2014,
-         "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
-         "disposal_type": "Resoluciones",
-         "disposal_number": 118,
-         "number_of_the_bulletin": 118,
-         "date_of_disposition": "26-03-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Cádiz",
-         "year": 2014,
-         "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
-         "disposal_type": "Anuncios",
-         "disposal_number": 95,
-         "number_of_the_bulletin": 111,
-         "date_of_disposition": "26-05-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Córdoba",
-         "year": 2014,
-         "organization": "Empresas Públicas y Asimiladas",
-         "disposal_type": "Anuncios",
-         "disposal_number": 77,
-         "number_of_the_bulletin": 202,
-         "date_of_disposition": "26-06-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Cádiz",
-         "year": 2014,
-         "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
-         "disposal_type": "Acuerdos",
-         "disposal_number": 114,
-         "number_of_the_bulletin": 195,
-         "date_of_disposition": "26-09-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        },
-        {
-         "province": "Sevilla",
-         "year": 2014,
-         "organization": "Universidades",
-         "disposal_type": "Resoluciones",
-         "disposal_number": 4,
-         "number_of_the_bulletin": 239,
-         "date_of_disposition": "26-11-2014",
-         "section_number": 2,
-         "section": " Autoridades y personal"
-        },
-        {
-         "province": "Huelva",
-         "year": 2014,
-         "organization": "Consejería de Educación, Cultura y Deporte",
-         "disposal_type": "Resoluciones",
-         "disposal_number": 13,
-         "number_of_the_bulletin": 239,
-         "date_of_disposition": "26-11-2014",
-         "section_number": 3,
-         "section": " Otras disposiciones"
-        },
-        {
-         "province": "Córdoba",
-         "year": 2014,
-         "organization": "Consejería de Educación, Cultura y Deporte",
-         "disposal_type": "Resoluciones",
-         "disposal_number": 17,
-         "number_of_the_bulletin": 235,
-         "date_of_disposition": "26-11-2014",
-         "section_number": 3,
-         "section": " Otras disposiciones"
-        },
-        {
-         "province": "Córdoba",
-         "year": 2014,
-         "organization": "Consejería de La Presidencia",
-         "disposal_type": "Resoluciones",
-         "disposal_number": 29,
-         "number_of_the_bulletin": 235,
-         "date_of_disposition": "26-11-2014",
-         "section_number": 5,
-         "section": " Anuncios"
-        }];
-        //db.remove({}, { multi: true }, (err, numRemoved) => {});
-        db.insert(datos_oua);
-              
+      app.get(rutaoua + "/loadInitialData", (req, res) => {
+        db.find({}, function (err, docs) {
+          if (docs.length === 0) {
+            db.insert([
+                {
+                    "province": "Huelva",
+                    "year": 2014,
+                    "organization": "Consejería de La Presidencia",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 7,
+                    "number_of_the_bulletin": 133,
+                    "date_of_disposition": "01-07-2014",
+                    "section_number": 3,
+                    "section": " Otras disposiciones"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Acuerdos",
+                    "disposal_number": 161,
+                    "number_of_the_bulletin": 140,
+                    "date_of_disposition": "01-07-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Juzgados de Primera Instancia",
+                    "disposal_type": "Edictos",
+                    "disposal_number": 10,
+                    "number_of_the_bulletin": 251,
+                    "date_of_disposition": "01-09-2014",
+                    "section_number": 4,
+                    "section": " Administración de Justicia"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 113,
+                    "number_of_the_bulletin": 204,
+                    "date_of_disposition": "01-09-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Acuerdos",
+                    "disposal_number": 118,
+                    "number_of_the_bulletin": 204,
+                    "date_of_disposition": "01-09-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Universidades",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 3,
+                    "number_of_the_bulletin": 203,
+                    "date_of_disposition": "01-10-2014",
+                    "section_number": 2,
+                    "section": " Autoridades y personal"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Consejería de Fomento y Vivienda",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 85,
+                    "number_of_the_bulletin": 218,
+                    "date_of_disposition": "01-10-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Sevilla",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 92,
+                    "number_of_the_bulletin": 199,
+                    "date_of_disposition": "01-10-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Huelva",
+                    "year": 2014,
+                    "organization": "Universidades",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 9,
+                    "number_of_the_bulletin": 241,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 2,
+                    "section": " Autoridades y personal"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Educación, Cultura y Deporte",
+                    "disposal_type": "Órdenes",
+                    "disposal_number": 17,
+                    "number_of_the_bulletin": 252,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 3,
+                    "section": " Otras disposiciones"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Juzgados de Primera Instancia",
+                    "disposal_type": "Edictos",
+                    "disposal_number": 19,
+                    "number_of_the_bulletin": 246,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 4,
+                    "section": " Administración de Justicia"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Tribunal Superior de Justicia de Andalucía",
+                    "disposal_type": "Edictos",
+                    "disposal_number": 20,
+                    "number_of_the_bulletin": 254,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 4,
+                    "section": " Administración de Justicia"
+                   },
+                   {
+                    "province": "Sevilla",
+                    "year": 2014,
+                    "organization": "Consejería de Hacienda y Administración Pública",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 23,
+                    "number_of_the_bulletin": 248,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Universidades",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 39,
+                    "number_of_the_bulletin": 252,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Universidades",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 41,
+                    "number_of_the_bulletin": 251,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 42,
+                    "number_of_the_bulletin": 254,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Educación, Cultura y Deporte",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 56,
+                    "number_of_the_bulletin": 244,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 58,
+                    "number_of_the_bulletin": 254,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Consejería de Fomento y Vivienda",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 61,
+                    "number_of_the_bulletin": 252,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Economía, Innovación, Ciencia y Empleo",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 68,
+                    "number_of_the_bulletin": 247,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Acuerdos",
+                    "disposal_number": 70,
+                    "number_of_the_bulletin": 251,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 78,
+                    "number_of_the_bulletin": 239,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 79,
+                    "number_of_the_bulletin": 239,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Consejería de Economía, Innovación, Ciencia y Empleo",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 81,
+                    "number_of_the_bulletin": 247,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 81,
+                    "number_of_the_bulletin": 239,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 82,
+                    "number_of_the_bulletin": 239,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Jaén",
+                    "year": 2014,
+                    "organization": "Consejería de Hacienda y Administración Pública",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 84,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Economía, Innovación, Ciencia y Empleo",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 104,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Economía, Innovación, Ciencia y Empleo",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 105,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 108,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Huelva",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 109,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Acuerdos",
+                    "disposal_number": 120,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 125,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 126,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 127,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 130,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 131,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Jaén",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 132,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Fomento y Vivienda",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 151,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 159,
+                    "number_of_the_bulletin": 238,
+                    "date_of_disposition": "01-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Ayuntamientos",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 105,
+                    "number_of_the_bulletin": 12,
+                    "date_of_disposition": "02-01-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Ayuntamientos",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 106,
+                    "number_of_the_bulletin": 12,
+                    "date_of_disposition": "02-01-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Juzgados de Primera Instancia",
+                    "disposal_type": "Edictos",
+                    "disposal_number": 22,
+                    "number_of_the_bulletin": 242,
+                    "date_of_disposition": "02-06-2014",
+                    "section_number": 4,
+                    "section": " Administración de Justicia"
+                   },
+                   {
+                    "province": "Jaén",
+                    "year": 2014,
+                    "organization": "Consejería de Hacienda y Administración Pública",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 106,
+                    "number_of_the_bulletin": 140,
+                    "date_of_disposition": "02-07-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 120,
+                    "number_of_the_bulletin": 151,
+                    "date_of_disposition": "02-07-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Consejería de Educación, Cultura y Deporte",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 5,
+                    "number_of_the_bulletin": 175,
+                    "date_of_disposition": "02-09-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Jaén",
+                    "year": 2014,
+                    "organization": "Universidades",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 4,
+                    "number_of_the_bulletin": 206,
+                    "date_of_disposition": "02-10-2014",
+                    "section_number": 2,
+                    "section": " Autoridades y personal"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Consejería de Economía, Innovación, Ciencia y Empleo",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 12,
+                    "number_of_the_bulletin": 199,
+                    "date_of_disposition": "02-10-2014",
+                    "section_number": 3,
+                    "section": " Otras disposiciones"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Juzgados de Primera Instancia",
+                    "disposal_type": "Edictos",
+                    "disposal_number": 33,
+                    "number_of_the_bulletin": 207,
+                    "date_of_disposition": "02-10-2014",
+                    "section_number": 4,
+                    "section": " Administración de Justicia"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Consejería de Fomento y Vivienda",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 86,
+                    "number_of_the_bulletin": 218,
+                    "date_of_disposition": "02-10-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Administración Local y Relaciones Institucionales",
+                    "disposal_type": "Decretos",
+                    "disposal_number": 1,
+                    "number_of_the_bulletin": 247,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 1,
+                    "section": " Disposiciones generales"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Administración Local y Relaciones Institucionales",
+                    "disposal_type": "Decretos",
+                    "disposal_number": 2,
+                    "number_of_the_bulletin": 247,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 1,
+                    "section": " Disposiciones generales"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Hacienda y Administración Pública",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 5,
+                    "number_of_the_bulletin": 248,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Juzgados de Primera Instancia",
+                    "disposal_type": "Edictos",
+                    "disposal_number": 11,
+                    "number_of_the_bulletin": 244,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 4,
+                    "section": " Administración de Justicia"
+                   },
+                   {
+                    "province": "Sevilla",
+                    "year": 2014,
+                    "organization": "Juzgados de lo Social",
+                    "disposal_type": "Edictos",
+                    "disposal_number": 31,
+                    "number_of_the_bulletin": 246,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 4,
+                    "section": " Administración de Justicia"
+                   },
+                   {
+                    "province": "Sevilla",
+                    "year": 2014,
+                    "organization": "Juzgados de lo Social",
+                    "disposal_type": "Edictos",
+                    "disposal_number": 32,
+                    "number_of_the_bulletin": 246,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 4,
+                    "section": " Administración de Justicia"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de La Presidencia",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 34,
+                    "number_of_the_bulletin": 240,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Acuerdos",
+                    "disposal_number": 46,
+                    "number_of_the_bulletin": 240,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Jaén",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Acuerdos",
+                    "disposal_number": 54,
+                    "number_of_the_bulletin": 239,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 60,
+                    "number_of_the_bulletin": 239,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 86,
+                    "number_of_the_bulletin": 239,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Ayuntamientos",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 139,
+                    "number_of_the_bulletin": 247,
+                    "date_of_disposition": "02-12-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 107,
+                    "number_of_the_bulletin": 47,
+                    "date_of_disposition": "03-01-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Acuerdos",
+                    "disposal_number": 145,
+                    "number_of_the_bulletin": 51,
+                    "date_of_disposition": "03-03-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 63,
+                    "number_of_the_bulletin": 249,
+                    "date_of_disposition": "03-04-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Málaga",
+                    "year": 2014,
+                    "organization": "Consejería de Medio Ambiente",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 91,
+                    "number_of_the_bulletin": 242,
+                    "date_of_disposition": "03-05-2011",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Fomento y Vivienda",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 105,
+                    "number_of_the_bulletin": 109,
+                    "date_of_disposition": "03-06-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Granada",
+                    "year": 2014,
+                    "organization": "Consejería de Fomento y Vivienda",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 107,
+                    "number_of_the_bulletin": 109,
+                    "date_of_disposition": "03-06-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 113,
+                    "number_of_the_bulletin": 109,
+                    "date_of_disposition": "03-06-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Consejería de Fomento y Vivienda",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 111,
+                    "number_of_the_bulletin": 190,
+                    "date_of_disposition": "03-09-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Almería",
+                    "year": 2014,
+                    "organization": "Otras entidades públicas",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 142,
+                    "number_of_the_bulletin": 190,
+                    "date_of_disposition": "03-09-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Jaén",
+                    "year": 2014,
+                    "organization": "Consejería de La Presidencia",
+                    "disposal_type": "Resoluciones",
+                    "disposal_number": 25,
+                    "number_of_the_bulletin": 213,
+                    "date_of_disposition": "03-10-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Huelva",
+                    "year": 2014,
+                    "organization": "Consejería de Agricultura, Pesca y Desarrollo Rural",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 55,
+                    "number_of_the_bulletin": 237,
+                    "date_of_disposition": "03-10-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 85,
+                    "number_of_the_bulletin": 199,
+                    "date_of_disposition": "03-10-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 86,
+                    "number_of_the_bulletin": 199,
+                    "date_of_disposition": "03-10-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Cádiz",
+                    "year": 2014,
+                    "organization": "Consejería de Fomento y Vivienda",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 87,
+                    "number_of_the_bulletin": 218,
+                    "date_of_disposition": "03-10-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   },
+                   {
+                    "province": "Córdoba",
+                    "year": 2014,
+                    "organization": "Consejería de Igualdad, Salud y Políticas Sociales",
+                    "disposal_type": "Anuncios",
+                    "disposal_number": 87,
+                    "number_of_the_bulletin": 199,
+                    "date_of_disposition": "03-10-2014",
+                    "section_number": 5,
+                    "section": " Anuncios"
+                   }  
+            ], function (err, newDocs) {
+              res.status(201).json('Se han creado 10 datos');
+              console.log("Se han creado 10 datos");
+            });
+          } else {
+            res.status(200).json('Ya existen datos' );
+            console.log("Ya existen datos");
+          }
+        });
+        console.log("New GET to /provisions-for-the-year-2014/loadInitialData");
+      });
 
               
 
@@ -606,11 +1053,11 @@ function oua2(app){
 
     // POST rutaoua
     app.post(rutaoua, (req, res) => {
-        console.log(req.body);
+        console.log("POST Received from frontend:\n"+JSON.stringify(req.body,null,2));
         let newReq = req.body;
         if (!req.body || !newReq.hasOwnProperty('province') || !newReq.hasOwnProperty('year') || 
         !newReq.hasOwnProperty('organization') || !newReq.hasOwnProperty('disposal_type') || 
-        !newReq.hasOwnProperty('disposal_number') || !newReq.hasOwnProperty('number_of_the_Bulletin') ||
+        !newReq.hasOwnProperty('disposal_number') || !newReq.hasOwnProperty('number_of_the_bulletin') ||
         !newReq.hasOwnProperty('date_of_disposition') || !newReq.hasOwnProperty('section_number') ||
         !newReq.hasOwnProperty('section')) {
             res.status(400).json({ message: 'Verifique que ha insertado todos los campos' });
@@ -694,7 +1141,7 @@ function oua2(app){
             } else {
                 existe.organization = req.body.organization || existe.organization;
                 existe.disposal_type = req.body.disposal_type || existe.disposal_type;
-                existe.number_of_the_Bulletin = req.body.number_of_the_Bulletin || existe.number_of_the_Bulletin;
+                existe.number_of_the_Bulletin = Number(req.body.number_of_the_Bulletin) || existe.number_of_the_Bulletin;
                 existe.date_of_disposition = req.body.date_of_disposition || existe.date_of_disposition;
                 existe.section_number = Number(req.body.section_number) || existe.section_number;
                 existe.section = req.body.section || existe.section;
