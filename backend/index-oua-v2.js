@@ -939,8 +939,8 @@ function oua2(app){
         if (req.query.disposal_number) {
             query.disposal_number = Number(req.query.disposal_number);
         }
-        if (req.query.number_of_the_Bulletin) {
-            query.number_of_the_Bulletin = Number(req.query.number_of_the_Bulletin);
+        if (req.query.number_of_the_bulletin) {
+            query.number_of_the_bulletin = Number(req.query.number_of_the_bulletin);
         }
         if (req.query.date_of_disposition) {
             query.date_of_disposition = req.query.date_of_disposition;
@@ -970,12 +970,12 @@ function oua2(app){
             query.year = { $lte: Number(req.query.year_below) };
         }
 
-        //number_of_the_Bulletin
-        if (req.query.number_of_the_Bulletin_over) {
-            query.number_of_the_Bulletin = { $gte: Number(req.query.number_of_the_Bulletin_over) };
+        //number_of_the_bulletin
+        if (req.query.number_of_the_bulletin_over) {
+            query.number_of_the_bulletin = { $gte: Number(req.query.number_of_the_bulletin_over) };
         }
-        if (req.query.number_of_the_Bulletin_below) {
-            query.number_of_the_Bulletin = { $lte: Number(req.query.number_of_the_Bulletin_below) };
+        if (req.query.number_of_the_bulletin_below) {
+            query.number_of_the_bulletin = { $lte: Number(req.query.number_of_the_bulletin_below) };
         }
 
         //GET and GET ?from&to and GET ?year
@@ -1065,13 +1065,13 @@ function oua2(app){
             const newData = req.body;
             db.find({
                 province: newData.province,
-                year: newData.year,
+                year: Number(newData.year),
                 organization: newData.organization,
                 disposal_type: newData.disposal_type,
-                disposal_number: newData.disposal_number,
-                number_of_the_Bulletin: newData.number_of_the_Bulletin,
+                disposal_number: Number(newData.disposal_number),
+                number_of_the_bulletin: Number(newData.number_of_the_bulletin),
                 date_of_disposition: newData.date_of_disposition,
-                section_number: newData.section_number,
+                section_number: Number(newData.section_number),
                 section: newData.section
             }, (err, docs) => {
                 if (docs.length > 0) {
@@ -1141,7 +1141,7 @@ function oua2(app){
             } else {
                 existe.organization = req.body.organization || existe.organization;
                 existe.disposal_type = req.body.disposal_type || existe.disposal_type;
-                existe.number_of_the_Bulletin = Number(req.body.number_of_the_Bulletin) || existe.number_of_the_Bulletin;
+                existe.number_of_the_bulletin = Number(req.body.number_of_the_bulletin) || existe.number_of_the_bulletin;
                 existe.date_of_disposition = req.body.date_of_disposition || existe.date_of_disposition;
                 existe.section_number = Number(req.body.section_number) || existe.section_number;
                 existe.section = req.body.section || existe.section;

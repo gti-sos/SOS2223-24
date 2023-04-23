@@ -207,8 +207,8 @@ function oua(app){
         if (req.query.disposal_number) {
             query.disposal_number = Number(req.query.disposal_number);
         }
-        if (req.query.number_of_the_Bulletin) {
-            query.number_of_the_Bulletin = Number(req.query.number_of_the_Bulletin);
+        if (req.query.number_of_the_bulletin) {
+            query.number_of_the_bulletin = Number(req.query.number_of_the_bulletin);
         }
         if (req.query.date_of_disposition) {
             query.date_of_disposition = req.query.date_of_disposition;
@@ -238,12 +238,12 @@ function oua(app){
             query.year = { $lte: Number(req.query.year_below) };
         }
 
-        //number_of_the_Bulletin
-        if (req.query.number_of_the_Bulletin_over) {
-            query.number_of_the_Bulletin = { $gte: Number(req.query.number_of_the_Bulletin_over) };
+        //number_of_the_bulletin
+        if (req.query.number_of_the_bulletin_over) {
+            query.number_of_the_bulletin = { $gte: Number(req.query.number_of_the_bulletin_over) };
         }
-        if (req.query.number_of_the_Bulletin_below) {
-            query.number_of_the_Bulletin = { $lte: Number(req.query.number_of_the_Bulletin_below) };
+        if (req.query.number_of_the_bulletin_below) {
+            query.number_of_the_bulletin = { $lte: Number(req.query.number_of_the_bulletin_below) };
         }
 
         //GET and GET ?from&to and GET ?year
@@ -325,7 +325,7 @@ function oua(app){
         let newReq = req.body;
         if (!req.body || !newReq.hasOwnProperty('province') || !newReq.hasOwnProperty('year') || 
         !newReq.hasOwnProperty('organization') || !newReq.hasOwnProperty('disposal_type') || 
-        !newReq.hasOwnProperty('disposal_number') || !newReq.hasOwnProperty('number_of_the_Bulletin') ||
+        !newReq.hasOwnProperty('disposal_number') || !newReq.hasOwnProperty('number_of_the_bulletin') ||
         !newReq.hasOwnProperty('date_of_disposition') || !newReq.hasOwnProperty('section_number') ||
         !newReq.hasOwnProperty('section')) {
             res.status(400).json({ message: 'Verifique que ha insertado todos los campos' });
@@ -337,7 +337,7 @@ function oua(app){
                 organization: newData.organization,
                 disposal_type: newData.disposal_type,
                 disposal_number: newData.disposal_number,
-                number_of_the_Bulletin: newData.number_of_the_Bulletin,
+                number_of_the_bulletin: newData.number_of_the_bulletin,
                 date_of_disposition: newData.date_of_disposition,
                 section_number: newData.section_number,
                 section: newData.section
@@ -409,7 +409,7 @@ function oua(app){
             } else {
                 existe.organization = req.body.organization || existe.organization;
                 existe.disposal_type = req.body.disposal_type || existe.disposal_type;
-                existe.number_of_the_Bulletin = req.body.number_of_the_Bulletin || existe.number_of_the_Bulletin;
+                existe.number_of_the_bulletin = req.body.number_of_the_bulletin || existe.number_of_the_bulletin;
                 existe.date_of_disposition = req.body.date_of_disposition || existe.date_of_disposition;
                 existe.section_number = Number(req.body.section_number) || existe.section_number;
                 existe.section = req.body.section || existe.section;
