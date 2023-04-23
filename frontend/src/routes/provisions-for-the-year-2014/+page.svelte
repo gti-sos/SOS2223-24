@@ -276,7 +276,7 @@ async function getProvisions() {
     resultStatus = status;
     if (res.ok) {
       showMessage("Recurso creado correctamente");
-      provisions.push(JSON.stringify({
+      provisions.insert(JSON.stringify({
         province: province1,
         year: year1,
         organization: organization1,
@@ -582,7 +582,7 @@ async function getProvisions() {
       
     </tbody>
   </Table>
-  {#if search.length > 0 || currentPage >= 1}
+  {#if provisions.length > 0}
   <Pagination size="lg" ariaLabel="Page navigation example">
     <PaginationItem disabled={currentPage === 1}>
       <PaginationLink first on:click={() => goToPage(1)} href="#" />
@@ -600,6 +600,7 @@ async function getProvisions() {
       <PaginationLink last on:click={() => goToPage(Math.ceil(provisions.length/itemsPerPage))} href="#" />
     </PaginationItem>
   </Pagination>
+
 {/if}
 
 
@@ -702,7 +703,13 @@ async function getProvisions() {
   </Table>
 </div>
 
-
+{#if resultStatus != ""}
+  <p>Result:</p>
+  <pre>
+            {resultStatus}
+            {result}
+        </pre>
+{/if}
 
 <style>
   h1 {
