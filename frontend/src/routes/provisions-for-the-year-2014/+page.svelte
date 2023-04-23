@@ -68,7 +68,11 @@ function goToPage(page) {
 currentPage = page;
 let url = API; 
 console.log()
-if(search.length !== 0 && currentPage!== getTotalPages() ){
+if(currentPage > getTotalPages) {
+  showMessage('Es la última página');
+  goToPage(getTotalPages());
+}
+else if(search.length !== 0 && currentPage<=getTotalPages() ){
   const offset = (currentPage - 1) * itemsPerPage;
   url += `?offset=${offset}&limit=${itemsPerPage}`;
 
@@ -106,7 +110,7 @@ const pageSize = 10;
 
     const status = await res.status;
     resultStatus = status;
-    if (status == 201) {
+    if (status === 201 || status === 200) {
       datos = true;
       getProvisions();
     }
@@ -272,7 +276,7 @@ async function getProvisions() {
     resultStatus = status;
     if (res.ok) {
       showMessage("Recurso creado correctamente");
-      provisions.insert(JSON.stringify({
+      provisions.push(JSON.stringify({
         province: province1,
         year: year1,
         organization: organization1,
@@ -589,11 +593,11 @@ async function getProvisions() {
     <PaginationItem active>
       <PaginationLink on:click={() => goToPage(currentPage)} href="#">{currentPage}</PaginationLink>
     </PaginationItem>
-    <PaginationItem disabled={currentPage === Math.ceil(search.length/itemsPerPage)}>
+    <PaginationItem disabled={currentPage === Math.ceil(provisions.length/itemsPerPage)}>
       <PaginationLink next on:click={() => goToPage(currentPage+1)} href="#" />
     </PaginationItem>
-    <PaginationItem disabled={currentPage === Math.ceil(search.length/itemsPerPage)}>
-      <PaginationLink last on:click={() => goToPage(Math.ceil(search.length/itemsPerPage))} href="#" />
+    <PaginationItem disabled={currentPage === Math.ceil(provisions.length/itemsPerPage)}>
+      <PaginationLink last on:click={() => goToPage(Math.ceil(provisions.length/itemsPerPage))} href="#" />
     </PaginationItem>
   </Pagination>
 {/if}
@@ -698,13 +702,7 @@ async function getProvisions() {
   </Table>
 </div>
 
-{#if resultStatus != ""}
-  <p>Result:</p>
-  <pre>
-            {resultStatus}
-            {result}
-        </pre>
-{/if}
+
 
 <style>
   h1 {
