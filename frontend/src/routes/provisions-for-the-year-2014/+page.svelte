@@ -52,17 +52,6 @@
 return Math.ceil(provisions.length / itemsPerPage);
 }
 
-function updateUrl() {
-    const url = new URL(window.location);
-    url.searchParams.set("page", currentPage);
-    url.searchParams.set("totalPages", getTotalPages);
-    window.history.pushState({}, '', url);
-    
- 
-}
-
-
-
 
 function goToPage(page) {
 currentPage = page;
@@ -84,9 +73,7 @@ fetch(url)
   .catch(error => {
     console.error('Error fetching Provisions-fo-the-year-2014:', error);
   })
-  .finally(() => {
-    updateUrl();
-  });
+
 }
 }
 
@@ -276,7 +263,7 @@ async function getProvisions() {
     resultStatus = status;
     if (res.ok) {
       showMessage("Recurso creado correctamente");
-      provisions.insert(JSON.stringify({
+      provisions.push(JSON.stringify({
         province: province1,
         year: year1,
         organization: organization1,
@@ -334,8 +321,8 @@ async function getProvisions() {
     }
   }
 </script>
-
-<main>
+<body>
+  
 <h1>Provisiones</h1>
 <h2>Desarrollado por Ouael Boussiali</h2>
 <p>Provisions devueltos: {provisions.length}</p>
@@ -357,8 +344,8 @@ async function getProvisions() {
       </td>
     </tr>
 
-    <Modal isOpen={open} {toggle}>
-      <ModalHeader {toggle}>Procede a borrar todos los datos</ModalHeader>
+    <Modal  isOpen={open} {toggle}>
+      <ModalHeader >Procede a borrar todos los datos</ModalHeader>
       <ModalBody>¿Estás seguro?</ModalBody>
       <ModalFooter>
         <Button color="secondary" on:click={deleteProvisions}>Confirmar</Button>
@@ -371,7 +358,7 @@ async function getProvisions() {
 <div class="tablas">
   <h3>Buscar y Filtrar por propiedades</h3>
 
-  <Table bordered>
+  <Table class="tabla" bordered>
     <thead>
       <tr>
         <th>From</th>
@@ -383,7 +370,7 @@ async function getProvisions() {
             type="number"
             placeholder="Desde el año: "
             bind:value={query.from}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -391,7 +378,7 @@ async function getProvisions() {
             type="number"
             placeholder="Hasta el año: "
             bind:value={query.to}
-            style="color: #888;"
+
           /></td
         >
       </tr>
@@ -409,7 +396,7 @@ async function getProvisions() {
             type="number"
             placeholder="Número de Disposición Mayor: "
             bind:value={query.disposal_number_over}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -417,7 +404,7 @@ async function getProvisions() {
             type="number"
             placeholder="Número de Disposición Menor: "
             bind:value={query.disposal_number_below}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -425,7 +412,7 @@ async function getProvisions() {
             type="number"
             placeholder="Número de Boletín Mayor"
             bind:value={query.number_of_the_bulletin_over}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -433,7 +420,7 @@ async function getProvisions() {
             type="number"
             placeholder="Número de Boletín Menor"
             bind:value={query.number_of_the_bulletin_below}
-            style="color: #888;"
+
           /></td
         >
       </tr>
@@ -455,7 +442,7 @@ async function getProvisions() {
             type="text"
             placeholder="Provincia"
             bind:value={query.province}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -463,7 +450,7 @@ async function getProvisions() {
             type="text"
             placeholder="Año"
             bind:value={query.year}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -471,7 +458,7 @@ async function getProvisions() {
             type="text"
             placeholder="Organización"
             bind:value={query.organization}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -479,7 +466,7 @@ async function getProvisions() {
             type="text"
             placeholder="Tipo de disposición"
             bind:value={query.disposal_type}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -487,7 +474,7 @@ async function getProvisions() {
             type="text"
             placeholder="Número de Disposición"
             bind:value={query.disposal_number}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -495,7 +482,7 @@ async function getProvisions() {
             type="text"
             placeholder="Número del Boletín"
             bind:value={query.number_of_the_bulletin}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -503,7 +490,7 @@ async function getProvisions() {
             type="text"
             placeholder="Fecha de disposición"
             bind:value={query.date_of_disposition}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -511,7 +498,7 @@ async function getProvisions() {
             type="text"
             placeholder="Número de sección"
             bind:value={query.section_number}
-            style="color: #888;"
+
           /></td
         >
         <td
@@ -519,15 +506,14 @@ async function getProvisions() {
             type="text"
             placeholder="Sección"
             bind:value={query.section}
-            style="color: #888;"
+
           /></td
         >
       </tr>
     </thead>
     <tbody>
-      <th class="container">
-        <Button class="btnBuscar" color="success" on:click={() => getProvisions()}>Buscar</Button>
-      </th>
+      
+      <Button class="btn-buscar" color="success" on:click={() => getProvisions()}>Buscar</Button>
 
       <tr>
         <th>Provincia</th>
@@ -633,63 +619,63 @@ async function getProvisions() {
           ><input
             placeholder="Provincia"
             bind:value={newProvision.province}
-            style="color: #888;"
+
           /></td
         >
         <td
           ><input
             placeholder="Año"
             bind:value={newProvision.year}
-            style="color: #888;"
+
           /></td
         >
         <td
           ><input
             placeholder="Organización"
             bind:value={newProvision.organization}
-            style="color: #888;"
+
           /></td
         >
         <td
           ><input
             placeholder="Tipo de disposición"
             bind:value={newProvision.disposal_type}
-            style="color: #888;"
+
           /></td
         >
         <td
           ><input
             placeholder="Número de Disposición"
             bind:value={newProvision.disposal_number}
-            style="color: #888;"
+
           /></td
         >
         <td
           ><input
             placeholder="Número del Boletín"
             bind:value={newProvision.number_of_the_bulletin}
-            style="color: #888;"
+
           /></td
         >
         <td
           ><input
             placeholder="Fecha de disposición"
             bind:value={newProvision.date_of_disposition}
-            style="color: #888;"
+
           /></td
         >
         <td
           ><input
             placeholder="Número de sección"
             bind:value={newProvision.section_number}
-            style="color: #888;"
+
           /></td
         >
         <td
           ><input
             placeholder="Sección"
             bind:value={newProvision.section}
-            style="color: #888;"
+
           /></td
         >
       </tr>
@@ -703,49 +689,117 @@ async function getProvisions() {
   </Table>
 </div>
 
-{#if resultStatus != ""}
-  <p>Result:</p>
-  <pre>
-            {resultStatus}
-            {result}
-        </pre>
-{/if}
+
+</body>
 
 <style>
-  h1 {
-    text-align: center;
-    color: blueviolet;
+  /* estilos generales */
+  body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+    padding: 0;
   }
 
-  h2 {
-    text-align: center;
+  h1,
+  h2,
+  h3 {
+    margin: 0;
   }
 
+  /* estilos para la cabecera */
   .cabecera {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    position: absolute;
-    right: -1000px;
-    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
-
-  .container {
-    text-align: center;
-    background-color: #28a745;
-    color: #fff;
-    font-size: 1rem;
-    }
 
   .btn-head {
-    position: relative;
-    left: 1270px;
+    display: flex;
+    justify-content: flex-start;
   }
 
-  h3 {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: auto;
+  .borrar {
+    margin-left: 10px;
   }
+
+  /* estilos para la tabla */
+  .tablas {
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+
+  
+
+
+  th,td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    text-align: center;
+    border-top: 1px solid #dee2e6;
+  }
+
+  th {
+    font-weight: bold;
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+  }
+
+  
+
+
+
+  h1 {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  .borrar {
+    text-align: center;
+    width: 33%;
+  }
+  .volveratras {
+    text-align: right;
+    width: 33%;
+  }
+  .messages {
+    margin-bottom: 30px;
+  }
+  .tablas {
+    margin-bottom: 50px;
+  }
+  th {
+    text-align: center;
+  }
+  td {
+    vertical-align: middle !important;
+  }
+
+  .btn-head {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn-buscar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 12px 24px;
+}
+  
+
 </style>
-</main>

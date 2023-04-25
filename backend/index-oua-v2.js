@@ -16,7 +16,59 @@ function oua2(app){
       });
 
     
+    app.get(rutaoua+"/data", async (req,res) => {
+    
+        console.log(`New GET to /data`);
+        let provincias = ['Almería', 'Cádiz', 'Córdoba', 'Granada', 'Huelva', 'Jaén', 'Málaga', 'Sevilla'];
+        var data = new Array();
+        
+        try {
+            // Esperar a que todas las consultas a la base de datos se completen
+            await Promise.all(provincias.map(provincia => {
+                return new Promise((resolve, reject) => {
+                    db.find({province: provincia}).exec(function (err, docs) {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            data.push({province : provincia, provisions_number : docs.length});
+                            resolve();
+                        }
+                    });
+                });
+            }));
+            res.json(data);
+    
+        } catch (err) {
+            // Manejar errores de consulta
+            res.status(500).json(err);
+        }
+    });
+    
+/*
 
+app.get(rutaoua+"/data", async (req,res) => {
+    console.log(`New GET to /data`);
+    let provincias = ['Almería', 'Cádiz', 'Córdoba', 'Granada', 'Huelva', 'Jaén', 'Málaga', 'Sevilla'];
+    var data = new Array();
+    
+    for (const provincia of provincias) {
+        try {
+            const docs = await db.find({ province: provincia }).exec();
+            data.push({ province: provincia, provisions_number: docs.length });
+        } catch (err) {
+            res.status(500).json(err);
+            return;
+        }
+    }
+    
+    try {
+        res.json(data);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+*/
       app.get(rutaoua + "/loadInitialData", (req, res) => {
         db.find({}, function (err, docs) {
           if (docs.length === 0) {
@@ -880,34 +932,7 @@ function oua2(app){
         console.log("New GET to /provisions-for-the-year-2014/loadInitialData");
       });
 
-              
-
-
-
-
-
-    //GET provincia + año + número de disposición
-    app.get(rutaoua + '/:province' + '/:year' + '/:disposal_number', (req, res) => {
-        const year = Number(req.params.year);
-        const province = req.params.province;
-        const disposal_number = Number(req.params.disposal_number);
     
-        db.findOne({ province: province, year: year, disposal_number: disposal_number }, (err, docs) => {
-            if (err) {
-                res.status(500).json( 'Error interno del servidor' );
-            } else if (docs) {
-                delete(docs._id);
-                res.status(200).json(docs);
-                
-                console.log(`Nuevo GET a ${rutaoua}/${province}/${year}/${disposal_number}`);
-            } else {
-                res.status(404).json(`No existe ningún recurso para la provincia: ${province} en el año: ${year} con el número de disposición: ${disposal_number}.` );
-            }
-        });
-    });
-    
- 
-
     //GET BASE, Paginating, Search, from&to
     app.get(rutaoua, (req, res) => {
         //paginating
@@ -1006,6 +1031,27 @@ function oua2(app){
             }
         });
     });
+
+
+        //GET provincia + año + número de disposición
+        app.get(rutaoua + '/:province' + '/:year' + '/:disposal_number', (req, res) => {
+            const year = Number(req.params.year);
+            const province = req.params.province;
+            const disposal_number = Number(req.params.disposal_number);
+        
+            db.findOne({ province: province, year: year, disposal_number: disposal_number }, (err, docs) => {
+                if (err) {
+                    res.status(500).json( 'Error interno del servidor' );
+                } else if (docs) {
+                    delete(docs._id);
+                    res.status(200).json(docs);
+                    
+                    console.log(`Nuevo GET a ${rutaoua}/${province}/${year}/${disposal_number}`);
+                } else {
+                    res.status(404).json(`No existe ningún recurso para la provincia: ${province} en el año: ${year} con el número de disposición: ${disposal_number}.` );
+                }
+            });
+        });
 
 
     //GET periodo concreto + provincia
@@ -1203,6 +1249,25 @@ function oua2(app){
         }
         });
     });
+
+    app.get(rutaoua+"/data", (request,response) => {
+        
+        console.log(`New GET to /data`);
+        
+        function getRandomInt(min,max){
+            return Math.floor(Math.random() *(max-min)+min);
+        }
+        function v(){return getRandomInt(1,100)};
+
+        var data = new Array();
+
+        for(var i=0; i<10;i++)
+            data.push(v());
+
+        response.json(data);
+
+    });
 }
+
 
 export {oua2};
