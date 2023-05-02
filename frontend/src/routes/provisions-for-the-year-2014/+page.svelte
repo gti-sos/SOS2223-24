@@ -36,12 +36,14 @@
   let open = false;
   const toggle = () => (open = !open);
   const toggleC = () => (showcreateform = !showcreateform);
+  const toggleS = () => (showsearchform = !showsearchform);
 
   let result = "";
   let resultStatus = "";
   let search = [];
   let showM, color,message ="";
   let showcreateform = false;
+  let showsearchform = false;
 
   function showMessage(mensaje, colorM) {
     showM = true;
@@ -150,6 +152,7 @@ const pageSize = 10;
   // Función para obtener las provisions según el objeto de búsqueda y los parámetros de paginación
   // Función para obtener las provisions según el objeto de búsqueda y los parámetros de paginación
 async function getProvisions() {
+  showsearchform = false;
   // Construye la URL para hacer la petición GET al backend
   let url = API;
   let params = '';
@@ -360,7 +363,7 @@ async function getProvisions() {
   {/if}
   </Alert>
 
-<div class="cabecera">
+<div class="d-flex justify-content-center">
     <Row>
       <Col sm = "4">
         <Button outline color ="secondary" style="width: 200px;" on:click={loadProvisions}>Cargar Provisiones</Button
@@ -385,141 +388,11 @@ async function getProvisions() {
 </div>
 
 <div class="tablas">
-  <h3>Buscar y Filtrar por propiedades</h3>
 
-
-  <Row>
-    <Col
-      >Desde el Año: <input
-        type="number"
-        placeholder="Desde el año: "
-        bind:value={query.from}
-
-      /></Col>
-    <Col
-      >Hata el Año: <input
-        type="number"
-        placeholder="Hasta el año: "
-        bind:value={query.to}
-
-      /></Col>
-  </Row>
-
-
-  <Row>
-    <Col>
-      Número de Disposición Mayor: <input
-        type="number"
-        placeholder="Número de Disposición Mayor: "
-        bind:value={query.disposal_number_over}
-
-      /></Col>
-    <Col>
-      Número de Disposición Menor: <input
-        type="number"
-        placeholder="Número de Disposición Menor: "
-        bind:value={query.disposal_number_below}
-
-      /></Col
-    >
-    <Col
-      >Número de Boletín Mayor: <input
-        type="number"
-        placeholder="Número de Boletín Mayor"
-        bind:value={query.number_of_Cole_bulletin_over}
-
-      /></Col
-    >
-    <Col
-      >Número de Boletín Menor: <input
-        type="number"
-        placeholder="Número de Boletín Menor"
-        bind:value={query.number_of_Cole_bulletin_below}
-
-      /></Col
-    >
-  </Row>
-
-
-  <Row>
-    <Col
-      >Provincia: <input
-        type="text"
-        placeholder="Provincia"
-        bind:value={query.province}
-
-      /></Col
-    >
-    <Col
-      >Año: <input
-        type="text"
-        placeholder="Año"
-        bind:value={query.year}
-
-      /></Col
-    >
-    <Col
-      >Organización: <input
-        type="text"
-        placeholder="Organización"
-        bind:value={query.organization}
-
-      /></Col
-    >
-    <Col
-      >Tipo de disposición<input
-        type="text"
-        placeholder="Tipo de disposición"
-        bind:value={query.disposal_type}
-
-      /></Col
-    >
-    <Col
-      >Número de Disposición: <input
-        type="text"
-        placeholder="Número de Disposición"
-        bind:value={query.disposal_number}
-
-      /></Col
-    >
-  </Row>
-
-
-  <Row>
-    <Col
-    >Número de Boletín: <input
-      type="text"
-      placeholder="Número del Boletín"
-      bind:value={query.number_of_Cole_bulletin}
-
-    /></Col
-  >
-  <Col
-    >Fecha de Disposición: <input
-      type="text"
-      placeholder="Fecha de disposición"
-      bind:value={query.date_of_disposition}
-
-    /></Col
-  >
-  <Col>Número de Sección: <input
-      type="text"
-      placeholder="Número de sección"
-      bind:value={query.section_number}
-
-    /></Col>
-  <Col>
-    Sección: <input
-      type="text"
-      placeholder="Sección"
-      bind:value={query.section}
-
-    /></Col>
-  </Row>
 
   <Row>
     <Col class="d-flex justify-content-center">
-      <Button style="width: 200px; margin-top: 10px;" color="success" on:click={() => getProvisions()}>Buscar</Button>
+      <Button style="width: 200px; margin-top: 10px;" color="success" on:click={() => toggleS()}>Filtrar Datos</Button>
     </Col>
   </Row>
 
@@ -527,8 +400,6 @@ async function getProvisions() {
   <Table class="tabla" responsive>
     <thead>
       <tr>
-        <th>#</th>
-
         <th>Provincia</th>
         <th>Año</th>
         <th>Organización</th>
@@ -546,7 +417,6 @@ async function getProvisions() {
       {#if datos}
       {#each provisions.slice((currentPage-1)*itemsPerPage, currentPage*itemsPerPage) as provision}
         <tr>
-          <th scope="row"></th>
           <td>{provision.province}</td>
           <td>{provision.year}</td>
           <td>{provision.organization}</td>
@@ -585,8 +455,8 @@ async function getProvisions() {
       
     </tbody>
   </Table>
-  {#if provisions.length > 0}
-  <Pagination size="lg" ariaLabel="Page navigation example">
+  {#if datos}
+  <Pagination class="d-flex justify-content-center" size="lg" ariaLabel="Page navigation example">
     <PaginationItem disabled={currentPage === 1}>
       <PaginationLink first on:click={() => goToPage(1)} href="#" />
     </PaginationItem>
@@ -603,69 +473,109 @@ async function getProvisions() {
       <PaginationLink last on:click={() => goToPage(Math.ceil(provisions.length/itemsPerPage))} href="#" />
     </PaginationItem>
   </Pagination>
-
 {/if}
-
 
 </div>
 <Row>
   <Col sm = "4"
-><Button color="info" style="width: 200px;" on:click={volverAtras}>Volver Atras</Button>
+><Button color="info" style="width: 200px; margin-bottom: 30px;" on:click={volverAtras}>Volver Atras</Button>
 </Col>
 </Row>
 
-
-
+<Modal  isOpen={showsearchform} {toggleS}>
+  <ModalHeader class="d-flex justify-content-center">Filtrar Datos</ModalHeader>
+  <ModalBody>
+    <Form>
+      <h4>Filtro por Periodo de Años</h4>
+      <FormGroup floating label="Desde el Año">
+        <Input bind:value={query.from}/>
+      </FormGroup>
+      <FormGroup floating label="Hasta el Año">
+        <Input bind:value={query.to}/>
+      </FormGroup>
+      <h4>Búsquedas Númericas</h4>
+      <FormGroup floating label="Número de Disposición Mayor">
+        <Input bind:value={query.disposal_number_over}/>
+      </FormGroup>
+      <FormGroup floating label="Número de Disposición Menor">
+        <Input bind:value={query.disposal_number_below}/>
+      </FormGroup>
+      <FormGroup floating label="Número de Boletín Mayor">
+        <Input bind:value={query.number_of_the_bulletin_over}/>
+      </FormGroup>
+      <FormGroup floating label="Número del Boletín Menor">
+        <Input bind:value={query.number_of_the_bulletin_below}/>
+      </FormGroup>
+      <h4>Filtro por Propiedades</h4>
+      <FormGroup floating label="Provincia">
+        <Input bind:value={query.province}/>
+      </FormGroup>
+      <FormGroup floating label="Año">
+        <Input bind:value={query.year}/>
+      </FormGroup>
+      <FormGroup floating label="Organización">
+        <Input bind:value={query.organization}/>
+      </FormGroup>
+      <FormGroup floating label="Tipo de Disposicón">
+        <Input bind:value={query.disposal_type}/>
+      </FormGroup>
+      <FormGroup floating label="Número de Disposición">
+        <Input bind:value={query.disposal_number}      />
+      </FormGroup>
+      <FormGroup floating label="Número del Boletín">
+        <Input bind:value={query.number_of_the_bulletin}/>
+      </FormGroup>
+      <FormGroup floating label="Fecha de Disposición">
+        <Input
+        bind:value={query.date_of_disposition}/>
+      </FormGroup>
+      <FormGroup floating label="Número de Sección">
+        <Input bind:value={query.section_number}/>
+      </FormGroup>
+      <FormGroup floating label="Sección">
+        <Input bind:value={query.section}/>
+      </FormGroup>
+      
+    </Form>
+  </ModalBody>
+  <ModalFooter>
+    <Button color="success" on:click={getProvisions}>Buscar</Button>
+    <Button color="secondary" on:click={toggleS}>Cancelar</Button>
+  </ModalFooter>
+</Modal>
 
 <Modal  isOpen={showcreateform} {toggleC}>
   <ModalHeader >Crear una provisión</ModalHeader>
   <ModalBody>
     <Form>
       <FormGroup floating label="Provincia">
-        <Input
-        bind:value={newProvision.province}
-
-      /></FormGroup>
+        <Input bind:value={newProvision.province}/>
+      </FormGroup>
       <FormGroup floating label="Año">
-        <Input
-        bind:value={newProvision.year}
-
-      /></FormGroup>
+        <Input bind:value={newProvision.year}/>
+      </FormGroup>
       <FormGroup floating label="Organización">
-        <Input
-        bind:value={newProvision.organization}
-
-      /></FormGroup>
+        <Input bind:value={newProvision.organization}/>
+      </FormGroup>
       <FormGroup floating label="Tipo de Disposicón">
-        <Input
-        bind:value={newProvision.disposal_type}
-
-      /></FormGroup>
+        <Input bind:value={newProvision.disposal_type}/>
+      </FormGroup>
       <FormGroup floating label="Número de Disposición">
-        <Input
-        bind:value={newProvision.disposal_number}
-
-      /></FormGroup>
+        <Input bind:value={newProvision.disposal_number}      />
+      </FormGroup>
       <FormGroup floating label="Número del Boletín">
-        <Input
-        bind:value={newProvision.number_of_the_bulletin}
-
-      /></FormGroup>
+        <Input bind:value={newProvision.number_of_the_bulletin}/>
+      </FormGroup>
       <FormGroup floating label="Fecha de Disposición">
         <Input
-        bind:value={newProvision.date_of_disposition}
-
-      /></FormGroup>
+        bind:value={newProvision.date_of_disposition}/>
+      </FormGroup>
       <FormGroup floating label="Número de Sección">
-        <Input
-        bind:value={newProvision.section_number}
-
-      /></FormGroup>
+        <Input bind:value={newProvision.section_number}/>
+      </FormGroup>
       <FormGroup floating label="Sección">
-        <Input
-        bind:value={newProvision.section}
-
-      /></FormGroup>
+        <Input bind:value={newProvision.section}/>
+      </FormGroup>
       
     </Form>
   </ModalBody>
@@ -690,31 +600,6 @@ async function getProvisions() {
     color: #333;
     margin: 0;
     padding: 0;
-  }
-
-  h1,
-  h2,
-  h3 {
-    margin: 0;
-  }
-
-  /* estilos para la cabecera */
-  .cabecera {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .btn-head {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .borrar {
-    margin-left: 10px;
   }
 
   /* estilos para la tabla */
@@ -752,19 +637,7 @@ async function getProvisions() {
     text-align: center;
     margin-bottom: 50px;
   }
-  .cabecera {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-  }
-  .borrar {
-    text-align: center;
-    width: 33%;
-  }
-  .volveratras {
-    text-align: right;
-    width: 33%;
-  }
+
 
   .tablas {
     margin-bottom: 50px;
@@ -776,16 +649,5 @@ async function getProvisions() {
     vertical-align: middle !important;
   }
 
-  .btn-head {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  #messages {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    color: white;
-  }
 
 </style>
