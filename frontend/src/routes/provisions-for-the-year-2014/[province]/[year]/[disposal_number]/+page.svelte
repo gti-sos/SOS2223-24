@@ -128,7 +128,7 @@
     
 </div>
 <div  class = "wp">
-    <Table>
+    <Table responsive>
         <thead>
             <tr>
                 <th>Provincia</th>
@@ -145,18 +145,20 @@
         <tbody>
             <tr>
 
-                <td style="color: #888;">{province}</td>
-                <td style="color: #888;">{year}  </td>
-                <td style="color: #888;">{disposal_number}  </td>
-                <td><input bind:value={newOrganization} style="color: #888;" /></td>
-                <td><input bind:value={newDisposal_type} style="color: #888;" /></td>
-                <td><input bind:value={newNumber_of_the_bulletin} style="color: #888;" /></td>
-                <td><input bind:value={newDate_of_disposition} style="color: #888;" /></td>
-                <td><input bind:value={newSection_number} style="color: #888;" /></td>
-                <td><input bind:value={newSection} style="color: #888;" /></td>
+                <td style="color: #9D69FD;">{province}</td>
+                <td style="color: #9D69FD;">{year}  </td>
+                <td style="color: #9D69FD;">{disposal_number}  </td>
+                <td><input bind:value={newOrganization} style="color: #9D69FD;" /></td>
+                <td><input bind:value={newDisposal_type} style="color: #9D69FD;" /></td>
+                <td><input bind:value={newNumber_of_the_bulletin} style="color: #9D69FD;" /></td>
+                <td><input bind:value={newDate_of_disposition} style="color: #9D69FD;" /></td>
+                <td><input bind:value={newSection_number} style="color: #9D69FD;" /></td>
+                <td><input bind:value={newSection} style="color: #9D69FD;" /></td>
                 <td><Button color="primary" on:click={PutProvision}>Actualizar</Button></td>
             </tr>
         </tbody>
+
+        
     </Table>
 
     <Button color="secondary" on:click={volverAtras} >Volver Atras</Button>

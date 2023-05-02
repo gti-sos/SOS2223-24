@@ -72,7 +72,8 @@ app.get(rutaoua+"/data", async (req,res) => {
       app.get(rutaoua + "/loadInitialData", (req, res) => {
         db.find({}, function (err, docs) {
           if (docs.length === 0) {
-            db.insert([
+            db.insert(
+                [
                 {
                     "province": "Huelva",
                     "year": 2014,
@@ -921,8 +922,8 @@ app.get(rutaoua+"/data", async (req,res) => {
                     "section": " Anuncios"
                    }  
             ], function (err, newDocs) {
-              res.status(201).json('Se han creado 10 datos');
-              console.log("Se han creado 10 datos");
+              res.status(201).json('Se han creado 77 datos');
+              console.log("Se han creado 77 datos");
             });
           } else {
             res.status(200).json('Ya existen datos' );
