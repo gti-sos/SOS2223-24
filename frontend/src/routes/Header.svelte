@@ -54,7 +54,5 @@
         text-decoration: none;
         font-weight: bold;
     }
-    .nav-link {
-        margin-right: 20px;
-    }
+
 </style>
