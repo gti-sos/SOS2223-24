@@ -20,7 +20,7 @@ function oua2(app){
     
         console.log(`New GET to /data`);
         let provincias = ['Almería', 'Cádiz', 'Córdoba', 'Granada', 'Huelva', 'Jaén', 'Málaga', 'Sevilla'];
-        var data = new Array();
+        var data =[];
         
         try {
             // Esperar a que todas las consultas a la base de datos se completen
@@ -43,7 +43,62 @@ function oua2(app){
             res.status(500).json(err);
         }
     });
-    
+
+    app.get(rutaoua + "/data1", async (req, res) => {
+
+        console.log(`New GET to /data`);
+        var data = [];
+      
+        try {
+          // Esperar a que todas las consultas a la base de datos se completen
+          await Promise.all(
+            provincias.map((provincia) => {
+              return new Promise((resolve, reject) => {
+                db.aggregate([
+                  { $match: { province: provincia } },
+                  {
+                    $group: {
+                      _id: { province: "$province", organization: "$organization" },
+                      provisions_number: { $sum: 1 },
+                    },
+                  },
+                ]).exec(function (err, docs) {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    // Agrupar los datos por organización en cada provincia
+                    var orgData = {};
+                    docs.forEach((doc) => {
+                      if (!orgData[doc._id.organization]) {
+                        orgData[doc._id.organization] = {
+                          organization: doc._id.organization,
+                          provisions_number: 0,
+                        };
+                      }
+                      orgData[doc._id.organization].provisions_number +=
+                        doc.provisions_number;
+                    });
+                    // Agregar los datos agrupados a la respuesta
+                    Object.values(orgData).forEach((org) => {
+                      data.push({
+                        province: doc._id.province,
+                        organization: org.organization,
+                        provisions_number: org.provisions_number,
+                      });
+                    });
+                    resolve();
+                  }
+                });
+              });
+            })
+          );
+          res.json(data);
+        } catch (err) {
+          // Manejar errores de consulta
+          res.status(500).json(err);
+        }
+      });
+      
 /*
 
 app.get(rutaoua+"/data", async (req,res) => {
