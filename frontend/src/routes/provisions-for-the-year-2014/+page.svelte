@@ -44,6 +44,7 @@
   let showM, color,message ="";
   let showcreateform = false;
   let showsearchform = false;
+  let loaded = false;
 
   function showMessage(mensaje, colorM) {
     showM = true;
@@ -104,13 +105,14 @@ const pageSize = 10;
     const res = await fetch(API + "/loadInitialData", {
       method: "GET",
     });
+    loaded = true;
 
     const status = await res.status;
     resultStatus = status;
     if (status === 201) {
       datos = true;
       getProvisions();
-      showMessage("Datos cargados correctamente", "success")
+      showMessage("Datos cargados correctamente", "success");
     }else if(status === 200) {
       datos = true;
       getProvisions();
@@ -204,6 +206,8 @@ async function getProvisions() {
     params += `&section=${query.section}`;
   }
 
+
+    if(!loaded) loadProvisions();
   // Agrega los parámetros de búsqueda a la URL solo si ya existe algún parámetro en ella
     if (params) {
       url += `?${params.substring(1)}`;
