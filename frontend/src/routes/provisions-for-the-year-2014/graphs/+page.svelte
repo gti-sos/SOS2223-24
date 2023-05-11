@@ -16,6 +16,8 @@
   import { dev } from '$app/environment';
   let API = '/api/v2/provisions-for-the-year-2014';
   if (dev) API = 'http://localhost:12345' + API;
+  const delay = d => new Promise(res => setTimeout(res, d));
+
   let data = [];
   let result = "";
   let resultStatus = "";
@@ -35,6 +37,7 @@
       data = dataReceived;
       const status = await res.status;
       resultStatus = status;
+      delay(500);
       loadCharts(data);
     } catch (error) {
       console.log(`Error fetching data: ${error}`);
@@ -108,7 +111,7 @@
         
       console.log(percentage); // muestra la longitud de cada array de provincias
       console.log(totalProvisions); // muestra el número total de provisiones
-
+      delay(500);
       loadCharts2(chartData); 
       }catch(error){
             console.log(`Error devolviendo la gráfica: ${error}`);
@@ -125,6 +128,7 @@
       y: provisions_number,
       label: province
     }));
+
     const chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       theme: "light2",
@@ -198,12 +202,6 @@
 
   }
 
-
-
-
-
-            
-          
 
 </script>
 
