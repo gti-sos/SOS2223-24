@@ -38,9 +38,14 @@ app.use(function(err, req, res, next) {
 var paths = "/bicycle-plans";
 var apiServerHost = "https://sos2223-17.appspot.com/api/v2/andalusian-bicycle-plans";
 
-app.use(paths, function(req,res){
-    var url = apiServerHost + req.url;
-    req.pipe(request(url)).pipe(res);
-});
 
-app.use(express.static('.'));
+app.use(paths, async (request, response) => {
+  try {
+    // Llamada a la API externa
+    const responseApi = await axios.get(apiServerHost+request.url);
+    response.json(responseApi.data);
+
+  } catch (error) {
+      response.status(500).json({ error: "Error en el proxy" });
+  }
+});

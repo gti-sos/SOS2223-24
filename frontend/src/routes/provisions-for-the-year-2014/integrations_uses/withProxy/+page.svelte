@@ -10,7 +10,7 @@
         getDataComp();
     });
 
-    let API_Comp = "https://sos2223-24.appspot.com/bicycle-plans";
+    let API_Comp = "https://sos2223-24.appspot.com/api/v2/bicycle-plans";
     let API ="https://sos2223-24.appspot.com/api/v2/provisions-for-the-year-2014";
 
     
@@ -23,10 +23,19 @@
 
 
     async function getDataComp() {
-        const res = await fetch(API_Comp);
-        const data = await res.json();
-
-        const populationByProvince = data.reduce((acc, cur) => {
+        try {
+      const res = await fetch(API_Comp, {
+        method: 'GET'
+      });
+      const dataReceived = await res.json();
+      result = JSON.stringify(dataReceived, null, 2);
+      data = dataReceived;
+      const status = await res.status;
+      resultStatus = status;
+      delay(500);
+      
+      
+      const populationByProvince = data.reduce((acc, cur) => {
             const { province, population } = cur;
             if (!acc[province]) {
             acc[province] = { province, population };
@@ -41,6 +50,11 @@
         console.log(datos_comp);
 
         getData(datos_comp);
+    } catch (error) {
+      console.log(`Error fetching data: ${error}`);
+    }
+   
+
     }   
 
 async function getData(datos_comp) {
