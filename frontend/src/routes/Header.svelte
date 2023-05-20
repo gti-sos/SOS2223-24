@@ -40,7 +40,7 @@
                 <DropdownItem divider/>
                 <DropdownItem><a href="/integrations/withoutProxy">Integración Sin Proxy</a></DropdownItem>     
                 <DropdownItem divider/>
-                <DropdownItem><a href="/integrationss/uso">Uso</a></DropdownItem>  
+                <DropdownItem><a href="/integrationss/usoAliExpress">Uso AliExpress</a></DropdownItem>  
                 <DropdownItem divider/>
                 <DropdownItem><a href="/integrations/usoOauth">Uso OAUTH</a></DropdownItem>  
               </DropdownMenu>
