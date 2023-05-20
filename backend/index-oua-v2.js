@@ -15,11 +15,129 @@ function oua2(app){
         res.redirect(API_DOC_PORTAL);
       });
 
+
+    /*USO SNAPCHAT*/
+/*    const clientId = 'f3da5fd1-4804-41fd-8308-f02616c291ff';
+    const clientSecret = 'GNh_yuSNr5yow51lzk3Rip5A2Llz-blr1yfNV4vLYSI';
+    let ACCESS_TOKEN = '';
+    //GET API SNAPCHAT
+
+    app.get('/api/photos', async (req, res) => {
+        try {
+          const response = await axios.get('https://api.example.com/photos', {
+            headers: {
+              Authorization: `Bearer ${ACCESS_TOKEN}`,
+              'Content-Type': 'application/json'
+            },
+            params: {
+              client_id: clientId
+            }
+          });
+      
+          res.json(response.data);
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Error al obtener las fotos.' });
+        }
+      });
+
+    //POST API SNAPCHAT (OBTENER EL TOKEN ACCESS)
+
+    // Endpoint para obtener el token de acceso
     
+app.get('/getAccessToken', async (req, res) => {
+
+    const grantType = 'client_credentials';
+  
+    const response = await fetch('https://accounts.snapchat.com/login/oauth2/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: `client_id=${clientId}&client_secret=${clientSecret}&grant_type=${grantType}`
+    });
+  
+    if (!response.ok) {
+      const error = await response.text();
+      console.error(`Error al obtener token de acceso: ${error}`);
+      res.status(500).send('Error al obtener token de acceso');
+      return;
+    }
+  
+    const data = await response.json();
+    console.log('Token de acceso:', data.access_token);
+    res.send(data.access_token);
+  });
+
+*/
+    
+
+/* USO SNAPCHAT */
+const clientId = 'f3da5fd1-4804-41fd-8308-f02616c291ff';
+const clientSecret = 'GNh_yuSNr5yow51lzk3Rip5A2Llz-blr1yfNV4vLYSI';
+let ACCESS_TOKEN = '';
+
+// GET API SNAPCHAT
+app.get('/api/photos', async (req, res) => {
+  try {
+    const response = await axios.get('https://api.example.com/photos', {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      params: {
+        client_id: clientId,
+      },
+    });
+
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener las fotos.' });
+  }
+});
+
+// POST API SNAPCHAT (OBTENER EL TOKEN ACCESS)
+
+// Endpoint para obtener el token de acceso
+app.get('/getAccessToken', async (req, res) => {
+  const grantType = 'client_credentials';
+
+  try {
+    const response = await axios.post(
+      'https://accounts.snapchat.com/login/oauth2/token',
+      `client_id=${clientId}&client_secret=${clientSecret}&grant_type=${grantType}`,
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
+
+    const data = response.data;
+    ACCESS_TOKEN = data.access_token;
+    console.log('Token de acceso:', ACCESS_TOKEN);
+    res.send(ACCESS_TOKEN);
+  } catch (error) {
+    console.error('Error al obtener token de acceso:', error.message);
+    res.status(500).send('Error al obtener token de acceso');
+  }
+});
+
+
+
+
+// POST API SNAPCHAT (OBTENER EL TOKEN ACCESS)
+
+// Endpoint para obtener el token de acceso
+
+
+
     app.get(rutaoua+"/data", async (req,res) => {
     
         console.log(`New GET to /data`);
         let provincias = ['Almería', 'Cádiz', 'Córdoba', 'Granada', 'Huelva', 'Jaén', 'Málaga', 'Sevilla'];
+
         var data =[];
         
         try {
