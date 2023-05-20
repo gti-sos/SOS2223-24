@@ -43,7 +43,9 @@ app.use(paths, async (request, response) => {
   try {
     // Llamada a la API externa
     const responseApi = await axios.get(apiServerHost+request.url);
+    console.log(responseApi);
     response.json(responseApi.data);
+    console.log()
 
   } catch (error) {
       response.status(500).json({ error: "Error en el proxy" });

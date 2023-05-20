@@ -31,6 +31,22 @@
             </Dropdown>
 
         </NavItem>
+
+        <NavItem>
+            <Dropdown nav>
+                <DropdownToggle nav caret style="font-weight:bold; color:black; font-size: 18px;">Integraciones y Usos</DropdownToggle>
+                <DropdownMenu>
+                <DropdownItem><a href="/integrations/withProxy">Integración Con Proxy</a></DropdownItem>
+                <DropdownItem divider/>
+                <DropdownItem><a href="/integrations/withoutProxy">Integración Sin Proxy</a></DropdownItem>     
+                <DropdownItem divider/>
+                <DropdownItem><a href="/integrationss/uso">Uso</a></DropdownItem>  
+                <DropdownItem divider/>
+                <DropdownItem><a href="/integrations/usoOauth">Uso OAUTH</a></DropdownItem>  
+              </DropdownMenu>
+            </Dropdown>
+
+        </NavItem>
     </Nav>
 </div>
 
