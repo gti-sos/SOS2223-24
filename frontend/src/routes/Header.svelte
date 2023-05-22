@@ -40,9 +40,11 @@
                 <DropdownItem divider/>
                 <DropdownItem><a href="/integrations/withoutProxy">Integración Sin Proxy</a></DropdownItem>     
                 <DropdownItem divider/>
-                <DropdownItem><a href="/integrationss/usoAliExpress">Uso AliExpress</a></DropdownItem>  
+                <DropdownItem><a href="/integrations/usoAliExpress">Widget AliExpress</a></DropdownItem>  
                 <DropdownItem divider/>
                 <DropdownItem><a href="/integrations/usoOauth">Uso OAUTH</a></DropdownItem>  
+                <DropdownItem divider/>
+                <DropdownItem><a href="/integrations/widgetApiExternaCurrency">Widget Monedas</a></DropdownItem>  
               </DropdownMenu>
             </Dropdown>
 

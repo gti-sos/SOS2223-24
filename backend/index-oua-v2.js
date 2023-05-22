@@ -79,6 +79,30 @@ const clientId = 'f3da5fd1-4804-41fd-8308-f02616c291ff';
 const clientSecret = 'GNh_yuSNr5yow51lzk3Rip5A2Llz-blr1yfNV4vLYSI';
 let ACCESS_TOKEN = '';
 
+//USO CURRENCY
+app.get('/api/v2/uso_currency', async (req, res)=> {
+    const options = {
+        method: 'GET',
+        url: 'https://currency23.p.rapidapi.com/currencyToAll',
+        params: {
+          base: 'EUR',
+          int: '1'
+        },
+        headers: {
+          'X-RapidAPI-Key': 'b270bea616msh4290fc927f6297bp15e5fajsnce54fefbd472',
+          'X-RapidAPI-Host': 'currency23.p.rapidapi.com'
+        }
+      };
+      
+      try {
+          const response = await axios.request(options);
+          res.json(response.data);
+          console.log(response.data);
+      } catch (error) {
+          console.error(error);
+      }
+}
+)
 //USO ALI EXPRESS
 
 app.get('/api/v2/uso_sales', async (req, res)=> 
