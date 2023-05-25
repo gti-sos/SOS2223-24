@@ -15,7 +15,7 @@
   });
 
   let API_Comp = "https://sos2223-17.appspot.com/api/v2/andalusian-bicycle-plans";
-  let API = "/api/v2/provisions-for-the-year-2014";
+  let API = "/api/v2/";
   if (dev) API = "http://localhost:12345" + API;
   let result = "";
   let resultStatus = "";
@@ -40,6 +40,8 @@
       y: Number(provisions_number) * 10000,
       label: province.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
       }));
+
+
 
 
 

@@ -152,7 +152,6 @@ const pageSize = 10;
   };
 
   // Función para obtener las provisions según el objeto de búsqueda y los parámetros de paginación
-  // Función para obtener las provisions según el objeto de búsqueda y los parámetros de paginación
 async function getProvisions() {
   showsearchform = false;
   // Construye la URL para hacer la petición GET al backend
@@ -207,7 +206,7 @@ async function getProvisions() {
   }
 
 
-    if(!loaded) loadProvisions();
+    if(!loaded & !showPost) loadProvisions();
   // Agrega los parámetros de búsqueda a la URL solo si ya existe algún parámetro en ella
     if (params) {
       url += `?${params.substring(1)}`;
@@ -257,9 +256,9 @@ async function getProvisions() {
     section_number: "",
     section: "",
   };
-  /*let newProvince, newYear, newOrganization, newDisposal_type, newDisposal_number, newNumber_of_the_bulletin, newDate_of_disposition, newSection_number, newSection;
-  newProvince= newYear= newOrganization= newDisposal_type= newDisposal_number= newNumber_of_the_bulletin= newDate_of_disposition= newSection_number= newSection = "";
-*/
+
+  let showPost = "";
+
 
   async function createProvitions() {
     resultStatus = result = "";
@@ -294,7 +293,7 @@ async function getProvisions() {
     });
     const status = await res.status;
     resultStatus = status;
-    if (res.ok) {
+    if (status == 201) {
       showMessage("Recurso creado correctamente", "success");
       provisions.push(JSON.stringify({
         province: province1,
@@ -308,6 +307,7 @@ async function getProvisions() {
         section: section1
       }));
       showcreateform = false;
+      showPost = true;
       getProvisions();
       newProvision = [];
 
@@ -358,7 +358,7 @@ async function getProvisions() {
   
 <h1>Provisiones</h1>
 <h2>Desarrollado por Ouael Boussiali</h2>
-<p>Provisions devueltos: {provisions.length}</p>
+
 
 
 <Alert color={color} isOpen={showM}>
@@ -488,7 +488,15 @@ async function getProvisions() {
 
 <Modal  isOpen={showsearchform} {toggleS}>
   <ModalHeader class="d-flex justify-content-center">Filtrar Datos</ModalHeader>
+  <div>
+    <button class="close-button" on:click={toggleS}>
+      <svg class="close-icon" viewBox="0 0 24 24">
+        <path d="M12 10.586L16.95 5.636c.363-.362.964-.362 1.326 0 .363.363.363.964 0 1.326L13.325 12l4.95 4.95c.363.363.363.964 0 1.326-.181.181-.416.272-.652.272-.236 0-.472-.09-.652-.272L12 13.675l-4.95 4.95c-.18.181-.416.272-.652.272-.236 0-.472-.09-.652-.272-.363-.362-.363-.964 0-1.326L10.675 12 5.725 7.05c-.363-.362-.363-.964 0-1.326.362-.363.964-.363 1.326 0L12 10.586z"/>
+      </svg>
+    </button>
+  </div>
   <ModalBody>
+
     <Form>
       <h4>Filtro por Periodo de Años</h4>
       <FormGroup floating label="Desde el Año">
@@ -550,6 +558,13 @@ async function getProvisions() {
 
 <Modal  isOpen={showcreateform} {toggleC}>
   <ModalHeader >Crear una provisión</ModalHeader>
+  <div>
+    <button class="close-button" on:click={toggleC}>
+      <svg class="close-icon" viewBox="0 0 24 24">
+        <path d="M12 10.586L16.95 5.636c.363-.362.964-.362 1.326 0 .363.363.363.964 0 1.326L13.325 12l4.95 4.95c.363.363.363.964 0 1.326-.181.181-.416.272-.652.272-.236 0-.472-.09-.652-.272L12 13.675l-4.95 4.95c-.18.181-.416.272-.652.272-.236 0-.472-.09-.652-.272-.363-.362-.363-.964 0-1.326L10.675 12 5.725 7.05c-.363-.362-.363-.964 0-1.326.362-.363.964-.363 1.326 0L12 10.586z"/>
+      </svg>
+    </button>
+  </div>
   <ModalBody>
     <Form>
       <FormGroup floating label="Provincia">
@@ -653,5 +668,20 @@ async function getProvisions() {
     vertical-align: middle !important;
   }
 
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .close-icon {
+    width: 24px;
+    height: 24px;
+    fill: #000;
+  }
 
 </style>
