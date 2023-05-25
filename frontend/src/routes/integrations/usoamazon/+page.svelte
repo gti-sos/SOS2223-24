@@ -36,10 +36,8 @@
             const ls = [name, price];
                 chartData.push(ls);
             });
-            console.log(JSON.stringify(chartData, null, 2));
 
             loadData(chartData);
-            console.log(chartData);
         } catch (error) {
             console.log(`Error fetching data: ${error}`);
         }
@@ -52,11 +50,9 @@
         type: 'column'
     },
     title: {
-        text: 'World\'s largest cities per 2021'
+        text: 'Comparación entre los CPU de AMD'
     },
-    subtitle: {
-        text: 'Source: <a href="https://worldpopulationreview.com/world-cities" target="_blank">World Population Review</a>'
-    },
+
     xAxis: {
         type: 'category',
         labels: {
@@ -108,10 +104,10 @@
     }
 </script>
 
-<main>
+<body style="height: 70vh; padding: 10px;">
     <figure class="highcharts-figure">
         <div id="container"></div>
         <p class="highcharts-description">
         </p>
     </figure>
-</main>
+</body>

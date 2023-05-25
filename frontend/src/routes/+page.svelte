@@ -1,65 +1,83 @@
-<script>
-    import { dev } from '$app/environment';
-    let API = '/api/v1';
-    let APIf='';
-    if (dev)
-        API = 'http://localhost:12345'+API;
-        APIf = 'http://localhost:12345';
-
-</script>
-<main>
-    <br>
-    <h1 style="padding-left: 10px;">SOS2223-23</h1>
+<section>
+    <h2>Equipo</h2>
     <ul>
-        <li><b>Equipo:</b></li>
-        <br>
-        <ul>
-            <li><a href="https://github.com/AdolfoRdgzCab">Adolfo Rodriguez Cabezon - agrodata-almeria </a></li>
-            <li><a href="https://github.com/vicsanesp">Victor Manuel Sanchez Espada - agroprices-weekly</a></li>
-            <li><a href="https://github.com/OUABSL">Ouael Boussiali - provisions-for-the-year-2014</a></li>
-        </ul>
-        <br>
-        <br>
-        <li><dl>
-            <dt><b>Descripción del proyecto:</b></dt>
-            <br>
-            <di>Comparison of the prices of agricultural products by area based on the number of greenhouses in the province </di>
-        </dl></li>
-        <br>
-        <br>
-        <li><b>Repositorio de GitHub: </b><a href="https://github.com/gti-sos/SOS2223-24">gti-sos/SOS2223-24</a></li>
-        <br>
-        <br>
-        <li><b>URL de la API: </b><a href="https://sos2223-24.ew.r.appspot.com">gti-sos/SOS2223-24/API</a></li>
-        <br>
-        <br>
-        <li><b>Documentacion de las APIS:</b></li>
-        <br>
-        <ul>
-            <li><a href="{API}/agrodata-almeria/docs">Documentacion agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
-            <li><a href="{API}/agroprices-weekly/docs">Documentacion agroprices-weekly</a> (developed by Victor Manuel Sanchez Espada)</li>
-            <li><a href="{API}/provisions-for-the-year-2014/docsv1">Documentacion provisions-for-the-year-2014 V1</a> (developed by Ouael Boussiali)</li>
-            <li><a href="{API}/provisions-for-the-year-2014/docsv2">Documentacion provisions-for-the-year-2014 V2</a> (developed by Ouael Boussiali)</li>
-
-        </ul>
-        <br>
-        <li><b>Frontends de las APIS:</b></li>
-        <br>
-        <ul>
-            <li><a href="{APIf}/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
-            <li><a href="{APIf}/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
-            <li><a href="https://sos2223-24.appspot.com/agroprices-weekly">Frontend de agroprices-weekly</a> (developed by Víctor Manuel Sánchez Espada)</li>
-
-
-        </ul>
-
-        <br>
-        <ul>
-            <li><a href="{API}/agrodata-almeria">Backend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
-            <li><a href="{API}/provisions-for-the-year-2014">Backend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
-            <li><a href="https://sos2223-24.appspot.com/api/v1/agroprices-weekly">Backend de agroprices-weekly</a> (developed by Víctor Manuel Sánchez Espada)</li>
-
-
-        </ul>
+        <li><a href="https://github.com/AdolfoRdgzCab">Adolfo Rodriguez Cabezon - agrodata-almeria </a></li>
+        <li><a href="https://github.com/vicsanesp">Victor Manuel Sanchez Espada - agroprices-weekly</a></li>
+        <li><a href="https://github.com/OUABSL">Ouael Boussiali - provisions-for-the-year-2014</a></li>
     </ul>
-</main>
+
+    <h2>Repositorio</h2>
+    <ul>
+        <li><a href="https://github.com/gti-sos/SOS2223-24">gti-sos/SOS2223-24</a></li>
+    </ul>
+
+    <h2>URL de la API</h2>
+    <ul>
+        <li><a href="https://sos2223-24.ew.r.appspot.com">gti-sos/SOS2223-24/API</a></li>
+    </ul>
+
+    <h2>Documentación de las APIs</h2>
+    <ul>
+        <li><a href="https://sos2223-24.appspot.com/agrodata-almeria/docs">Documentación agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
+        <li><a href="https://sos2223-24.appspot.com/agroprices-weekly/docs">Documentación agroprices-weekly</a> (developed by Victor Manuel Sanchez Espada)</li>
+        <li><a href="https://sos2223-24.appspot.com/provisions-for-the-year-2014/docsv1">Documentación provisions-for-the-year-2014 V1</a> (developed by Ouael Boussiali)</li>
+        <li><a href="https://sos2223-24.appspot.com/provisions-for-the-year-2014/docsv2">Documentación provisions-for-the-year-2014 V2</a> (developed by Ouael Boussiali)</li>
+    </ul>
+
+    <h2>Frontends de las APIs</h2>
+    <ul>
+        <li><a href="https://sos2223-24.appspot.com/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
+        <li><a href="https://sos2223-24.appspot.com/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
+        <li><a href="https://sos2223-24.appspot.com/agroprices-weekly">Frontend de agroprices-weekly</a> (developed by Victor Manuel Sanchez Espada)</li>
+    </ul>
+
+    <h2>Backend de las APIs</h2>
+    <ul>
+        <li><a href="https://sos2223-24.appspot.com/api/v1/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
+        <li><a href="https://sos2223-24.appspot.com/api/v1/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
+        <li><a href="https://sos2223-24.appspot.com/api/v2/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
+        <li><a href="https://sos2223-24.appspot.com/api/v1/agroprices-weekly">Frontend de agroprices-weekly</a> (developed by Victor Manuel Sanchez Espada)</li>
+    </ul>
+</section>
+
+<style>
+    h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-top: 15px;
+    margin-left: 2%;
+    color: #9500ff;
+    list-style-type: circle;
+}
+
+ul {
+    margin: 0;
+    margin-left: 2%;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    margin: 10px 0;
+    list-style-type: circle;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    list-style-type: circle;
+}
+
+section {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 8px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1%;
+    margin-top: 1.5%;
+}
+
+</style>

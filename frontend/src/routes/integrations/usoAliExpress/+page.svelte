@@ -24,12 +24,11 @@
       const datos = await res.json();
       const status = await res.status;
 
-      console.log(JSON.stringify(datos, null, 2));
       const resultList = datos.result.resultList;
       let chartData = [];
 
       resultList.forEach((item) => {
-        const itemId = item.item.itemId;
+        const itemId = item.item.title.split(' ').slice(0, 4).join(' ');
         const sales = parseInt(item.item.sales); // Convertir a número
         let obj = {
           y: sales,
@@ -49,7 +48,7 @@
     const chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       title: {
-        text: "Sales by Item ID",
+        text: "Venatas de Mi tienda",
         horizontalAlign: "left",
       },
       data: [
@@ -67,6 +66,7 @@
   }
 </script>
 
-<main>
+<body style="height: 65vh; padding: 20px;">
+  
   <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-</main>
+</body>

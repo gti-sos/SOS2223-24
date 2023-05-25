@@ -1,5 +1,7 @@
 import Datastore from 'nedb';
 import axios from 'axios';
+import request from 'request';
+
 
 
 
@@ -17,6 +19,20 @@ function oua2(app) {
         res.redirect(API_DOC_PORTAL);
     });
 
+    
+    var paths = "/api/proxyoua"
+    var apiServerHost = "https://sos2223-17.appspot.com/api/v2/andalusian-bicycle-plans"
+    app.use(paths, function(req, res) {
+        console.log("c");
+        var url = apiServerHost + req.url;
+        console.log('piped: ' + req.url);
+        req.pipe(request(url)).pipe(res);
+       });
+      
+
+
+    // USOS
+
 
     app.get('/api/v2/amazondata', async (req, res) => {
         const options = {
@@ -25,7 +41,7 @@ function oua2(app) {
             params: {
               criteria: 'AMD Ryzen',
               page: '1',
-              countryCode: 'ESP',
+              countryCode: 'US',
               languageCode: 'ES'
             },
             headers: {
@@ -44,7 +60,7 @@ function oua2(app) {
 
 
 
-    //
+    //uso homicidios
     app.get('/api/v2/homicide_rate', async (req, res) => {
  
         const options = {
@@ -74,14 +90,14 @@ function oua2(app) {
             method: 'GET',
             url: 'https://currency23.p.rapidapi.com/currencyToAll',
             params: {
-                base: 'EUR',
-                int: '1'
+              base: 'EUR',
+              int: '1'
             },
             headers: {
-                'X-RapidAPI-Key': 'b270bea616msh4290fc927f6297bp15e5fajsnce54fefbd472',
-                'X-RapidAPI-Host': 'currency23.p.rapidapi.com'
+              'X-RapidAPI-Key': 'b438c147e1mshf0cf7673386f32bp1a3702jsn4684b7b860b7',
+              'X-RapidAPI-Host': 'currency23.p.rapidapi.com'
             }
-        };
+          };
 
         try {
             const response = await axios.request(options);
@@ -90,7 +106,7 @@ function oua2(app) {
             console.error(error);
         }
     });
-    //USO ALI EXPRESS
+    //USO ALIEXPRESS
 
     app.get('/api/v2/uso_sales', async (req, res) => {
         const options = {
@@ -117,6 +133,7 @@ function oua2(app) {
 
 
 
+    //For Integration 
 
     app.get(rutaoua + "/data", async (req, res) => {
 

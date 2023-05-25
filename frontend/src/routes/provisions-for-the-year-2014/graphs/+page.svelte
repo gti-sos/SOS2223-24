@@ -16,7 +16,6 @@
   import { dev } from '$app/environment';
   let API = '/api/v2/provisions-for-the-year-2014';
   if (dev) API = 'http://localhost:12345' + API;
-  const delay = d => new Promise(res => setTimeout(res, d));
 
   let data = [];
   let result = "";
@@ -37,7 +36,6 @@
       data = dataReceived;
       const status = await res.status;
       resultStatus = status;
-      delay(500);
       loadCharts(data);
     } catch (error) {
       console.log(`Error fetching data: ${error}`);
@@ -64,10 +62,8 @@
                 res[prov].push(actual);
                 return res;
             }, {} ); // inicializar el res
-            console.log(dic);
             
             const groupedArray = Object.keys(dic).map(key => dic[key]);
-            console.log(groupedArray);
             const provinciaLengths = {};
             let totalProvisions = 0;
 
@@ -85,33 +81,8 @@
             const chartData = Object.entries(percentage).map(([province, porcentage]) => ({
               name: province,
               y: Number(porcentage.toFixed(2)),
-              // drilldown: province
             }));
-
-
-            /*const series2 = [];
-
-            Object.keys(dic).forEach(prov => {
-              const data = [];
-              const provisionsInProv = dic[prov].length;
-              dic[prov].forEach(p => {
-                const org = p.organization;
-                data.push([org, 1/provisionsInProv]);
-              });
-              series2.push({
-                name: prov,
-                id: prov,
-                data: data
-              });
-            });
-
-          console.log("series : " +JSON.stringify(series2, null ,2) );
-          */
-
-        
-      console.log(percentage); // muestra la longitud de cada array de provincias
-      console.log(totalProvisions); // muestra el número total de provisiones
-      delay(500);
+            
       loadCharts2(chartData); 
       }catch(error){
             console.log(`Error devolviendo la gráfica: ${error}`);

@@ -161,7 +161,6 @@ function toggleDataSeries(e) {
 
 </script>
 
-<main>
-  <h1 style="margin-top: 30px;">Número de Provisiones frente a la población en cada Provincia</h1>
+<body style="height: 70vh; padding: 20px; margin-top: 40px">
   <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-</main>
+</body>

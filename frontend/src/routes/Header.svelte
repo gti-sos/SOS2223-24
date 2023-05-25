@@ -12,9 +12,8 @@
             <ButtonDropdown>
                 <DropdownToggle color="" style="font-weight:bold; color = #; font-size: 18px;" caret>Front-ends</DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem header>Tipos:</DropdownItem>
-                    <DropdownItem divider />
                     <DropdownItem><a href="/agrodata-almeria">agrodata-almeria</a></DropdownItem>
+                    <DropdownItem divider />
                     <DropdownItem><a href="/agroprices-weekly">agroprices-weekly</a></DropdownItem>
                 </DropdownMenu>
             </ButtonDropdown>
@@ -27,7 +26,9 @@
                 <DropdownItem><a href="/provisions-for-the-year-2014">Página de Inicio</a></DropdownItem>
                 <DropdownItem divider/>
                 <DropdownItem><a href="/provisions-for-the-year-2014/graphs">Grafos</a></DropdownItem>     
-              </DropdownMenu>
+                <DropdownItem divider/>
+                <DropdownItem><a href="/integrations">Integraciones y Usos</a></DropdownItem>                     
+            </DropdownMenu>
             </Dropdown>
 
         </NavItem>
@@ -36,19 +37,23 @@
             <Dropdown nav>
                 <DropdownToggle nav caret style="font-weight:bold; color:black; font-size: 18px;">Integraciones y Usos</DropdownToggle>
                 <DropdownMenu>
-                <DropdownItem><a href="/integrations/withProxy">Integración Con Proxy</a></DropdownItem>
+                <DropdownItem><a href="/integrations/withproxy">Integración Con Proxy</a></DropdownItem>
                 <DropdownItem divider/>
-                <DropdownItem><a href="/integrations/withoutProxy">Integración Sin Proxy</a></DropdownItem>     
+                <DropdownItem><a href="/integrations/withoutproxy">Integración Sin Proxy</a></DropdownItem>     
                 <DropdownItem divider/>
-                <DropdownItem><a href="/integrations/usoAliExpress">Widget AliExpress</a></DropdownItem>  
+                <DropdownItem><a href="/integrations/usoaliexpress">Widget AliExpress</a></DropdownItem>  
                 <DropdownItem divider/>
-                <DropdownItem><a href="/integrations/usoOauth">Uso OAUTH</a></DropdownItem>  
+                <DropdownItem><a href="/integrations/usohomiciderate">Widget Homicidios</a></DropdownItem>  
                 <DropdownItem divider/>
-                <DropdownItem><a href="/integrations/widgetApiExternaCurrency">Widget Monedas</a></DropdownItem>  
+                <DropdownItem><a href="/integrations/usocurrency">Widget Monedas</a></DropdownItem>  
+                <DropdownItem divider/>
+                <DropdownItem><a href="/integrations/usoamazon">Widget Amazon</a></DropdownItem>  
               </DropdownMenu>
             </Dropdown>
 
         </NavItem>
+        <NavLink href="/" class="nav-link" style="margin-right: 20px;" ><h6 style="font-weight:bold;  color:black; font-size: 18px;">Acerca De</h6> <Icon name="house-fill"/></NavLink>
+
     </Nav>
 </div>
 

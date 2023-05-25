@@ -1,15 +1,17 @@
 <svelte:head>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
-    <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
-    <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
 </svelte:head>
+
 <script>
-//@ts-nocheck
+  //@ts-nocheck
 
   import { onMount } from "svelte";
   import { dev } from "$app/environment";
+
 
   let datos = "";
 
@@ -30,14 +32,12 @@
       const dataArray = datos.result.data;
       let chartData = [];
 
-
       dataArray.forEach((moneda) => {
         const name = moneda.code;
-        const value = moneda.calculated; 
-        if(value < 10){
-        let cur = [name, value];
-        chartData.push(cur);
-        console.log(JSON.stringify(chartData, null, 2));
+        const value = moneda.calculated;
+        if (value < 10) {
+          let cur = [name, value];
+          chartData.push(cur);
         }
       });
 
@@ -48,7 +48,6 @@
   }
 
   function loadData(chartData) {
-    
     anychart.onDocumentReady(function () {
       // create column chart
       var chart = anychart.column();
@@ -90,15 +89,33 @@
       // set container id for the chart
       chart.container('container');
 
+      chart.width('600px');
+      chart.height('400px');
+
       // initiate chart drawing
       chart.draw();
     });
-  
-
-                
   }
 </script>
 
-<main>
-    <div id="container"></div>
-</main>
+<body style="height: 70vh; padding: 20px;">
+
+  <div id="container"></div>
+
+</body>
+
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+
+  #container {
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+  }
+</style>

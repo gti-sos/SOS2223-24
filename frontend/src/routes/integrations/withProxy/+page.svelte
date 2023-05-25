@@ -8,16 +8,18 @@
   import { dev } from "$app/environment";
 
 
-  let datos = "";
+  let result = "";
 
   onMount(async () => {
     getDataComp();
   });
 
-  let API_Comp = "https://sos2223-17.appspot.com/api/v2/andalusian-bicycle-plans";
-  let API = "/api/v2/";
-  if (dev) API = "http://localhost:12345" + API;
-  let result = "";
+  let API_Comp = "https://sos2223-24.appspot.com/api/proxyoua";    
+  
+  let API = "/api/v2/provisions-for-the-year-2014";
+  if (dev){
+     API = "http://localhost:12345" + API;
+} 
   let resultStatus = "";
   const delay = d => new Promise(res => setTimeout(res, d));
 

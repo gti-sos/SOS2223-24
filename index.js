@@ -35,14 +35,3 @@ app.use(function(err, req, res, next) {
   res.status(500).json({ error: 'Ocurrió un error en el servidor' });
 });
 
-
-//Proxy Ouael
-var paths = "/proxy-oua";
-var apiServerHost = "https://sos2223-17.appspot.com/api/v2/andalusian-bicycle-plans";
-
-
-app.use(paths, function(req, res) {
-  var url = apiServerHost + req.url;
-  console.log('piped: ' + req.url);
-  req.pipe(request(url)).pipe(res);
-  });

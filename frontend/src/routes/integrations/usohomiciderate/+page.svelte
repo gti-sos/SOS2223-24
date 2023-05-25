@@ -108,8 +108,8 @@
   }
 </script>
 
-<main>
+<body style="height: 70vh; padding: 20px; ">
   <figure class="highcharts-figure">
     <div id="container"></div>
   </figure>
-</main>
+</body>
