@@ -1,0 +1,61 @@
+﻿Project,Client,Description,Duration
+SOS2223-24,,#1 Configurar POSTMAN,00:28:53
+SOS2223-24,,#10 Replicar el algoritmo del archivo llamado “index-YYY.js” dentro del archivo “index.js”,01:23:00
+SOS2223-24,,#11 Registrar información en el repositorio común de la asignatura,00:51:53
+SOS2223-24,,#12 Verificar que la pestaña individual de la ficha de trabajo cumple los requisitos,01:01:40
+SOS2223-24,,#13 Replicar el algoritmo del archivo llamado “index-YYY.js,00:15:07
+SOS2223-24,,#14 Realizar tracking de tiempo con Toggl de todas las issues asignadas,00:15:05
+SOS2223-24,,#15 Haber leído todas las noticias en Piazza previas a 16 horas antes del inicio de la sesión de feedback.,00:15:18
+SOS2223-24,,#16 Registrar información en el repositorio común de la asignatura,00:15:32
+SOS2223-24,,"#17 Replicar el algoritmo del archivo llamado “index-YYY.js""",00:34:00
+SOS2223-24,,#18 Tener una ruta dinámica “/cool”,00:18:12
+SOS2223-24,,#19 Asegurarse que el nombre del recurso (FFFFF) debe cumplir las siguientes restricciones:,01:15:34
+SOS2223-24,,#2 Configuración postman vicsanesp,00:38:36
+SOS2223-24,,#2 Issue vicsanesp 1,00:59:38
+SOS2223-24,,#21 Debe desarrollarse una colección de llamadas en POSTMAN sobre la API desplegada en GCloud que pruebe todas las funcionalidades de la API (tal como se vió en el L06),01:10:55
+SOS2223-24,,#22 Debe tener desplegado en Google Cloud una API REST funcional ofreciendo su fuente de datos. La API debe estar desplegada (e integrada con los compañeros de grupo) en la dirección: http://sos2223-XX.appspot.com/api/v1/FFFFF  (Siendo XX el numero de grupo relleno con ceros y FFFFF el nombre del recurso).,00:20:20
+SOS2223-24,,#23 El recurso debe contener una ruta /api/v1/FFFFF/loadInitialData que al hacer un GET cree 10 o más datos en el array de NodeJS si está vacío.,00:20:10
+SOS2223-24,,#24 La API debe cumplir con las buenas prácticas definidas en los laboratorios: Deben implementarse todos los métodos de la tabla azul (vistos en el L05) Deben usarse todos los códigos de estado del cuadro verde (vistos en el L05) No se debe devolver HTML en ningún caso,00:20:10
+SOS2223-24,,#25 LoadInitialData,00:27:00
+SOS2223-24,,#26 Buenas Practicas,01:11:00
+SOS2223-24,,#27 Deplegar API,00:53:00
+SOS2223-24,,#28 La API debe implementar una persistencia basada en una base de datos NeDB tal como se vio en el L07.,00:20:09
+SOS2223-24,,#29 La API debe implementar búsquedas por todos los campos del recurso (siguiendo las buenas prácticas recomendadas en el L06),00:20:05
+SOS2223-24,,#3 Clonar el repositorio común de la asignatura,01:21:43
+SOS2223-24,,#3 Instalar y configurar extensión de Chrome de Toggl,00:11:02
+SOS2223-24,,#30 El proyecto debe contener una ruta /api/v1/FFFFF/docs que redirija al portal de documentación generado  en POSTMAN (tal como se vió en el L07 )a partir de la colección de llamadas del punto 6. Para redirigir se recomienda utilizar el método “redirect” (ejemplo).,00:20:06
+SOS2223-24,,#31 Implementar la API,00:37:53
+SOS2223-24,,#32 La API debe implementar búsquedas por todos los campos del recurso,00:25:40
+SOS2223-24,,#33 Implementar paginación en la API,00:49:04
+SOS2223-24,,#34 El proyecto debe contener una ruta /api/v1/FFFFF/docs,00:27:00
+SOS2223-24,,#35 Búsqueda por todos los campos,02:48:00
+SOS2223-24,,#36 Implementar NeDB,00:18:00
+SOS2223-24,,#37 Los identificadores de recursos que están compuestos por varias propiedades deben estar correctamente utilizados,00:43:29
+SOS2223-24,,"#38 Extender la colección de llamadas de POSTMAN (para que funcionen, al menos, sobre la api desplegada en GCloud) de forma que cada llamada debe tener siempre alguna comprobación y, en los casos que sea posible, que vaya más allá de comprobar el estado (p.e. comprobar que el dato devuelto tenga algún campo o que el array devuelto tenga un tamaño determinado)",00:20:06
+SOS2223-24,,#39 Se debe devolver en cada caso un Objeto o un Array en función del tipo de operación que se realice,00:30:57
+SOS2223-24,,"#4 Programar ""index-YYY.js""",02:19:22
+SOS2223-24,,"#40 Se debe añadir un script de lanzamiento llamado test-FFFF  en el archivo package.json que lance (tal como se vió en el L08), con newman,  la colección de test de la API /api/v1/FFFFF  desplegada en local de manera que se pueda ejecutar con el comando  “npm run test-FFFFF”.",00:26:04
+SOS2223-24,,#41 Tener configurado el sistema de integración continua tal como se vio en el L08 de forma que al hacer push al repositorio se lancen las pruebas automáticamente sobre todas las apis con el comando “npm test” y que el estado antes de la clase de feedback sea de correcto y aparezca el símbolo de check válido verde (✔️) al lado del identificador del último commit (que no sea “Merge pull Request”).,00:20:05
+SOS2223-24,,#42 Aádir un script de lanzamiento llamado test-FFFF  en el archivo package.json,00:31:00
+SOS2223-24,,#43 Extender coleccion Postman,00:47:00
+SOS2223-24,,#44 Añadir run test-FFFF,00:20:00
+SOS2223-24,,#45 Identificadores de recursos,00:25:00
+SOS2223-24,,#46 Se debe tener una vista correctamente configurada en http://sos2223-XX.appspot.com/ donde debe aparecer como mínimo: Un enlace a cada una de los front-end desarrollados por cada miembro del grupo. Un enlace a cada una de las URL base de las APIs desarrolladas. Un enlace a cada una de las páginas de documentación de Postman de las APIs desarrolladas. Un enlace al repositorio de GitHub del equipo. El nombre de los componentes del equipo y el nombre de su fuente de datos (que debe coincidir con el nombre de recurso de su API).,01:00:06
+SOS2223-24,,"#47 Un back-end basado en API REST que tenga todas las funcionalidades que se solicitaron en el D01. Si se realiza alguna modificación sobre la API se debe realizar una nueva versión de forma que la API deberá estar disponible en: /api/v2/FFFFF. Se debe tener un nuevo portal público de documentación de la API v2 (generado por Postman) sobre el entorno de GCloud, manteniendo un enlace a ambos portales de documentación en el README.md del proyecto.",01:00:06
+SOS2223-24,,#48 Front-end Svelte que permita todas las funcionalidades básicas de gestión de la información realizando peticiones a la API REST: Una forma de crear recursos. Una forma de listar todos los recursos. Una forma de borrar todos los recursos. Una forma de borrar un recurso concreto. Una forma de editar recursos.,02:00:16
+SOS2223-24,,#49 No Json ni codigos de estado,00:17:00
+SOS2223-24,,#5 Creación index-YYY vicsanesp,01:00:47
+SOS2223-24,,#5 Realizar tracking de tiempo,00:13:07
+SOS2223-24,,#50 Frontend Svelte,01:42:00
+SOS2223-24,,#51 Mensaje informativo a usuarios,00:55:00
+SOS2223-24,,#56 Uso de algún widget de la biblioteca Highcharts,00:38:10
+SOS2223-24,,#57 Uso de alguna biblioteca especificada en la lista awesome-charting o similar,00:41:28
+SOS2223-24,,#58 Alguna de las integraciones o usos se debe hacer a través de un proxy propio.,01:42:00
+SOS2223-24,,#59 Integrar o usar al menos 4 APIs distintas y que sean distintas a las que han integrado/usado los compañeros del grupo,03:21:20
+SOS2223-24,,#6 Clonar repositorio de la asignatura vicsanesp,00:22:53
+SOS2223-24,,#6 trackeo de toggl con git,00:15:08
+SOS2223-24,,#7 Configuracion de Postman,00:35:41
+SOS2223-24,,#8 Archivo index.YYY.js,01:04:42
+SOS2223-24,,#9 Mantener al dia y correcion de errores anteriores,00:30:00
+SOS2223-24,,arreglando toggl,00:17:08
+SOS2223-24,,,00:00:02
