@@ -359,12 +359,12 @@ async function getProvisions() {
 <h2>Desarrollado por Ouael Boussiali</h2>
 
 
-
-<Alert color={color} isOpen={showM}>
   {#if message!=""}
+  <Alert color={color} isOpen={showM}>
     {message}
-  {/if}
   </Alert>
+  {/if}
+
 
 <div class="d-flex justify-content-center">
     <Row>
