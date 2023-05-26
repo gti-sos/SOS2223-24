@@ -80,7 +80,7 @@
                 }
             },
             tooltip: {
-                headerFormat: '<b>Age: {point.x}</b><br>'
+                headerFormat: '<b>CPU: {point.x}</b><br>'
             },
             plotOptions: {
                 series: {
@@ -90,7 +90,7 @@
             },
             series: [{
                 data: data,
-                name: 'Cases',
+                name: 'Precio',
                 showInLegend: false
             }]
         });
