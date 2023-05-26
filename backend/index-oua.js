@@ -6,11 +6,11 @@ function oua(app){
     const db = new Datastore();
     const provisionsDB = "../db/provisions";
     const rutaoua = "/api/v1/provisions-for-the-year-2014";
-    const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26056359/2s93JzN1dS";
+    const API_DOC_PORTAL_V1 = "https://documenter.getpostman.com/view/26056359/2s93JzN1dS";
 
     //POSTMAN docs
-    app.get(rutaoua+"/docsv1",(req,res)=>{
-        res.redirect(API_DOC_PORTAL);
+    app.get(rutaoua+"/docs",(req,res)=>{
+        res.redirect(API_DOC_PORTAL_V1);
       });
 
 
@@ -474,4 +474,3 @@ function oua(app){
 }
 
 export {oua};
-// Comprobacion 

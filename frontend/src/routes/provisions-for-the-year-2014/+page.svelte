@@ -2,7 +2,7 @@
   // @ts-nocheck
 
   import { onMount } from "svelte";
-  import {Pagination,PaginationItem,PaginationLink,Styles,} from "sveltestrap";
+  import {Pagination,PaginationItem,PaginationLink} from "sveltestrap";
   import { dev } from "$app/environment";
   import {
     Button,
@@ -17,9 +17,7 @@
     FormGroup,
     Form,
     Input,
-    Label
   } from "sveltestrap";
-    import { error } from "@sveltejs/kit";
 
   let API = "/api/v2/provisions-for-the-year-2014";
 
@@ -206,9 +204,10 @@ async function getProvisions() {
   }
 
 
-    if(!loaded & !showPost) loadProvisions();
+  if(!loaded & !showPost) loadProvisions();
+  
   // Agrega los parámetros de búsqueda a la URL solo si ya existe algún parámetro en ella
-    if (params) {
+  if (params) {
       url += `?${params.substring(1)}`;
     }
 
@@ -233,7 +232,7 @@ async function getProvisions() {
     resultStatus = status;
     if (resultStatus === 200) {
       datos = true;
-      showMessage("Datos encontrados", "success");
+      if(params) showMessage("Datos encontrados", "success");
     }
     else{
       datos = false;

@@ -11,32 +11,27 @@
         <li><a href="https://github.com/gti-sos/SOS2223-24">gti-sos/SOS2223-24</a></li>
     </ul>
 
-    <h2>URL de la API</h2>
-    <ul>
-        <li><a href="https://sos2223-24.ew.r.appspot.com">gti-sos/SOS2223-24/API</a></li>
-    </ul>
-
     <h2>Documentación de las APIs</h2>
     <ul>
         <li><a href="https://sos2223-24.appspot.com/agrodata-almeria/docs">Documentación agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
         <li><a href="https://sos2223-24.appspot.com/agroprices-weekly/docs">Documentación agroprices-weekly</a> (developed by Victor Manuel Sanchez Espada)</li>
-        <li><a href="https://sos2223-24.appspot.com/provisions-for-the-year-2014/docsv1">Documentación provisions-for-the-year-2014 V1</a> (developed by Ouael Boussiali)</li>
-        <li><a href="https://sos2223-24.appspot.com/provisions-for-the-year-2014/docsv2">Documentación provisions-for-the-year-2014 V2</a> (developed by Ouael Boussiali)</li>
+        <li><a href="https://sos2223-24.appspot.com/api/v1/provisions-for-the-year-2014/docs">Documentación provisions-for-the-year-2014 V1</a> (developed by Ouael Boussiali)</li>
+        <li><a href="https://sos2223-24.appspot.com/api/v2/provisions-for-the-year-2014/docs">Documentación provisions-for-the-year-2014 V2</a> (developed by Ouael Boussiali)</li>
     </ul>
 
-    <h2>Frontends de las APIs</h2>
+    <h2>Frontends</h2>
     <ul>
         <li><a href="https://sos2223-24.appspot.com/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
         <li><a href="https://sos2223-24.appspot.com/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
         <li><a href="https://sos2223-24.appspot.com/agroprices-weekly">Frontend de agroprices-weekly</a> (developed by Victor Manuel Sanchez Espada)</li>
     </ul>
 
-    <h2>Backend de las APIs</h2>
+    <h2>Backends</h2>
     <ul>
-        <li><a href="https://sos2223-24.appspot.com/api/v1/agrodata-almeria">Frontend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
-        <li><a href="https://sos2223-24.appspot.com/api/v1/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
-        <li><a href="https://sos2223-24.appspot.com/api/v2/provisions-for-the-year-2014">Frontend de provisions-for-the-year-2014</a> (developed by Ouael Boussiali)</li>
-        <li><a href="https://sos2223-24.appspot.com/api/v1/agroprices-weekly">Frontend de agroprices-weekly</a> (developed by Victor Manuel Sanchez Espada)</li>
+        <li><a href="https://sos2223-24.appspot.com/api/v1/agrodata-almeria">Backend de agrodata-almeria</a> (developed by Adolfo Rodriguez Cabezon)</li>
+        <li><a href="https://sos2223-24.appspot.com/api/v1/provisions-for-the-year-2014">Backend de provisions-for-the-year-2014 V1</a> (developed by Ouael Boussiali)</li>
+        <li><a href="https://sos2223-24.appspot.com/api/v2/provisions-for-the-year-2014">Backend de provisions-for-the-year-2014 V2</a> (developed by Ouael Boussiali)</li>
+        <li><a href="https://sos2223-24.appspot.com/api/v1/agroprices-weekly">Backend de agroprices-weekly</a> (developed by Victor Manuel Sanchez Espada)</li>
     </ul>
 </section>
 

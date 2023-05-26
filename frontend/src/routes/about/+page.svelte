@@ -2,7 +2,7 @@
     <h2>OUAEL BOUSSIALI</h2>
     <ul>
         <li>
-           - - Video de youtube con todo explicado.
+           <a href="https://www.youtube.com/watch?v=qv0dpeKOH_k&ab_channel=OUAELBOUSSIALI">Video</a>-- Video de youtube con todo explicado.
         </li>
     </ul>
 
@@ -38,7 +38,7 @@ li {
 }
 
 a {
-    color: #000000;
+    color: #ff0000;
     text-decoration: none;
     font-weight: bold;
     list-style-type: circle;

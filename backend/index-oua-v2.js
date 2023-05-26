@@ -11,19 +11,18 @@ function oua2(app) {
 
     const db = new Datastore();
     const rutaoua = "/api/v2/provisions-for-the-year-2014";
-    const API_DOC_PORTAL = "https://documenter.getpostman.com/view/26056359/2s93XyVPEC";
+    const API_DOC_PORTAL_V2 = "https://documenter.getpostman.com/view/26056359/2s93m7UL9V";
 
 
     //POSTMAN docs
-    app.get(rutaoua + "/docsv2", (req, res) => {
-        res.redirect(API_DOC_PORTAL);
+    app.get(rutaoua+"/docs", (req, res) => {
+        res.status(301).redirect(API_DOC_PORTAL_V2);
     });
 
     
     var paths = "/api/proxyoua"
     var apiServerHost = "https://sos2223-17.appspot.com/api/v2/andalusian-bicycle-plans"
     app.use(paths, function(req, res) {
-        console.log("c");
         var url = apiServerHost + req.url;
         console.log('piped: ' + req.url);
         req.pipe(request(url)).pipe(res);
@@ -34,6 +33,7 @@ function oua2(app) {
     // USOS
 
 
+    //uso Amazon
     app.get('/api/v2/amazondata', async (req, res) => {
         const options = {
             method: 'GET',
@@ -84,7 +84,6 @@ function oua2(app) {
 
 
     //USO CURRENCY
-
     app.get('/api/v2/uso_currency', async (req, res) => {
         const options = {
             method: 'GET',
@@ -106,8 +105,8 @@ function oua2(app) {
             console.error(error);
         }
     });
-    //USO ALIEXPRESS
 
+    //USO ALIEXPRESS
     app.get('/api/v2/uso_sales', async (req, res) => {
         const options = {
             method: 'GET',
@@ -134,7 +133,6 @@ function oua2(app) {
 
 
     //For Integration 
-
     app.get(rutaoua + "/data", async (req, res) => {
 
         console.log(`New GET to /data`);

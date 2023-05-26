@@ -21,7 +21,7 @@
 
         <NavItem>
             <Dropdown nav {isOpen} toggle={() => (isOpen = !isOpen)}>
-                <DropdownToggle nav caret style="font-weight:bold; color:black; font-size: 18px;">Provisions</DropdownToggle>
+                <DropdownToggle nav caret style="font-weight:bold; color:black; font-size: 18px;">Provisiones</DropdownToggle>
                 <DropdownMenu>
                 <DropdownItem><a href="/provisions-for-the-year-2014">Página de Inicio</a></DropdownItem>
                 <DropdownItem divider/>
@@ -52,7 +52,7 @@
             </Dropdown>
 
         </NavItem>
-        <NavLink href="/" class="nav-link" style="margin-right: 20px;" ><h6 style="font-weight:bold;  color:black; font-size: 18px;">Acerca De</h6> <Icon name="house-fill"/></NavLink>
+        <NavLink href="/about" class="nav-link" style="margin-right: 20px;" ><h6 style="font-weight:bold;  color:black; font-size: 18px;">Acerca De</h6> <Icon name="house-fill"/></NavLink>
 
     </Nav>
 </div>
