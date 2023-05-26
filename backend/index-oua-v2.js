@@ -3,9 +3,6 @@ import axios from 'axios';
 import request from 'request';
 
 
-
-
-
 function oua2(app) {
 
 
@@ -42,10 +39,10 @@ function oua2(app) {
               criteria: 'AMD Ryzen',
               page: '1',
               countryCode: 'US',
-              languageCode: 'ES'
+              languageCode: 'EN'
             },
             headers: {
-              'X-RapidAPI-Key': 'b270bea616msh4290fc927f6297bp15e5fajsnce54fefbd472',
+              'X-RapidAPI-Key': '621cb83b84msh28cec764879c509p1ee6bbjsn826efdd3023b',
               'X-RapidAPI-Host': 'amazon-web-scraping-api.p.rapidapi.com'
             }
           };
@@ -123,7 +120,6 @@ function oua2(app) {
 
             res.json(response.data);
 
-            console.log(JSON.stringify(response.data.json, null, 2));
         } catch (error) {
             console.error(error);
         }
@@ -143,6 +139,7 @@ function oua2(app) {
         try {
             // Esperar a que todas las consultas a la base de datos se completen
             await Promise.all(provincias.map(provincia => {
+
                 return new Promise((resolve, reject) => {
                     db.find({ province: provincia }).exec(function (err, docs) {
                         if (err) {
@@ -153,6 +150,7 @@ function oua2(app) {
                         }
                     });
                 });
+
             }));
             res.json(data);
 
@@ -168,7 +166,7 @@ function oua2(app) {
     app.get(rutaoua + "/loadInitialData", (req, res) => {
         db.find({}, function (err, docs) {
             if (docs.length === 0) {
-                db.insert(
+                db.insert(                    
                     [
                         {
                             "province": "Huelva",
@@ -1017,7 +1015,9 @@ function oua2(app) {
                             "section_number": 5,
                             "section": " Anuncios"
                         }
-                    ], function (err, newDocs) {
+                    ]
+                    , function (err, newDocs) {
+
                         res.status(201).json('Se han creado 77 datos');
                         console.log("Se han creado 77 datos");
                     });
@@ -1032,6 +1032,8 @@ function oua2(app) {
 
     //GET BASE, Paginating, Search, from&to
     app.get(rutaoua, (req, res) => {
+
+        
         //paginating
         let offset = 0;
         let limit = 0;
@@ -1105,6 +1107,7 @@ function oua2(app) {
         const to = Number(req.query.to);
         const year = Number(req.query.year);
 
+
         if (from && to) {
             if (from >= to) {
                 res.status(400).json("El rango es incorrecto");
@@ -1136,10 +1139,12 @@ function oua2(app) {
         const province = req.params.province;
         const disposal_number = Number(req.params.disposal_number);
 
+
         db.findOne({ province: province, year: year, disposal_number: disposal_number }, (err, docs) => {
             if (err) {
                 res.status(500).json('Error interno del servidor');
             } else if (docs) {
+
                 delete (docs._id);
                 res.status(200).json(docs);
 
@@ -1147,8 +1152,10 @@ function oua2(app) {
             } else {
                 res.status(404).json(`No existe ningún recurso para la provincia: ${province} en el año: ${year} con el número de disposición: ${disposal_number}.`);
             }
+
         });
     });
+
 
 
     //GET periodo concreto + provincia
@@ -1198,8 +1205,7 @@ function oua2(app) {
     app.post(rutaoua, (req, res) => {
         console.log("POST Received from frontend:\n" + JSON.stringify(req.body, null, 2));
         let newReq = req.body;
-        if (
-            !newReq ||
+        if (!newReq ||
             !newReq.hasOwnProperty('province') ||
             !newReq.hasOwnProperty('year') ||
             !newReq.hasOwnProperty('organization') ||
@@ -1226,6 +1232,7 @@ function oua2(app) {
                     section: newData.section
                 },
                 (err, docs) => {
+
                     if (err) {
                         res.status(500).json({ message: `Error interno del servidor: ${err}` });
                     } else if (docs.length > 0) {
@@ -1238,12 +1245,18 @@ function oua2(app) {
                                 console.log(`newData = ${JSON.stringify(doc, null, 2)}`);
                                 console.log("New POST to /provisions-for-the-year-2014");
                                 res.status(201).json({ message: 'El recurso se ha creado correctamente.' });
+
                             }
+
                         });
+
                     }
                 }
+                
             );
+
         }
+
     });
 
     //Ruta específica POST NO permitida
@@ -1342,6 +1355,7 @@ function oua2(app) {
 
     //DELETE de un recurso.
     app.delete(rutaoua + "/:province/:year/:disposal_number", (req, res) => {
+
         const province = req.params.province;
         const year = Number(req.params.year);
         const disposal_number = Number(req.params.disposal_number);
@@ -1355,6 +1369,7 @@ function oua2(app) {
                 res.status(200).json({ message: "El recurso se ha borrado correctamente." });
             }
         });
+
     });
 
 }

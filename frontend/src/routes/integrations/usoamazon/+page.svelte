@@ -1,5 +1,7 @@
 <svelte:head>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/cylinder.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
@@ -44,62 +46,54 @@
     }
 
     function loadData(chartData) {
+
+        let dataAxis = [];
+        let data = [];
+        for (let ls of chartData) {
+            dataAxis.push(ls[0]);
+            data.push(ls[1]);
+        }
         
         Highcharts.chart('container', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Comparación entre los CPU de AMD'
-    },
-
-    xAxis: {
-        type: 'category',
-        labels: {
-            rotation: -45,
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Precio'
-        }
-    },
-    legend: {
-        enabled: false
-    },
-    tooltip: {
-        pointFormat: 'Precio: <b>{point.y:.1f} Euros</b>'
-    },
-    series: [{
-        name: 'Population',
-        colors: [
-            '#9b20d9', '#9215ac', '#861ec9', '#7a17e6', '#7010f9', '#691af3',
-            '#6225ed', '#5b30e7', '#533be1', '#4c46db', '#4551d5', '#3e5ccf',
-            '#3667c9', '#2f72c3', '#277dbd', '#1f88b7', '#1693b1', '#0a9eaa',
-            '#03c69b',  '#00f194'
-        ],
-        colorByPoint: true,
-        groupPadding: 0,
-        data: chartData,
-        dataLabels: {
-            enabled: true,
-            rotation: -90,
-            color: '#FFFFFF',
-            align: 'right',
-            format: '{point.y:.1f}', // one decimal
-            y: 10, // 10 pixels down from the top
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
-    }]
-});
+            chart: {
+                type: 'cylinder',
+                options3d: {
+                    enabled: true,
+                    alpha: 15,
+                    beta: 15,
+                    depth: 50,
+                    viewDistance: 25
+                }
+            },
+            title: {
+                text: 'Comparación entre los CPU de AMD'
+            },
+            xAxis: {
+                categories: dataAxis,
+                title: {
+                    text: 'CPU'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Precio'
+                }
+            },
+            tooltip: {
+                headerFormat: '<b>Age: {point.x}</b><br>'
+            },
+            plotOptions: {
+                series: {
+                    depth: 25,
+                    colorByPoint: true
+                }
+            },
+            series: [{
+                data: data,
+                name: 'Cases',
+                showInLegend: false
+            }]
+        });
 
     }
 </script>
@@ -107,7 +101,6 @@
 <body style="height: 70vh; padding: 10px;">
     <figure class="highcharts-figure">
         <div id="container"></div>
-        <p class="highcharts-description">
-        </p>
     </figure>
+    
 </body>
